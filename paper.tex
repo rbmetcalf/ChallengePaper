@@ -1,0 +1,106 @@
+\documentclass[useAMS,usenatbib]{mn2e}
+
+% A Monthly Notices of the Royal Astronomical Society sample TeX file.
+% The teX file has had all publication information removed and been left intentionally blank
+% Created by: Martyn Bristow, M.Bristow@2007.ljmu.ac.uk, http://martynbristow.co.uk
+% Edit this file to suit your needs, but be careful not to remove something important
+% I have added sample images, tables and equations to help you if your don't know how to write them in LaTeX and to make your life easier.
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cite}
+\usepackage{natbib}
+\usepackage{xcolor}
+
+\def\aap{Astronomy \& Astrophysics}
+\def\apj{The Astrophysical Journal}
+\def\mnras{Monthly Notices of the Royal Astronomical Society}
+
+\usepackage{newtxtext,newtxmath}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+\newcommand{\red}[1]{{\color{red} #1}}
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+
+\title[SL Challenge]{Strong Gravitational  Lensing Finding Challenge}
+
+\author[R. B. Metcalf {\it et al.}]{
+R. Benton Metcalf,$^{1}$\thanks{E-mail: robertbenton.metcalf@unibo.it} R\'emi Cabanac,$^2$ 
+A. N. Other,$^3$ \\
+% List of institutions
+$^{1}$Department of Physics and Astronomy, Universit\`a di Bologna, viale Berti Pichat 6/2, 40127 Bologna, Italy \\
+$^{2}$ IRAP, University of Toulouse, CNRS, UPS, France.\\
+}
+
+\begin{document}
+
+\date{Accepted . Received ; in original form }
+
+\maketitle
+
+\label{firstpage}
+
+% Abstract of the paper
+\begin{abstract}
+
+\end{abstract}
+
+\begin{keywords}
+gravitational lensing -- cosmology 
+\end{keywords}
+
+
+\section{Introduction}
+
+some numbers about future surveys
+
+\section{The Challenge}
+
+\section{the simulations}
+
+\section{lens finding methods}
+
+This section contains short descriptions of the lens finding methods that were used in 
+the challenge.  Each subsection refers to a team which gave a separate entry.
+
+\subsection{GAHEC IRAP}
+
+\begin{figure}
+ \includegraphics[width=\columnwidth]{Cabanac/arcmethod.pdf}
+ \caption{\footnotesize  GAHEC IRAP) From top-left to botton right, 1) a simulated arc extracted from SL challenge in which an tunned Arcfinder selects 3 candidates (green circles), 2) the smoothed image on which pixelwise elongation is computed, 3) the resulting elongated pixels after thresholding, 4) the set of pixels selected for the computation of arc candidate properties. 
+}
+ \label{fig:Cabanac}
+\end{figure}
+
+Arcfinder \citep{2006astro.ph..6757A,2007A&A...461..813C,2012ApJ...749...38M} is a fast linear method that computes a pixelwise elongation parameter (ratio of first-order moments in a n-pix window oriented in proper reference frame) for all pixels of mexican-hat-smoothed FITS images. Arcfinder then extract contiguous pixels above a given background and computes the candidate arcs length, width, area, radius of curvature and peak surface brightness. A final thresholding is set to maximize purity over completeness on a few typical arcs of the dataset.
+For the current SL challenge, arcfinder was tunned to detect long and narrow arcs, and was optimized on a subset of 1000 simulated images with a grid covering a range of elongation windows and arc areas.  A python wrapper allows users to change parameters in a flexible way and run the arcfinder C code as a linux line command. Arcfinder took a couple of hours to run on the entire dataset with some overheads due to the dataset format. The code is publicly available at https://github.com/rcabanac/arcfinder.
+
+\red{Referenc to figure \ref{fig:Cabanac}?}
+\section{results}
+
+\section{Conclusions \& discussion}
+
+It is clear that the robustness of lens finders against falsely classifying unusual galaxies as lenses was not adequitely tested in this challenge.  Some of the methods which appear overly conservative in this test might be better at avoiding false positives in real data.  This can be seen as a form of overfitting to the test set.
+In future challenges we wish to concentrate on this aspect of the problem.
+
+\section*{Acknowledgements}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{mn2e}
+\bibliography{references}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\label{lastpage}
+\end{document}

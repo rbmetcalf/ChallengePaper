@@ -72,21 +72,22 @@ the challenge.  Each subsection refers to a team which gave a separate entry.
 
 \begin{figure}
  \includegraphics[width=\columnwidth]{Cabanac/arcmethod.pdf}
- \caption{\footnotesize  GAHEC IRAP) From top-left to botton right, 1) a simulated arc extracted from SL challenge in which an tunned Arcfinder selects 3 candidates (green circles), 2) the smoothed image on which pixelwise elongation is computed, 3) the resulting elongated pixels after thresholding, 4) the set of pixels selected for the computation of arc candidate properties. 
-}
+ \caption{ (GAHEC IRAP) From top-left to botton right, 1) a simulated arc extracted from SL challenge in which an tunned Arcfinder selects 3 candidates (green circles), 2) the smoothed image on which pixelwise elongation is computed, 3) the resulting elongated pixels after thresholding, 4) the set of pixels selected for the computation of arc candidate properties. }
  \label{fig:Cabanac}
 \end{figure}
 
 Arcfinder \citep{2006astro.ph..6757A,2007A&A...461..813C,2012ApJ...749...38M} is a fast linear method that computes a pixelwise elongation parameter (ratio of first-order moments in a n-pix window oriented in proper reference frame) for all pixels of mexican-hat-smoothed FITS images. Arcfinder then extract contiguous pixels above a given background and computes the candidate arcs length, width, area, radius of curvature and peak surface brightness. A final thresholding is set to maximize purity over completeness on a few typical arcs of the dataset.
 For the current SL challenge, arcfinder was tunned to detect long and narrow arcs, and was optimized on a subset of 1000 simulated images with a grid covering a range of elongation windows and arc areas.  A python wrapper allows users to change parameters in a flexible way and run the arcfinder C code as a linux line command. Arcfinder took a couple of hours to run on the entire dataset with some overheads due to the dataset format. The code is publicly available at https://github.com/rcabanac/arcfinder.
 
-\red{Referenc to figure \ref{fig:Cabanac}?}
+\red{Reference to figure \ref{fig:Cabanac}?}
 \section{results}
 
 \section{Conclusions \& discussion}
 
 It is clear that the robustness of lens finders against falsely classifying unusual galaxies as lenses was not adequitely tested in this challenge.  Some of the methods which appear overly conservative in this test might be better at avoiding false positives in real data.  This can be seen as a form of overfitting to the test set.
 In future challenges we wish to concentrate on this aspect of the problem.
+
+Human inspection was the only method to find the jackpot lens
 
 \section*{Acknowledgements}
 

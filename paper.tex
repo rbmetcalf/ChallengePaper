@@ -31,10 +31,11 @@
 
 \author[R. B. Metcalf {\it et al.}]{
 R. Benton Metcalf,$^{1}$\thanks{E-mail: robertbenton.metcalf@unibo.it} R\'emi Cabanac,$^2$ 
-A. N. Other,$^3$ \\
+Alessandro Sonnenfeld,$^5$ \\
 % List of institutions
 $^{1}$Department of Physics and Astronomy, Universit\`a di Bologna, viale Berti Pichat 6/2, 40127 Bologna, Italy \\
 $^{2}$ IRAP, University of Toulouse, CNRS, UPS, France.\\
+$^{5}$Kavli IPMU (WPI), UTIAS, The University of Tokyo, Kashiwa, Chiba 277-8583, Japan\\
 }
 
 \begin{document}
@@ -80,6 +81,19 @@ Arcfinder \citep{2006astro.ph..6757A,2007A&A...461..813C,2012ApJ...749...38M} is
 For the current SL challenge, arcfinder was tunned to detect long and narrow arcs, and was optimized on a subset of 1000 simulated images with a grid covering a range of elongation windows and arc areas.  A python wrapper allows users to change parameters in a flexible way and run the arcfinder C code as a linux line command. Arcfinder took a couple of hours to run on the entire dataset with some overheads due to the dataset format. The code is publicly available at https://github.com/rcabanac/arcfinder.
 
 \red{Reference to figure \ref{fig:Cabanac}?}
+
+\subsection{YattaLens Lite (Alessandro Sonnenfeld)}
+YattaLensLite is a simpler version of the algorithm YattaLens (Sonnenfeld et al. in prep.), modified to meet the time constraints of the challenge.
+YattaLensLite subtracts a model surface brightness profile describing the lens galaxy from the $g$-band image, then runs SExtractor to detect tangentially elongated or ring-shaped objects, which are interpreted as lensed images.
+In the ground-based challenge, the model lens surface brightness profile is obtained by taking a rescaled version of the $i$-band image.
+The difference in color between lens and source usually allows the lensed images to still be detectable after the lens subtraction process.
+However in order to avoid subtracting off the lensed images in systems with similar colors between lens source, we radially truncate the model lens surface brightness.
+at the smallest radius between the position where the surface brightness is comparable to the sky background level or the position of a positive radial gradient in surface brightness, if detected.
+
+In the space-based challenge it is not possible to separate lens and source based on color, because only data in one band is provided. The lens light model then is produced by taking a centrally-inverted image and then using the same truncation prescription used with ground-based data. The central inversion step is taken to reduce the chances of subtracting flux from lensed images, which are in general not centrally symmetric as opposed to typical lens galaxies.
+
+In the full version of YattaLens, a lens modeling step is performed to improve the purity of the sample. However, such a procedure is too time consuming and was not performed in this challenge.
+
 \section{results}
 
 \section{Conclusions \& discussion}
@@ -91,6 +105,8 @@ Human inspection was the only method to find the jackpot lens
 
 \section*{Acknowledgements}
 
+AS was supported by World Premier International Research Center Initiative (WPI Initiative), MEXT, Japan.
+RBM's research was partly part of project GLENCO, funded under the European Seventh Framework Programme, Ideas, Grant Agreement n. 259349.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%

@@ -7,10 +7,14 @@
 \usepackage{cite}
 \usepackage{natbib}
 \usepackage{xcolor}
+\usepackage{import}
 
 \def\aap{Astronomy \& Astrophysics}
 \def\apj{The Astrophysical Journal}
 \def\mnras{Monthly Notices of the Royal Astronomical Society}
+\def\aj{Astronomical Journal}
+\def\aaps{AAPS}
+
 
 \usepackage{newtxtext,newtxmath}
 \usepackage[T1]{fontenc}
@@ -25,13 +29,32 @@
 \title[SL Challenge]{The Strong Gravitational  Lens Finding Challenge}
 
 \author[R. B. Metcalf {\it et al.}]{
-R. Benton Metcalf,$^{1,4}$\thanks{E-mail: robertbenton.metcalf@unibo.it} M. Meneghetti,$^4$ R\'emi Cabanac,$^2$ Emmanuel Bertin,$^3$ Alessandro Sonnenfeld,$^5$ and \\
+R. Benton Metcalf,$^{1,4}$\thanks{E-mail: robertbenton.metcalf@unibo.it} 
+M. Meneghetti,$^4$ 
+Fabio Bellagamba,$^1$
+Emmanuel Bertin,$^3$ 
+\newauthor
+R\'emi Cabanac,$^2$ 
+Remi Flamary,$^8$
+Mario Geiger,$^6$ 
+Philippa Hartley,$^7$
+Neal Jackson,$^7$ 
+\newauthor
+Jean-Paul Kneib,$^6$
+Christoph Sch\"{a}fer,$^6$ 
+Alessandro Sonnenfeld,$^5$ 
+Amit Tagore,$^7$
+\newauthor
+and ?\\
 % List of institutions
 $^{1}$ Departimento di Fisica \& Astronomia, Universit\`a di Bologna, viale Berti Pichat 6/2, 40127 Bologna, Italy \\
 $^{2}$ IRAP, University of Toulouse, CNRS, UPS, France.\\
-$^{3}$ Sorbonne Universités, UPMC Univ. Paris 6 and CNRS, UMR 7095, Institut d'Astrophysique de Paris,  98bis Bd Arago, F-75014, Paris \\
+$^{3}$ Sorbonne Universit\'{e}s, UPMC Univ. Paris 6 and CNRS, UMR 7095, Institut d'Astrophysique de Paris,  98bis Bd Arago, F-75014,\\ Paris France.\\
 $^{4}$ INAF-Osservatorio Astronomico di Bologna, via Ranzani 1, 40127 Bologna, Italy \\
-$^{5}$Kavli IPMU (WPI), UTIAS, The University of Tokyo, Kashiwa, Chiba 277-8583, Japan\\
+$^{5}$ Kavli IPMU (WPI), UTIAS, The University of Tokyo, Kashiwa, Chiba 277-8583, Japan\\
+$^{6}$ EPFL\\
+$^{7}$ Jodrell Bank Centre for Astrophysics, School of Physics \& Astronomy, University of Manchester, Oxford Rd, Manchester M13 9PL, UK \\
+$^{8}$ Laboratoire Lagrange, Universi\'{e} de Nice Sophia-Antipolis, Centre National de la Recherche Scientifique, Observatoire de la C\^{o}te d'Azur, \\ Parc Valrose, 06108 Nice, France \\
 }
 
 \begin{document}
@@ -44,7 +67,7 @@ $^{5}$Kavli IPMU (WPI), UTIAS, The University of Tokyo, Kashiwa, Chiba 277-8583,
 
 % Abstract of the paper
 \begin{abstract}
-
+The present the results of an open gravitational lens finding challenge.  Participants were asked to classify 100,000 candidate objects as to whether they were gravitational lenses or not with the goal of developing better automated methods for finding lenses in large data sets.   
 \end{abstract}
 
 \begin{keywords}
@@ -53,14 +76,112 @@ gravitational lensing -- cosmology
 
 
 \section{Introduction}
+\label{sec:introduction}
 
 some numbers about future surveys
 
+some background of passed methods
+
+The paper is organized as follows.  The form of the challenge and its rules are described in the next section.  The methods used to simulate mock images of galaxies and gravitational lenses are described in section~\ref{sec:simulation}.  In section~\ref{sec:entries} each of the methods that were used to solve the challenge are briefly described.  We discuss the metrics used to evaluate entries in section~\ref{sec:figure_of_merit}.  The performance of each of the methods broken down in different ways is presented in section~\ref{sec:performance}.  Finally,  in section~\ref{sec:conclusion}, we conclude with a discussion of what was learned and how methods can be improved in the future.
+
 \section{The Challenge}
+\label{sec:challenge}
+
+The challenge was in fact two independent challenges that could be entered independently.  One was designed to mimic a single band of a future imaging data set from a satellite survey such as Euclid\footnote{https://www.euclid-ec.org/} \citep{***}.  The other was designed to mimic ground based data with multiple bands, roughly modeled on the Kilo-Degree Survey (KiDS)\footnote{http://kids.strw.leidenuniv.nl/} \citep{***} .    In neither case were the simulated images meant to precisely mock these surveys, but only used them as general guide as to set noise levels, pixel sizes, sensitivities and other parameters.
+
+In each case a training set of 20,000 images in each band was provided for download at any time along with a key giving some properties of the object including whether it was a gravitational lens.  Each image was $101\times101$ pixels.  The researchers were free to download these sets and train their algorithms on them.  To enter the contest the participants needed to register with a team name at which point they would be given a unique key and the address of a test data set.  These data sets contained 100,000 candidates.  In the case of the multi-band ground-based set this was 400,000 images. The participant had 48 hours to upload a classification of all candidates consisting of a score between 0 and 1 -- 0 signifying the lowest confidence that it is a lens and 1 signifying the highest confidence that it is a lens.  This ranking could have been a simple binary (0 or 1) classification  or it could have been a continuous range of numbers representing the probability of being a lens or it could have been a finite number of confidence levels.  
+
+The challenge was opened on November 25, 2016 and closed on February 5, 2017.
 
 \section{the simulations}
+\label{sec:simulation}
+
+Creating the mock images starts with a cosmological nbody simulation.  In this case it was the Millennium simulation \citep{***}.   A catalog of dark matter halos within a light-cone is 
+constructed within the Millennium Observatory project \citep{2013MNRAS.428..778O}.  Using the GLAMER lensing code \citep{2014MNRAS.445.1942M,2014MNRAS.445.1954P} we identify and map out all the caustics within the light-cone for *** source planes.  For every caustic that corresponded to a critical curve with an Einstein radius larger than **** arcseconds, we identify the main object causing lensing by finding the largest ****.  The Einstein radius is estimated here and in all that follows as $R_{\rm ein}=\sqrt{A_{\rm ein}/\pi}$ where $A_{\rm ein}$ is the angular area within the critical curve.  All the halos within *** Mpc of this main lens are extracted and used as a lens.  This collection of halos is rotated to produce more random lenses.  A **** light-cone gives rise to **** such lenses.
+
+For lensed sources we use sources from the Hubble Ultra Deep Field (UDF) that have been decomposed into shapelet functions to remove noise.  This is the same set of images as used 
+in ***.   The source is placed within **** of the center of the lenses caustic as found in the initial ray tracing.  This is a somewhat arbitrary length designed to be a compromise between producing only very clear strong lenses because all the sources are right in the center of the caustic and making the proccess  inefficiently because most of the sources are too far away from the caustic to produce clear lenses.  If the source positions where taken completely at random the fraction of clear lenses would be very low.
+
+ \red{How the redshifts are picked}
+
+{\bf Lens Galaxies}
+
+There are not enough large galaxies in the UDF to make enough mock lens galaxies.  The Millennium Observatory provides parameters for the galaxies that inhabit the dark matter halos using the semi-analytic galaxy formation models of ****.  To model the surface brightness of these galaxies we use the models ****
+
+{\bf mass rendering}
+
+To represent the mass of the galaxies we make a gridded map of the surface brightness at 3 times the resolution of the final image.  The surface brightness map in converted into a mass map by assuming a uniform mass-to-light ratio of **** in the **** band.  This mass map is added to the lens before the ray tracing is done.
+
+Every time the lens is reoriented a new realization of the lens galaxies is made and a new source position is found.
+
+
+{\bf size of cones}
+
+{\bf products - images output}
+
+For the training sets all these products were provided, but for the test sets only the final images were provided to participants although all the information was stored for analysing the entries.
+
+\subsection{space-based}
+
+For the space-based data sets a simple Gaussian PSF was applied with a ***** of **** arcsec.  
+The band used was SDSS K.  The noise was a Gaussian random realization ****.
+
+{\bf fractions}
+
+\subsection{ground-based}
+
+For the ground-based images four bands where *****.  
+ The KiDS survey provided a representative PSF map, **** image stamps of their targets and the weights maps for those images.  Some of these images had masked regions to remove stars, cosmic rays and bad pixels. The PSF had a FWHM of *** and was applied to all the images.   Noise was simulated by adding normally distributed numbers with the variance given by the weight maps.  The weight maps where also randomly rotated and flipped.  This resulted in many of the images having large masked regions in them ($\sim$ ***** \%).
+ 
+In the test image set some actual KiDS images were used also.  Here a random mass distribution and source was used to produce a lensed source that was added directly to the KiDS image after aplying the PSF.  No additional noise was added.
+
+{\bf fractions}
+
+By chance one of the original KiDS images appears to have been a lens.  When an additional lensed source was added this made a double lens or "jockpot" lens.
+
+\section{the entries}
+\label{sec:entries}
+
+There were 24 valid entries into the challenge.  They are listed in table~\ref{table:entries}.  There were a variety of different methods used and participants come from a variety of different backgrounds, most were professional astronomers, but there were also entries form people outside of the field.  
+
+\begin{table*}
+\centering
+\begin{tabular}{rlll}
+  \hline
+ & Name & type & authors \\ 
+  \hline
+  1 & AstrOmatic & Space-Based & Bertin   \\ 
+  2 & GAHEC IRAP & Space-Based & Cabanac  \\ 
+  3 & CAS Swinburne Melb & Ground-Based & Jacobs   \\ 
+  4 & ALL-star & Ground-Based & Avestruz, N.Li \& Lightman  \\ 
+  5 & Manchester1 & Space-Based & Jackson, Hartley \& Tagore  \\ 
+  6 & CMU-DeepLens-Resnet-Voting & Space-Based & Ma, Lanusse \& C. Li  \\ 
+  7 & Manchester SVM & Ground-Based & Hartley   \\ 
+  8 & CMU-DeepLens-ResNet & Space-Based & Francois Lanusse, Ma, C. Li \& Ravanbakhsh \\ 
+  9 & CMU-DeepLens-Resnet-Voting & Ground-Based & Ma, Lanusse \& C. Li   \\ 
+  10 & YattaLensLite & Space-Based &  Sonnenfeld  \\ 
+  11 & NeuralNet2 & Space-Based &  Davies  \\ 
+  12 & CAST & Ground-Based &  Roque De Bom, Valent\"{\i}n \&  Makler  \\ 
+  13 & CMU-DeepLens-ResNet-ground3 & Ground-Based &  Lanusse, Ma, Ravanbakhsh \& C. Li \\ 
+  14 & GAMOCLASS & Space-Based & Marc Huertas-Company, Tuccillo, Velasco-Forero \& Decenci\~{a}re \\ 
+  15 & LASTRO EPFL (CNN) & Space-Based & Geiger, Sch\"{a}fer \& Kneib \\ 
+  16 & Manchester SVM & Space-Based &  Hartley  \\ 
+  17 & CMU-DeepLens-ResNet-aug & Space-Based & Ma,  Lanusse, Ravanbakhsh \& C. Li \\ 
+  18 & LASTRO EPFL & Ground-Based & Geiger, Sch\"{a}fer \& Kneib   \\ 
+  19 & CAST & Space-Based & Roque De Bom, Valent\"{\i}n \& Makler  \\ 
+  20 & AstrOmatic & Ground-Based & Bertin  \\ 
+  21 & All-now & Space-Based & Avestruz, N. Li \& Lightman   \\ 
+  22 & Manchester-NA2 & Ground-Based & Jackson \& Tagore  \\ 
+  23 & YattaLensLite & Ground-Based & Sonnenfeld   \\ 
+  24 & Kapteyn & Space-Based & Petrillo, Koopmans, Kleijn, Tortora \& Vernardos \\ 
+   \hline
+\end{tabular}
+\caption{Entries to the challenges.}
+\label{table:entries}
+\end{table*}
 
 \section{lens finding methods}
+\label{sec:methods}
 
 This section contains short descriptions of the lens finding methods that were used in 
 the challenge.  Each subsection refers to a team which gave a separate entry.
@@ -68,7 +189,7 @@ the challenge.  Each subsection refers to a team which gave a separate entry.
 \subsection{GAHEC IRAP (Remi Cabanac)}
 
 \begin{figure}
- \includegraphics[width=\columnwidth]{Cabanac/arcmethod.pdf}
+ \includegraphics[width=\columnwidth]{figures/arcmethod.pdf}
  \caption{ (GAHEC IRAP) From top-left to botton right, 1) a simulated arc extracted from SL challenge in which an tunned Arcfinder selects 3 candidates (green circles), 2) the smoothed image on which pixelwise elongation is computed, 3) the resulting elongated pixels after thresholding, 4) the set of pixels selected for the computation of arc candidate properties. }
  \label{fig:Cabanac}
 \end{figure}
@@ -102,9 +223,151 @@ In the space-based challenge it is not possible to separate lens and source base
 
 In the full version of YattaLens, a lens modeling step is performed to improve the purity of the sample. However, such a procedure is too time consuming and was not performed in this challenge.
 
+
+\subsection{LASTRO EPFL (Geiger, Sch\"{a}fer)}
+
+We used a convolutional neural network \citep{Fukushima1980,Lecun1998} with a simple architecture of 12 layers (inspired by \citep{symmetry}), see table \ref{tab:architecture}.
+To avoid the problem of the data flow distribution getting out of the comfort zone of the activation functions (Internal Covariate Shift), we used a mix of normalization propagation \citep{norm_prop} (without the constraint on the weights but a proper initialization) and batch normalization \citep{batch_norm} (slowly disabled over the iterations).
+As activation function, we used a scaled and shifted ReLU (Rectifier Linear Unit), 
+\begin{equation} \label{eq:relu}
+    \frac{1}{\sqrt{\pi-1}} (\sqrt{2 \pi} \max(0,x) - 1),
+\end{equation}
+to satisfy the properties required by the normalization propagation.
+In our implementation of batch normalization, instead of using only the moments computed over the current batch, we used a low-pass filter ($\bar\mu_i \longleftarrow (1-\eta) \; \bar\mu_{i-1} + \eta \; \mu_i(\text{batch})$, $\eta$ set to $1$ at the beginning and decay with the iterations).
+For the training, the 20k provided images were split into two sets, 17k for training and 3k for validation.
+Each iteration of the gradient descent (more precisely ADAM \citep{adam}) minimizes the cross entropy, 
+\begin{equation} \label{eq:xent}
+    \left\{
+    \begin{array}{ll}
+        - \log(p)   & \text{if the image is a true lens} \\
+        - \log(1-p) & \text{if the image is a nonlens}
+    \end{array}
+    \right.,
+\end{equation}
+where $p$ is the output of the neural network, computed over a batch of 30 images, 15 lenses and 15 nonlenses, picked from the training set.
+Making batches of 30 images adds noise to the gradient makes the iterations faster.
+
+To augment the training set, each image of the batch is transformed with a random transformation of the dihedral group (rotations of 90 degrees and mirrors), its pixel values multiplied by a factor picked between $0.8$ and $1.2$ and shifted by a random value between $-0.1$ and $0.1$.
+To prevent the overfitting, we used some dropout \citep{dropout} (with a keeping probability decreasing with the iterations).
+The masked region of the ground based images are handled by simply setting them to zero.
+Each final prediction is made of the product of the predictions of the 8 transformations of the image by the dihedral group.
+The architecture is implemented in Tensorflow\footnote{\url{http://tensorflow.org/}}.
+Our code is accessible on github\footnote{\url{https://github.com/antigol/lensfinder-euclid}}.
+
+\begin{table*}
+    \centering
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        Layer type & shape & activation & \# parameters \\ \hline \hline
+        
+        \textbf{convolutional 4x4} & $101\!\times\! 101\!\times\!1/4 \to 98\!\times\!98\!\times\!16$ & rectifier & 256/1'024 + 16 \\ \hline
+        \textbf{convolutional 3x3} & $98\times98\times16 \to 96\times96\times16$ & rectifier & 2'304 + 16 \\ \hline
+        max pool /2 & $96\times96\times16 \to 48\times48\times16$ & - & - \\ \hline
+        batch normalization & $48\times48\times16$ & - & 16 + 16 \\ \hline
+        
+        \textbf{convolutional 3x3} & $48\times48\times16 \to 46\times46\times32$ & rectifier & 4'608 + 32 \\ \hline
+        \textbf{convolutional 3x3} & $46\times46\times32 \to 44\times44\times32$ & rectifier & 9'216 + 32 \\ \hline
+        max pool /2 & $44\times44\times32 \to 22\times22\times32$ & - & - \\ \hline
+        batch normalization & $22\times22\times32$ & - & 32 + 32 \\ \hline
+        
+        \textbf{convolutional 3x3} & $22\times22\times32 \to 20\times20\times64$ & rectifier & 18'432 + 64 \\ \hline
+        \textbf{convolutional 3x3} & $20\times20\times64 \to 18\times18\times64$ & rectifier & 36'864 + 64 \\ \hline
+        max pool /2 & $18\times18\times64 \to 9\times9\times64$ & - & - \\ \hline
+        batch normalization & $9\times9\times64$ & - & 64 + 64 \\ \hline
+        dropout & $9\times9\times64$ & - & - \\ \hline
+        
+        \textbf{convolutional 3x3} & $9\times9\times64 \to 7\times7\times128$ & rectifier & 73'728 + 128 \\ \hline
+        dropout & $7\times7\times128$ & - & - \\ \hline
+        \textbf{convolutional 3x3} & $7\times7\times128 \to 5\times5\times128$ & rectifier & 147'456 + 128 \\ \hline
+        batch normalization & $5\times5\times128$ & - & 128 + 128 \\ \hline
+        dropout & $5\times5\times128$ & - & - \\ \hline
+        
+        \textbf{fully-connected} & $5\times5\times128 \to 1024$ & rectifier & 3'276'800 + 1'024 \\ \hline
+        dropout & $1024$ & - & - \\ \hline
+        \textbf{fully-connected} & $1024 \to 1024$ & rectifier & 1'048'576 + 1'024 \\ \hline
+        dropout & $1024$ & - & - \\ \hline
+        \textbf{fully-connected} & $1024 \to 1024$ & rectifier & 1'048'576 + 1'024 \\ \hline
+        batch normalization & $1024$ & - & 1'024 + 1'024 \\ \hline
+        \textbf{fully-connected} & $1024 \to 1$ & sigmoid & 1'024 + 1 \\ \hline \hline
+        Total & - & - & $\approx$ 5'674'000 \\ \hline
+    \end{tabular}
+    \caption{LASTRO EPFL architecture}
+    \label{tab:architecture}
+\end{table*}
+
+\subsection{Manchester/Manchester1 (Jackson, Tagore)}
+
+All images (a total of 100000) were examined for each of the space- and
+ground-based datasets. This was done by two observers; AT examined 30000
+images in each case and NJ examined 70000. Observation was carried out
+over a 48-hour period, at the rate of 5000/hr (NJ) and 2500/hr (AT). 
+The overall results, in terms of ROC curves, were very similar for 
+both observers. The space-based challenge produced areas of 0.800 and 
+0.812 for NJ and AT respectively, and the ground-based challenge yielded 
+0.891 and 0.884.
+
+The Python scripts used for manual examination of multiple images are available
+on https://github.com/nealjackson/bigeye and are described in more detail
+in Hartley et al. (2016, in preparation). For one-colour data such as
+the space-based training set, the images are individually colour-scaled using
+square-root scaling. The bright limit of the colour-scale is determined
+from the pixel values in a rectangle comprising the inner ninth of the
+image area, with the limit being chosen as the $n$th centile of the pixel
+values in this area. Values between $n=95$ and $n=98$ give optimum results,
+judging by experiments on the training set. The number of images in each
+grid was also optimised using the training set, with 16$\times$8 or 
+8$\times$4 giving good results on one-colour data. For three-colour data,
+such as the ground-based challenge data, the individual bands for each 
+object are colour-scaled and then combined into an RGB image. In this case
+8$\times$4 grids were used for examination, due to the generally lower 
+resolution of the images. The script also allows the user to adjust the
+colour-scale in real time when examining and marking images, and records
+the image name corresponding to the image within which the cursor resides
+at the time any key is pressed, together with the key.
+
+Images were classified by both observers into 5 categories, ranging from
+0 (no evidence of any lensed objects in the image) to 4 (certain lenses).
+For both observers, the rate of false positives in the ``certain'' lenses
+was between 0.1\% and 0.3\%. The exception was the ground-based imaging 
+for one observer, where a 4.6\% rate resulted mainly from a
+single decision to allow a false-positive ``double lens'' which occurred
+repeatedly throughout the data at different orientations. The false-negative
+rate among the class-0 identifications was similar for both observers, at
+around 25\% for the space-based images and 20\% for the ground-based.
+
+\subsection{Gabor-SVM (Hartley,Flamary)}
+
+A Support Vector Machine (SVM) is a supervised machine learning method which uses labelled training data to determine a classification model (see e.g., \citet{vapnik79estimation}, \citet{Cortes1995} and \citet{Burges1998}). A preprocessing stage first extracts a set of useful features from input samples, before projecting each sample as a vector in multidimensional space. The model then separates classes of data by maximising the margin between a defining hyperplane and a set of so-called support-vectors at the inner edge of each class. The process of classification is computationally inexpensive since optimisation depends only on the dot products of the support vector subset. Feature extraction, however,  requires both an extensive exploration of the feature space during the development of a model, and potentially intensive computer resources in order to transform the original samples. Our full method is described in detail in Hartley et. al., in prep., and was developed using the Python scikit-learn and scikit-image packages \citep{scikit-learn,scikit-image}.
+
+During our development of an SVM classifier for lens finding, feature extraction initially involved the decomposition of each image into a set of objects, using SExtractor \citep{1996A&AS..117..393B} and GALFIT \citep{2002AJ....124..266P} to recover and subtract objects iteratively. This method had previously been used in a static algorithm approach which assigned points according to the morphological properties of each image \citep[see][]{2014A&A...566A..63J}. Lensed-like objects displaying, for example, greater ellipticity and tangentiality were awarded more points. Since the SVM operates in a fixed dimensional space,  properties of individual objects were collapsed into a fixed set describing the mean and variance of morphological properties of all the objects within an image. After training an SVM using these features we recorded a modest separation of lens and non-lens classes.
+
+An alternative approach was to design a set of Gabor filters to be applied to each sample. The Gabor kernel is described by a sinusoidal function multiplied by a Gaussian envelope. We discard the imaginary part of the function to leave, in two-dimensional space:
+
+\begin{equation}
+G_c[i,j]=Be^{-\frac{(i^2+j^2)}{2\sigma^2}} \mathrm{cos}\left(\frac{2\pi}{\lambda} (i\, \mathrm{cos} \, \theta + j\, \mathrm{sin} \,\theta)\right),
+\end{equation}
+
+where harmonic wavelength $\lambda$, Gaussian spread  $\sigma$ and orientation $\theta$ define the operation performed on each point $i,j$ in an image. Such a kernel is a popular image processing choice for edge detection and texture classification \citep[e.g.][]{Feichtinger98a,Springer-verlag97computationalmodels} and is thought to mimic some image processing functions of the mammalian brain \citep{Jones1233}.
+
+
+\begin{figure}
+  \centering
+      \includegraphics[width=1\columnwidth]{figures/polarfilter.pdf} 
+  \caption{Example of our feature extraction procedure used to transform a ring. The image on the right shows the response of a set of Gabor filters after convolution with a polar transformed image of an Einstein ring. The strongest response is seen in the orientation perpendicular to the radial direction and at the frequency most closely matching that of the ring.}
+ \label{gaborring}
+
+\end{figure}
+
+Our final feature extraction procedure first applied a polar transform to each image in order to exploit the edge detection of the Gabor filter, picking out tangential components typical of galaxy-galaxy lensing. Each image was then convolved with several Gabor filters of varying frequency and rotation (see Fig.~\ref{gaborring}). Stability selection methods were used to investigate the classification performance using different combinations of filters. The responses for each Gabor filter when applied to each image were measured by calculating statistical moments for each filtered image. These moments formed  our final input data on which the SVM could be trained and applied. We used brute-force optimisation methods to select a non-linear SVM containing radial basis function (RBF) kernel and tuned a small set of regularisation hyperparameters to achieve good generalisation performance. During training and testing, our final and best scores achieved when testing on the lens finding challenge training data were an AUC of 0.88 for the space set and 0.95 for the ground set. Classification was performed using a modest desktop PC.
+
+
 \section{results}
+\label{sec:results}
+
+In this section we summarize some of our analysis of the submissions.  In section~\ref{sec:figure_of_merit} we discuss how to judge a classifier in this particular case and define some metrics of success.
 
 \subsection{figures of merit}
+\label{sec:figure_of_merit}
 
 In deriving a good figure of merit for evaluating lens finding algorithms one needs to take into account the particular nature of this problem.
 The traditional method for evaluating a classification algorithm is with the receiver operating characteristic curve, or {\bf ROC} curve.  This a plot of the true positive rate (TPR) and the false positive rate (FPR).  In this case these are defined as
@@ -122,16 +385,160 @@ If the rates of false positives and false negatives remain the same in real data
 \end{align}
 Since only about one in a thousand objects will be lenses (perhaps somewhat more depending on pre-selection) the contamination will be high unless the FPR is much less than the TPR.  For this reason we consider some additional figures of merit.
 
-The {\bf TPR0} will be defined as the highest TPR reached, as a function of $p$ threshold, before a single false positive occurs in the test set of 100,000 images.  This is the point were the ROC meets the FPR = 0 axis.  This quantity highly penalizes classifiers with discrete ranking which often get TPR0 = 0 because their highest classification level is not conservative enough to eliminate all false positives.  We also define {\bf TPR10} which is the TPR at the point were less than ten false positives are made.  If the TP 
+The {\bf TPR$_0$} will be defined as the highest TPR reached, as a function of $p$ threshold, before a single false positive occurs in the test set of 100,000 images.  This is the point were the ROC meets the FPR = 0 axis.  This quantity highly penalizes classifiers with discrete ranking which often get TPR$_0$ = 0 because their highest classification level is not conservative enough to eliminate all false positives.  We also define {\bf TPR$_{10}$} which is the TPR at the point were less than ten false positives are made.  If the TP 
 rate is boosted from the FPR by a factor of 1,000 in a realistic data set with would correspond to about a 10\% contamination.
 
-In addition to these considerations, the performance of a classifier is a function of many characteristics of the lens system.  It might be that one classifier is good at finding systems with large Einstein radii and incomplete arcs, but not as good at finding small complete Einstein rings that are blended with the light of the lens galaxy.  Also lens may have a source that is too faint to be detected by any algorithm or is too far from the lens to be very distorted, but will be classified as a lens in the test data set.   We want to include these objects because we want to test the limits of the classifiers.  As we will see, if you restrict your objectives to detecting only lensed images with surface brightness above threshold, for example, the "best" algorithm might change and the TPR will change.  For this reason we plot the AUROC, TPR0 and TPR10 as a function of several variables for all the entries.  This is done by removing all the lenses that do not exceed the threshold and then recalculating the these quantities, the number of non-lenses remains the same.
+In addition to these considerations, the performance of a classifier is a function of many characteristics of the lens system.  It might be that one classifier is good at finding systems with large Einstein radii and incomplete arcs, but not as good at finding small complete Einstein rings that are blended with the light of the lens galaxy.  Also lens may have a source that is too faint to be detected by any algorithm or is too far from the lens to be very distorted, but will be classified as a lens in the test data set.   We want to include these objects because we want to test the limits of the classifiers.  As we will see, if you restrict your objectives to detecting only lensed images with surface brightness above threshold, for example, the "best" algorithm might change and the TPR will change.  For this reason we plot the AUROC, TPR$_0$ and TPR$_{10}$ as a function of several variables for all the entries.  This is done by removing all the lenses that do not exceed the threshold and then recalculating the these quantities, the number of non-lenses remains the same.
 
 ***
-\subsection{plots}
 
+\subsection{Performance of methods}
+\label{sec:performance}
+
+\begin{table*}
+\centering
+\begin{tabular}{llrrrl}
+  \hline
+  Name & type & AUROC & TPR$_0$ & TPR$_{10}$ & short description \\ 
+  \hline
+ CMU-DeepLens-ResNet-ground3 & Ground-Based & 0.98 & 0.09 & 0.45 & CNN \\ 
+  CMU-DeepLens-Resnet-Voting & Ground-Based & 0.98 & 0.02 & 0.10 & CNN \\ 
+  LASTRO EPFL & Ground-Based & 0.97 & 0.07 & 0.11 & CNN \\ 
+  CAS Swinburne Melb & Ground-Based & 0.96 & 0.02 & 0.08 & CNN \\ 
+  AstrOmatic & Ground-Based & 0.96 & 0.00 & 0.01 & CNN \\ 
+  Manchester SVM & Ground-Based & 0.93 & 0.22 & 0.35 & SVM / Gabor \\ 
+  Manchester-NA2 & Ground-Based & 0.89 & 0.00 & 0.01 & Human Inspection \\ 
+   ALL-star & Ground-Based & 0.84 & 0.01 & 0.02 & edges/gradiants and Logistic Reg. \\ 
+   CAST & Ground-Based & 0.83 & 0.00 & 0.00 & CNN / SVM \\ 
+   YattaLensLite & Ground-Based & 0.82 & 0.00 & 0.00 & SExtractor \\ 
+   LASTRO EPFL (CNN) & Space-Based & 0.93 & 0.00 & 0.08 & CNN \\ 
+  CMU-DeepLens-ResNet & Space-Based & 0.92 & 0.22 & 0.29 & CNN \\ 
+   GAMOCLASS & Space-Based & 0.92 & 0.07 & 0.36 & CNN \\ 
+  CMU-DeepLens-Resnet-Voting & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
+  AstrOmatic & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
+   CMU-DeepLens-ResNet-aug & Space-Based & 0.91 & 0.00 & 0.00 & CNN \\ 
+   Kapteyn & Space-Based & 0.82 & 0.00 & 0.00 & CNN \\ 
+   CAST & Space-Based & 0.81 & 0.07 & 0.12 & CNN \\ 
+  Manchester1 & Space-Based & 0.81 & 0.01 & 0.17 & Human Inspection \\ 
+   Manchester SVM & Space-Based & 0.81 & 0.03 & 0.08 & SVM / Gabor \\ 
+   NeuralNet2 & Space-Based & 0.76 & 0.00 & 0.00 & CNN / wavelets \\ 
+   YattaLensLite & Space-Based & 0.76 & 0.00 & 0.00 & Arcs / SExtractor \\ 
+   All-now & Space-Based & 0.73 & 0.05 & 0.07 & edges/gradiants and Logistic Reg. \\ 
+  GAHEC IRAP & Space-Based & 0.66 & 0.00 & 0.01 & arc finder \\ 
+   \hline
+\end{tabular}
+\caption{The AUROC, TPR$_0$ and TPR$_{10}$ for the entries in order of AUROC.}
+\label{table:AUROC}
+\end{table*}
+
+\begin{table*}
+\centering
+\begin{tabular}{llrrrl}
+  \hline
+  Name & type & AUROC & TPR$_0$ & TPR$_{10}$ & short description \\ 
+  \hline
+ Manchester SVM & Ground-Based & 0.93 & 0.22 & 0.35 & SVM / Gabor \\ 
+  CMU-DeepLens-ResNet-ground3 & Ground-Based & 0.98 & 0.09 & 0.45 & CNN \\ 
+  LASTRO EPFL & Ground-Based & 0.97 & 0.07 & 0.11 & CNN \\ 
+   CMU-DeepLens-Resnet-Voting & Ground-Based & 0.98 & 0.02 & 0.10 & CNN \\ 
+   CAS Swinburne Melb & Ground-Based & 0.96 & 0.02 & 0.08 & CNN \\ 
+   ALL-star & Ground-Based & 0.84 & 0.01 & 0.02 & edges/gradiants and Logistic Reg. \\ 
+   Manchester-NA2 & Ground-Based & 0.89 & 0.00 & 0.01 & Human Inspection \\ 
+   YattaLensLite & Ground-Based & 0.82 & 0.00 & 0.00 & SExtractor \\ 
+   CAST & Ground-Based & 0.83 & 0.00 & 0.00 & CNN / SVM \\ 
+   AstrOmatic & Ground-Based & 0.96 & 0.00 & 0.01 & CNN \\ 
+   CMU-DeepLens-ResNet & Space-Based & 0.92 & 0.22 & 0.29 & CNN \\ 
+   GAMOCLASS & Space-Based & 0.92 & 0.07 & 0.36 & CNN \\ 
+   CAST & Space-Based & 0.81 & 0.07 & 0.12 & CNN \\ 
+   All-now & Space-Based & 0.73 & 0.05 & 0.07 & edges/gradiants and Logistic Reg. \\ 
+   Manchester SVM & Space-Based & 0.80 & 0.03 & 0.07 & SVM / Gabor \\ 
+   Manchester1 & Space-Based & 0.81 & 0.01 & 0.17 & Human Inspection \\ 
+   LASTRO EPFL (CNN) & Space-Based & 0.93 & 0.00 & 0.08 & CNN \\ 
+   GAHEC IRAP & Space-Based & 0.66 & 0.00 & 0.01 & arc finder \\ 
+   AstrOmatic & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
+   Kapteyn & Space-Based & 0.82 & 0.00 & 0.00 & CNN \\ 
+   CMU-DeepLens-ResNet-aug & Space-Based & 0.91 & 0.00 & 0.00 & CNN \\ 
+   CMU-DeepLens-Resnet-Voting & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
+   NeuralNet2 & Space-Based & 0.76 & 0.00 & 0.00 & CNN / wavelets \\ 
+   YattaLensLite & Space-Based & 0.76 & 0.00 & 0.00 & Arcs / SExtractor \\ 
+   \hline
+\end{tabular}
+\caption{The AUROC, TPR$_0$ and TPR$_{10}$ for the entries in order of TPR$_0$.  }
+\label{table:TPR0}
+\end{table*}
+
+\begin{figure*}
+ \includegraphics[width=2\columnwidth]{figures/roc_space.pdf}
+ \caption{The ROC curves for the space-based entries.}
+ \label{fig:roc_space}
+\end{figure*}
+
+\begin{figure*}
+ \includegraphics[width=2\columnwidth]{figures/roc_ground.pdf}
+ \caption{The ROC curves for the ground-based entries.  Notice that these are are generally better than in figure~\ref{fig:einstein_space} indicating that colour information is an important discriminant. }
+ \label{fig:roc_ground}
+\end{figure*}
+
+\begin{figure*}
+ \includegraphics[width=2\columnwidth]{figures/roc_kids.pdf}
+ \caption{The ROC curves for the ground-based entries including only the cases with authentic images taken from the KiDS survey.  It can be seen that in all cases these are lower than in figure~\ref{fig:roc_ground}.}
+ \label{fig:roc_kids}
+\end{figure*}
+
+\begin{figure*}
+ \includegraphics[width=2\columnwidth]{figures/einstein_space.pdf}
+ \caption{The AUROC, TPR$_0$, TPR$_{10}$ and the fraction of lenses in the test sample after discarding the lenses with Einstein radii larger than the number indicated on the x-axis. }
+ \label{fig:einstein_space}
+\end{figure*}
+
+\begin{figure*}
+ \includegraphics[width=2\columnwidth]{figures/einstein_ground.pdf}
+ \caption{Same as figure~\ref{fig:einstein_space}, but for space-based entries.}
+ \label{fig:einstein_ground}
+\end{figure*}
+
+\begin{figure*}
+ \includegraphics[width=2\columnwidth]{figures/flux_space.pdf}
+ \caption{}
+ \label{fig:flux_space}
+\end{figure*}
+
+\begin{figure*}
+ \includegraphics[width=2\columnwidth]{figures/flux_ground.pdf}
+ \caption{}
+ \label{fig:flux_ground}
+\end{figure*}
+
+\begin{figure*}
+\includegraphics[width=2\columnwidth]{figures/npixel_space.pdf}
+ \caption{}
+ \label{fig:npixel_space}
+\end{figure*}
+
+\begin{figure*}
+ \includegraphics[width=2\columnwidth]{figures/npixel_ground.pdf}
+ \caption{}
+ \label{fig:npixel_ground}
+\end{figure*}
+
+\begin{figure*}
+ \includegraphics[width=2\columnwidth]{figures/flux_contrast_space.pdf}
+ \caption{}
+ \label{fig:flux_contrast_space}
+\end{figure*}
+
+\begin{figure*}
+ \includegraphics[width=2\columnwidth]{figures/flux_contrast_ground.pdf}
+ \caption{}
+ \label{fig:flux_contrast_ground}
+\end{figure*}
+
+\red{surface brightness contrast}
+
+\red{breakups Manchester between Neil and Amit}
 
 \section{Conclusions \& discussion}
+\label{sec:conclusion}
 
 It is clear that the robustness of lens finders against falsely classifying unusual galaxies as lenses was not adequately tested in this challenge.  Some of the methods which appear overly conservative in this test might be better at avoiding false positives in real data.  This can be seen as a form of over fitting to the test set.
 In future challenges we wish to concentrate on this aspect of the problem.
@@ -143,6 +550,9 @@ Human inspection was the only method to find the jackpot lens
 EB thanks Raphael Gavazzi for proposing him to participate to the challenge.
 AS was supported by World Premier International Research Center Initiative (WPI Initiative), MEXT, Japan.
 RBM's research was partly part of project GLENCO, funded under the European Seventh Framework Programme, Ideas, Grant Agreement n. 259349.
+AT acknowledges receipt of an STFC postdoctoral research
+assistantship.
+\red{We thank the International Space Science Institute (ISSI) for hosting and funding our workshop.\footnote{http://www.issibern.ch/}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%

@@ -1,0 +1,121 @@
+%% Creator: Inkscape inkscape 0.92.1, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file '11q.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{97.5bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,5.38461538)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{11q.pdf}}%
+    \put(0.50051082,5.14750601){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{conv 4x4 16}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{11q.pdf}}%
+    \put(0.50051082,4.91673678){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{conv 3x3 16}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{11q.pdf}}%
+    \put(0.50051082,4.68596746){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{max pool /2}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{11q.pdf}}%
+    \put(0.52944078,5.28313558){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{101\times101\times4}$}}}%
+    \put(0.52944078,5.0523664){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{98\times98\times16}$}}}%
+    \put(0.52944078,4.82159708){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{96\times96\times16}$}}}%
+    \put(0.52944078,4.59082803){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{48\times48\times16}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{11q.pdf}}%
+    \put(0.50051082,4.26289077){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{conv 3x3 32}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{11q.pdf}}%
+    \put(0.50051082,4.03212154){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{conv 3x3 32}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{11q.pdf}}%
+    \put(0.50051082,3.80135231){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{max pool /2}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{11q.pdf}}%
+    \put(0.52944078,4.16775105){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{46\times46\times32}$}}}%
+    \put(0.52944078,3.93698182){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{44\times44\times32}$}}}%
+    \put(0.52944078,3.70621259){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{22\times22\times32}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{11q.pdf}}%
+    \put(0.50051082,3.37827527){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{conv 3x3 64}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{11q.pdf}}%
+    \put(0.50051082,3.14750604){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{conv 3x3 64}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{11q.pdf}}%
+    \put(0.50051082,2.91673681){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{max pool /2}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{11q.pdf}}%
+    \put(0.52944078,3.28313555){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{20\times20\times64}$}}}%
+    \put(0.52944078,3.05236632){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{18\times18\times64}$}}}%
+    \put(0.52944078,2.82159708){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{9\times9\times64}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{11q.pdf}}%
+    \put(0.50051082,2.37827527){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{conv 3x3 128}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{11q.pdf}}%
+    \put(0.50051082,1.95519835){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{conv 3x3 128}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{11q.pdf}}%
+    \put(0.50051082,1.41673681){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{fc 1024}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{11q.pdf}}%
+    \put(0.52944078,2.28313555){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{7\times7\times128}$}}}%
+    \put(0.52944078,1.86005862){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{5\times5\times128}$}}}%
+    \put(0.52944078,1.32159708){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{1024}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{11q.pdf}}%
+    \put(0.50051082,0.99365989){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{fc 1024}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{11q.pdf}}%
+    \put(0.50051082,0.57058296){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{fc 1024}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{11q.pdf}}%
+    \put(0.50051082,0.14750604){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{fc 1}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{11q.pdf}}%
+    \put(0.52944078,0.05236678){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{1}$}}}%
+    \put(0.50051082,4.49365983){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\tiny batch norm}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{11q.pdf}}%
+    \put(0.50051082,3.6090445){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\tiny batch norm}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{11q.pdf}}%
+    \put(0.50051082,2.72442912){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\tiny batch norm}}}}%
+    \put(0.50051082,2.6090445){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\tiny dropout}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=23]{11q.pdf}}%
+    \put(0.50051082,1.76289065){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\tiny batch norm}}}}%
+    \put(0.50051082,1.64750604){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\tiny dropout}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=24]{11q.pdf}}%
+    \put(0.50051082,0.37827527){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\tiny batch norm}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=25]{11q.pdf}}%
+    \put(0.50051082,1.22442912){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\tiny dropout}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=26]{11q.pdf}}%
+    \put(0.50051082,0.80135219){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\tiny dropout}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=27]{11q.pdf}}%
+    \put(0.50051082,2.18596758){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{{\tiny dropout}}}}%
+    \put(0.52944078,0.89851969){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{1024}$}}}%
+    \put(0.52944078,0.47544277){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\scriptscriptstyle{1024}$}}}%
+  \end{picture}%
+\endgroup%

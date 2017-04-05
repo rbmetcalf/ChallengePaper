@@ -47,7 +47,7 @@ Amit Tagore,$^7$
 \newauthor
 and ?\\
 % List of institutions
-$^{1}$ Departimento di Fisica \& Astronomia, Universit\`a di Bologna, viale Berti Pichat 6/2, 40127 Bologna, Italy \\
+$^{1}$ Departimento di Fisica \& Astronomia, Universit\`a di Bologna, via Gabetti 93/2, 4012 Bologna, Italy \\
 $^{2}$ IRAP, University of Toulouse, CNRS, UPS, France.\\
 $^{3}$ Sorbonne Universit\'{e}s, UPMC Univ. Paris 6 and CNRS, UMR 7095, Institut d'Astrophysique de Paris,  98bis Bd Arago, F-75014,\\ Paris France.\\
 $^{4}$ INAF-Osservatorio Astronomico di Bologna, via Ranzani 1, 40127 Bologna, Italy \\
@@ -80,7 +80,7 @@ gravitational lensing -- cosmology
 
 some numbers about future surveys
 
-some background of passed methods
+some background on past methods
 
 The paper is organized as follows.  The form of the challenge and its rules are described in the next section.  The methods used to simulate mock images of galaxies and gravitational lenses are described in section~\ref{sec:simulation}.  In section~\ref{sec:entries} each of the methods that were used to solve the challenge are briefly described.  We discuss the metrics used to evaluate entries in section~\ref{sec:figure_of_merit}.  The performance of each of the methods broken down in different ways is presented in section~\ref{sec:performance}.  Finally,  in section~\ref{sec:conclusion}, we conclude with a discussion of what was learned and how methods can be improved in the future.
 
@@ -97,7 +97,7 @@ The challenge was opened on November 25, 2016 and closed on February 5, 2017.
 \label{sec:simulation}
 
 Creating the mock images starts with a cosmological nbody simulation.  In this case it was the Millennium simulation \citep{***}.   A catalog of dark matter halos within a light-cone is 
-constructed within the Millennium Observatory project \citep{2013MNRAS.428..778O}.  Using the GLAMER lensing code \citep{2014MNRAS.445.1942M,2014MNRAS.445.1954P} we identify and map out all the caustics within the light-cone for *** source planes.  For every caustic that corresponded to a critical curve with an Einstein radius larger than **** arcseconds, we identify the main object causing lensing by finding the largest ****.  The Einstein radius is estimated here and in all that follows as $R_{\rm ein}=\sqrt{A_{\rm ein}/\pi}$ where $A_{\rm ein}$ is the angular area within the critical curve.  All the halos within *** Mpc of this main lens are extracted and used as a lens.  This collection of halos is rotated to produce more random lenses.  A **** light-cone gives rise to **** such lenses.
+constructed within the Millennium Observatory project \citep{2013MNRAS.428..778O}.  Using the GLAMER lensing code \citep{2014MNRAS.445.1942M,2014MNRAS.445.1954P} we identify and map out all the caustics within the light-cone for *** source planes.  For every caustic that corresponded to a critical curve with an Einstein radius larger than **** arcseconds, we identify the main object causing lensing by finding the largest ****.  The Einstein radius is estimated here and in all that follows as $R_{\rm ein}=\sqrt{A_{\rm ein}/\pi}$ where $A_{\rm ein}$ is the angular area within the critical curve.  A **** square degree light-cone gives rise to **** such lenses.  All the halos within *** Mpc of this main lens are extracted and used as a lens.  This collection of halos is rotated to produce more random lenses.    In this way the lenses contain the all the subhalos and near by companion halos.
 
 For lensed sources we use sources from the Hubble Ultra Deep Field (UDF) that have been decomposed into shapelet functions to remove noise.  This is the same set of images as used 
 in ***.   The source is placed within **** of the center of the lenses caustic as found in the initial ray tracing.  This is a somewhat arbitrary length designed to be a compromise between producing only very clear strong lenses because all the sources are right in the center of the caustic and making the proccess  inefficiently because most of the sources are too far away from the caustic to produce clear lenses.  If the source positions where taken completely at random the fraction of clear lenses would be very low.
@@ -122,6 +122,7 @@ Every time the lens is reoriented a new realization of the lens galaxies is made
 For the training sets all these products were provided, but for the test sets only the final images were provided to participants although all the information was stored for analysing the entries.
 
 \subsection{space-based}
+\label{sec:sim-space-based}
 
 For the space-based data sets a simple Gaussian PSF was applied with a ***** of **** arcsec.  
 The band used was SDSS K.  The noise was a Gaussian random realization ****.
@@ -129,6 +130,7 @@ The band used was SDSS K.  The noise was a Gaussian random realization ****.
 {\bf fractions}
 
 \subsection{ground-based}
+\label{sec:sim-ground-based}
 
 For the ground-based images four bands where *****.  
  The KiDS survey provided a representative PSF map, **** image stamps of their targets and the weights maps for those images.  Some of these images had masked regions to remove stars, cosmic rays and bad pixels. The PSF had a FWHM of *** and was applied to all the images.   Noise was simulated by adding normally distributed numbers with the variance given by the weight maps.  The weight maps where also randomly rotated and flipped.  This resulted in many of the images having large masked regions in them ($\sim$ ***** \%).
@@ -411,7 +413,7 @@ In addition to these considerations, the performance of a classifier is a functi
    ALL-star & Ground-Based & 0.84 & 0.01 & 0.02 & edges/gradiants and Logistic Reg. \\ 
    CAST & Ground-Based & 0.83 & 0.00 & 0.00 & CNN / SVM \\ 
    YattaLensLite & Ground-Based & 0.82 & 0.00 & 0.00 & SExtractor \\ 
-   LASTRO EPFL (CNN) & Space-Based & 0.93 & 0.00 & 0.08 & CNN \\ 
+   LASTRO EPFL & Space-Based & 0.93 & 0.00 & 0.08 & CNN \\ 
   CMU-DeepLens-ResNet & Space-Based & 0.92 & 0.22 & 0.29 & CNN \\ 
    GAMOCLASS & Space-Based & 0.92 & 0.07 & 0.36 & CNN \\ 
   CMU-DeepLens-Resnet-Voting & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
@@ -430,6 +432,9 @@ In addition to these considerations, the performance of a classifier is a functi
 \caption{The AUROC, TPR$_0$ and TPR$_{10}$ for the entries in order of AUROC.}
 \label{table:AUROC}
 \end{table*}
+
+Table~\ref{table:AUROC} shows the AUROC, TPR$_0$ and TPR$_{10}$ for the entries in order of AUROC and data set type.  It can be seen that CMU-DeepLens-ResNet-ground3 had the best AUROC for the ground-based set and LASTRO EPFL the best for the space-based set.  The order is different if TPR$_0$ is used to rank the entries as seen in table~\ref{table:TPR0}.  Here Manchester SVM and 
+CMU-DeepLens-ResNet get the best scores.
 
 \begin{table*}
 \centering
@@ -453,7 +458,7 @@ In addition to these considerations, the performance of a classifier is a functi
    All-now & Space-Based & 0.73 & 0.05 & 0.07 & edges/gradiants and Logistic Reg. \\ 
    Manchester SVM & Space-Based & 0.80 & 0.03 & 0.07 & SVM / Gabor \\ 
    Manchester1 & Space-Based & 0.81 & 0.01 & 0.17 & Human Inspection \\ 
-   LASTRO EPFL (CNN) & Space-Based & 0.93 & 0.00 & 0.08 & CNN \\ 
+   LASTRO EPFL & Space-Based & 0.93 & 0.00 & 0.08 & CNN \\ 
    GAHEC IRAP & Space-Based & 0.66 & 0.00 & 0.01 & arc finder \\ 
    AstrOmatic & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
    Kapteyn & Space-Based & 0.82 & 0.00 & 0.00 & CNN \\ 
@@ -485,6 +490,9 @@ In addition to these considerations, the performance of a classifier is a functi
  \label{fig:roc_kids}
 \end{figure*}
 
+Figures~\ref{fig:roc_space} and \ref{fig:roc_space} show the ROC curves for all the entries.  In addition figure~\ref{fig:roc_kids} shows the ROC curves for only the ground-based images where an actual KiDS image was used (see section~\ref{sec:sim-ground-based}).  It can be seen that the classifiers do uniformly less well on this subset.  This indicates that the simulated galaxy images are different from the real ones and that the classifiers are not able to distinguish fake foreground galaxies from lenses more easily.  This is perhaps not unexpected, but does show that the simulated lenses need to be improved before the raw numbers can be directly used to evaluate the performance of a classifier on real data.
+
+
 \begin{figure*}
  \includegraphics[width=2\columnwidth]{figures/einstein_space.pdf}
  \caption{The AUROC, TPR$_0$, TPR$_{10}$ and the fraction of lenses in the test sample after discarding the lenses with Einstein radii larger than the number indicated on the x-axis. }
@@ -499,37 +507,37 @@ In addition to these considerations, the performance of a classifier is a functi
 
 \begin{figure*}
  \includegraphics[width=2\columnwidth]{figures/flux_space.pdf}
- \caption{}
+ \caption{Same as figure~\ref{fig:einstein_space}, but here the x-axis is the flux within the pixels that are above 1 $\sigma$ in the lensed source only image.}
  \label{fig:flux_space}
 \end{figure*}
 
 \begin{figure*}
  \includegraphics[width=2\columnwidth]{figures/flux_ground.pdf}
- \caption{}
+ \caption{Same as figure~\ref{fig:flux_space}, but for space-based entries.}
  \label{fig:flux_ground}
 \end{figure*}
 
 \begin{figure*}
 \includegraphics[width=2\columnwidth]{figures/npixel_space.pdf}
- \caption{}
+ \caption{Same as figure~\ref{fig:einstein_space}, but here the x-axis is the number of pixels that are above 1 $\sigma$ in the lensed source only image.  This is an indication of the lensed arcs' size.}
  \label{fig:npixel_space}
 \end{figure*}
 
 \begin{figure*}
  \includegraphics[width=2\columnwidth]{figures/npixel_ground.pdf}
- \caption{}
+ \caption{Same as figure~\ref{fig:npixel_space}, but for space-based entries.}
  \label{fig:npixel_ground}
 \end{figure*}
 
 \begin{figure*}
  \includegraphics[width=2\columnwidth]{figures/flux_contrast_space.pdf}
- \caption{}
+  \caption{Same as figure~\ref{fig:einstein_space}, but here the x-axis is the ratio of the flux coming from the lensed source to the total flux in the image.  (\red{ check this.  Band?})}
  \label{fig:flux_contrast_space}
 \end{figure*}
 
 \begin{figure*}
  \includegraphics[width=2\columnwidth]{figures/flux_contrast_ground.pdf}
- \caption{}
+ \caption{Same as figure~\ref{fig:flux_contrast_space}, but for space-based entries.}
  \label{fig:flux_contrast_ground}
 \end{figure*}
 

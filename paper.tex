@@ -392,8 +392,6 @@ rate is boosted from the FPR by a factor of 1,000 in a realistic data set with w
 
 In addition to these considerations, the performance of a classifier is a function of many characteristics of the lens system.  It might be that one classifier is good at finding systems with large Einstein radii and incomplete arcs, but not as good at finding small complete Einstein rings that are blended with the light of the lens galaxy.  Also lens may have a source that is too faint to be detected by any algorithm or is too far from the lens to be very distorted, but will be classified as a lens in the test data set.   We want to include these objects because we want to test the limits of the classifiers.  As we will see, if you restrict your objectives to detecting only lensed images with surface brightness above threshold, for example, the "best" algorithm might change and the TPR will change.  For this reason we plot the AUROC, TPR$_0$ and TPR$_{10}$ as a function of several variables for all the entries.  This is done by removing all the lenses that do not exceed the threshold and then recalculating the these quantities, the number of non-lenses remains the same.
 
-***
-
 \subsection{Performance of methods}
 \label{sec:performance}
 
@@ -540,6 +538,14 @@ Figures~\ref{fig:roc_space} and \ref{fig:roc_space} show the ROC curves for all 
  \caption{Same as figure~\ref{fig:flux_contrast_space}, but for space-based entries.}
  \label{fig:flux_contrast_ground}
 \end{figure*}
+
+Figures~\ref{fig:einstein_space} and \ref{fig:einstein_ground} shows the AUROC, TPR$_0$, TPR$_{10}$ and fraction of lenses as a function of a lower cutoff on the Einstein radius (area).  There is also a vertical dotted line that indicates where no more than 100 lenses in the test sample had Einstein radii larger than this mark.  Beyond this point one should be suspicius of small number statistics.  When deriving the distribution of Einstein radii from data these curves would need to be used to correct for detection bias.  It can be seen the CMU-DeepLens-ResNet, Manchester1, Manchester SVM and GAMOCLASS obtain significantly higher TPR$_0$ and  TPR$_{10}$ for larger Einstein radii.  Manchester1 is the human inspection method.  In some cases these are above 50\% of the lenses that meet the criterion.  Remember that many of the so called lenses are very dim or there is no significant arc because of the source position is well outside the caustic.  If an additional require was placed on the definition of a lens, such as the brightness of the arc being above a threshold, the TPRs would go up.
+
+Figures~\ref{fig:flux_space} and \ref{fig:flux_ground} are the same except that the flux in the lensed image is used as the threshold.  We count only the flux in pixels with flux over one $\sigma$ of the background.  In some cases one can see an abrupt rise in the TPRs at some flux threshold.  CMU-DeepLens-ResNet in particular reaches a TPR$_0$ above 75\% for the bightest $\sim$ 10\% of the lenses.
+
+A lensed image can be bright without being visibly distorted as in the case of a unresolved image.  Figures~\ref{fig:npixel_space} and \ref{fig:npixel_ground} use the number of pixels in the lensed image(s) that are over  one $\sigma$ of the background.  In this case also some classifiers show an abrupt improvement when the image is required to be larger than some threshold.  Interestingly in some cases the TPRs go down with lensed image size after reaching a peak.  This could be because they are not differentiating the arcs from companion galaxies as well in this regime.
+
+Figures~\ref{fig:flux_contrast_space} and \ref{fig:flux_contrast_ground} investigate how the flux contrast between the foreground objects and the lensed source affects the classifiers.  Interestingly some method's TPRs go up with this quantity and some go down.
 
 \red{surface brightness contrast}
 

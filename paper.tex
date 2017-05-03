@@ -22,7 +22,7 @@
 \usepackage{hyperref}
 
 \newcommand{\red}[1]{{\color{red} #1}}
-
+\newcommand{\degree}{^{\circ}}
 %%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
 
 
@@ -104,40 +104,54 @@ The challenge was opened on November 25, 2016 and closed on February 5, 2017.
 \section{the simulations}
 \label{sec:simulation}
 
-Creating the mock images starts with a cosmological nbody simulation.  In this case it was the Millennium simulation \citep{2009MNRAS.398.1150B}.   A catalog of dark matter halos within a light-cone is constructed within the Millennium Observatory project \citep{2013MNRAS.428..778O} down to a mass of ****.   
-These halo catalog is read into the GLAMER lensing code \citep{2014MNRAS.445.1942M,2014MNRAS.445.1954P} to do all the ray-tracing.
-This code projects the halos onto lens planes, in this case 20, and finds the deflection angle on each plane by a hybrid tree method.  In this way the halos have the mass, concentration and clustering properties from the nbody simulation, but within each strong lens the mass resolution is not limited by the original simulation, but follows the analytic mass profile.  
+Creating the mock images starts with a cosmological nbody simulation.  In this case it was the Millennium simulation \citep{2009MNRAS.398.1150B}.   A catalog of dark matter halos within a light-cone is constructed within the Millennium Observatory project \citep{2013MNRAS.428..778O} down to a mass of ****.   The challenge sets were based on a 1.6 sq.deg. light cone extending out to redshift 6.
+The halo catalog is read into the GLAMER lensing code \citep{2014MNRAS.445.1942M,2014MNRAS.445.1954P} to do all the ray-tracing.  This code projects the halos onto lens planes, in this case 20, and finds the deflection angle on each plane by a hybrid tree method.  In this way the halos have the mass, concentration and clustering properties from the nbody simulation, but within each strong lens the mass resolution is not limited by the original simulation, but follows the analytic mass profile.  
 
 With GLAMER we identify and map out all the caustics within the light-cone for 33 source planes -- z=1 to 3 in intervals of 0.1 and 3 to 6 in intervals of 0.25.  We take every caustic that corresponded to a critical curve with an Einstein radius larger than 1.5 times the resolution.  The Einstein radius is estimated here and in all that follows as $R_{\rm ein}=\sqrt{A_{\rm ein}/\pi}$ where $A_{\rm ein}$ is the angular area within the critical curve.
 
  A **** square degree light-cone gives rise to **** such caustics, but these over count the number of lenses since most will have caustics on multiple source planes.  These lenses could be used as is, but we want to produce a much larger number with more randomness.   For each caustic we identify the lens plane with the highest convergence and identify all the halos within a three dimensional distance of 0.5 Mpc from the center of the critical curve and on this and its neighboring lens planes.    This collection of halos is then used as the lens and rotated to produce more random lenses.    It  contains all the subhalos and near by companion halos, but not the large scale structure surrounding it.
 
 For lensed sources we use sources from the Hubble Ultra Deep Field (UDF) that have been decomposed into shapelet functions to remove noise.  This is the same set of images as used 
-in ****.   The source is placed within **** of the center of the lenses caustic as found in the initial ray tracing.  This is a somewhat arbitrary length designed to be a compromise between producing only very clear strong lenses because all the sources are right in the center of the caustic and making the process  inefficiently because most of the sources are too far away from the caustic to produce clear lenses.  If the source positions where taken completely at random the fraction of clear lenses would be very low.
+in  \red{*** Massimo: Can you put a citation in for this?}.   There are 9,350 such sources with redshifts and separate coefficients in 10 bands.   
 
- \red{How the redshifts are picked}
+To construct a mock lens, first a caustic on the highest redshift source plane is selected.  This is done in order of Einstein area, but all the critical curves are used more than once.  Since every lens with a caustic at a lower redshift will have a caustic at the highest redshift this is a selection from all of the caustics in the light-cone.   The lens is extracted as explained above and rotated randomly in three dimensions.  A source is selected at random from the shapelet catalog subject to a magnitude limit in a target band.   The redshift of the UDF source is used as the source redshift.  If the source is at a lower redshift than the lens or within $\Delta z = 0.4$ another source is selected.
 
-{\bf Lens Galaxies}
+The furthest point in the caustic is found from its own center and the source is placed randomly within 3 times this distance.  This is a somewhat arbitrary length designed to be a compromise between producing only very clear strong lenses because all the sources are right in the center of the caustic and making the process  inefficiently because most of the sources are too far away from the caustic to produce clear lenses.  If the source positions where taken completely at random the fraction of clear lenses would be very low.
 
-There are not enough large galaxies in the UDF to make enough mock lens galaxies.  The Millennium Observatory provides parameters for the galaxies that inhabit the dark matter halos using the semi-analytic galaxy formation models of \citet{2011MNRAS.413..101G}.  To model the surface brightness of these galaxies we use the models ****
+The visible galaxies associated with the lens must also be simulated.
+There were not enough large galaxies in the UDF catalog to make enough mock lens galaxies for this purpose.  Instead, for most of the lenses, we used an analytic model for the surface brightness of these galaxies.  The Millennium Observatory provides parameters for the galaxies that inhabit the dark matter halos using the semi-analytic galaxy formation models of \citet{2011MNRAS.413..101G}.  The parameters used here were the total magnitude, the bulge-to-disk ratio, the disk scale height and the bulge effective radius.  The magnitude and bulge-to-disk ratio are a function of the pass band.  Each galaxy is given a random orientation and inclination angle.between 0 and $80\degree$.  The disk is exponential with no vertical height which is why the inclination is limited to $80\degree$.  The bulge is represented by a S\'{e}rsic profile with a axis ratio randomly sampled between 0.5 and 1.  The S\'{e}rsic index, $n_s$, is by 
+\begin{align}
+\log( n_s )= 0.4 \log\left[ {\rm max}\left(\frac{B}{T},0.03\right)\right] + 0.1 x 
+\end{align}
+where $\frac{B}{T}$ is the bulge to total flux ratio and $x$ is a uniform random number between -1 and 1.  This approximately reproduces the observed correlation between these quantities.
 
-{\bf mass rendering}
+In addition to the basic disk and bulge models we introduce some spiral arms.  The surface brightness of 
+the disks are given by
+\begin{align}
+S(\theta,r) = e^{-r/R_h} \left( 1 + A \cos(N_a\theta + \phi_r \right) ~, \\
+\phi_r = \alpha\log(2 r/ R_h) + \phi_d \nonumber
+\end{align}
+where $R_h$ is the scale height of the disk.  The phase angle of the arms, $\phi_d$, is chosen at random.  The parameters $A$, $\alpha$ and $N_a$ are chosen from distributions that are judged by eye to produce realistic 
+galaxies.
+The bulge is also perturbed from a perfect S\'{e}rsic profile by multiplying the surface brightness by
+\begin{align}
+1+\sum_{n=1}^6 a_n \cos\left( n \theta  + \phi_n \right)
+\end{align}
+where $\phi_n$ is a random phase.  The coefficients are picked randomly from between -0.002 and 0.002.
 
-To represent the mass of the galaxies we make a gridded map of the surface brightness at 3 times the resolution of the final image.  The surface brightness map in converted into a mass map by assuming a uniform mass-to-light ratio of **** in the **** band.  This mass map is added to the lens before the ray tracing is done.
+These foreground galaxies are rotated in three dimensions with the halos of the lens each time a random lens is produced so that they remain in the same same positions relative to the mass.  All the random parameters are also reassigned with every realization of the lens.
 
-Every time the lens is reoriented a new realization of the lens galaxies is made and a new source position is found.
+These images of the of foreground galaxies are not intended to reproduce the true population of galaxies, but only to be sufficiently irregular to make them difficult to fit to a simple analytic model that might make them very easy to distinguish from a foreground plus a lensed image.   As will be discussed later, more realistic models will be needed in the future and are a subject of current investigation.
 
+To represent the mass of the galaxies we make a gridded map of the surface brightness at 3 times the resolution of the final image.  The surface brightness map in converted into a mass map by assuming a uniform mass-to-light ratio of 1.5 solar in the target band.  This mass map is added to the lens before the ray tracing is done.
 
-{\bf size of cones}
-
-{\bf products - images output}
-
-For the training sets all these products were provided, but for the test sets only the final images were provided to participants although all the information was stored for analyzing the entries.
+The code is able to produce any combination of foreground galaxies, lensed image and noise that is desired.  For the training set we provided an image of the total lens with noise, an image of the foreground galaxies with noise and and image of the lensed background source without noise.
+For the test sets only the final images were provided to participants although all the information was stored for analyzing the entries.
 
 \subsection{space-based}
 \label{sec:sim-space-based}
 
-For the space-based data sets a simple Gaussian PSF was applied with a ***** of **** arcsec.  
+For the space-based datasets a simple Gaussian PSF was applied with a ***** of **** arcsec.  
 The band used was SDSS K.  The noise was a Gaussian random realization ****.
 
 {\bf fractions}
@@ -209,14 +223,14 @@ the challenge.  Each subsection refers to a team which gave a separate entry.
  \label{fig:Cabanac}
 \end{figure}
 
-Arcfinder \citep{astronaut.ph..6757A,2007A&A...461..813C,2012ApJ...749...38M} is a fast linear method that computes a pixel wise elongation parameter (ratio of first-order moments in a n-pix window oriented in proper reference frame) for all pixels of mexican-hat-smoothed FITS images. Arcfinder then extract contiguous pixels above a given background and computes the candidate arcs length, width, area, radius of curvature and peak surface brightness. A final thresholding is set to maximize purity over completeness on a few typical arcs of the data set.
-For the current SL challenge, arcfinder was tuned to detect long and narrow arcs, and was optimized on a subset of 1000 simulated images with a grid covering a range of elongation windows and arc areas.  A python wrapper allows users to change parameters in a flexible way and run the arcfinder C code as a linux line command. Arcfinder took a couple of hours to run on the entire data set with some overheads due to the data set format. The code is publicly available at https://github.com/rcabanac/arcfinder.
+Arcfinder \citep{astronaut.ph..6757A,2007A&A...461..813C,2012ApJ...749...38M} is a fast linear method that computes a pixel wise elongation parameter (ratio of first-order moments in a n-pix window oriented in proper reference frame) for all pixels of mexican-hat-smoothed FITS images. Arcfinder then extract contiguous pixels above a given background and computes the candidate arcs length, width, area, radius of curvature and peak surface brightness. A final thresholding is set to maximize purity over completeness on a few typical arcs of the dataset.
+For the current SL challenge, arcfinder was tuned to detect long and narrow arcs, and was optimized on a subset of 1000 simulated images with a grid covering a range of elongation windows and arc areas.  A python wrapper allows users to change parameters in a flexible way and run the arcfinder C code as a linux line command. Arcfinder took a couple of hours to run on the entire dataset with some overheads due to the dataset format. The code is publicly available at https://github.com/rcabanac/arcfinder.
 
 \red{Reference to figure \ref{fig:Cabanac}?}
 
 \subsection{AstrOmatic (Emmanuel Bertin)}
 
-The lens detector is based on a convolutional neural network (CNN), trained with the provided training data sets. The CNN is implemented in Python, using the TensorFlow framework\footnote{http://www.tensorflow.org/}. Both ground multichannel and space monochannel image classifiers have the exact same CNN architecture.
+The lens detector is based on a convolutional neural network (CNN), trained with the provided training datasets. The CNN is implemented in Python, using the TensorFlow framework\footnote{http://www.tensorflow.org/}. Both ground multichannel and space monochannel image classifiers have the exact same CNN architecture.
 
 The network itself consists of three convolutional layers ($11\times 11\times 32$, $5\times 5 \times 64$ and $3\times 3\times 64$), followed by two fully-connected layers ($256$ and $64$ neurons) and an output softmax layer. The first five layers use the ELU (Exponential Linear Unit) activation function \citep{2015arXiv151107289C}, which in our tests led to significantly faster convergence compared to ReLU and even SoftPlus activation. Dropout regularization \citep{2012arXiv1207.0580H,JMLR:v15:srivastava14a} is applied to both convolutional and fully connected layers, with ``keep'' probabilities $p=2/3$ and $p=1/2$, respectively.
 
@@ -401,9 +415,9 @@ If the rates of false positives and false negatives remain the same in real data
 Since only about one in a thousand objects will be lenses (perhaps somewhat more depending on pre-selection) the contamination will be high unless the FPR is much less than the TPR.  For this reason we consider some additional figures of merit.
 
 The {\bf TPR$_0$} will be defined as the highest TPR reached, as a function of $p$ threshold, before a single false positive occurs in the test set of 100,000 images.  This is the point were the ROC meets the FPR = 0 axis.  This quantity highly penalizes classifiers with discrete ranking which often get TPR$_0$ = 0 because their highest classification level is not conservative enough to eliminate all false positives.  We also define {\bf TPR$_{10}$} which is the TPR at the point were less than ten false positives are made.  If the TP 
-rate is boosted from the FPR by a factor of 1,000 in a realistic data set with would correspond to about a 10\% contamination.
+rate is boosted from the FPR by a factor of 1,000 in a realistic dataset with would correspond to about a 10\% contamination.
 
-In addition to these considerations, the performance of a classifier is a function of many characteristics of the lens system.  It might be that one classifier is good at finding systems with large Einstein radii and incomplete arcs, but not as good at finding small complete Einstein rings that are blended with the light of the lens galaxy.  Also lens may have a source that is too faint to be detected by any algorithm or is too far from the lens to be very distorted, but will be classified as a lens in the test data set.   We want to include these objects because we want to test the limits of the classifiers.  As we will see, if you restrict your objectives to detecting only lensed images with surface brightness above threshold, for example, the "best" algorithm might change and the TPR will change.  For this reason we plot the AUROC, TPR$_0$ and TPR$_{10}$ as a function of several variables for all the entries.  This is done by removing all the lenses that do not exceed the threshold and then recalculating the these quantities, the number of non-lenses remains the same.
+In addition to these considerations, the performance of a classifier is a function of many characteristics of the lens system.  It might be that one classifier is good at finding systems with large Einstein radii and incomplete arcs, but not as good at finding small complete Einstein rings that are blended with the light of the lens galaxy.  Also lens may have a source that is too faint to be detected by any algorithm or is too far from the lens to be very distorted, but will be classified as a lens in the test dataset.   We want to include these objects because we want to test the limits of the classifiers.  As we will see, if you restrict your objectives to detecting only lensed images with surface brightness above threshold, for example, the "best" algorithm might change and the TPR will change.  For this reason we plot the AUROC, TPR$_0$ and TPR$_{10}$ as a function of several variables for all the entries.  This is done by removing all the lenses that do not exceed the threshold and then recalculating the these quantities, the number of non-lenses remains the same.
 
 \subsection{Performance of methods}
 \label{sec:performance}
@@ -444,7 +458,7 @@ In addition to these considerations, the performance of a classifier is a functi
 \label{table:AUROC}
 \end{table*}
 
-Table~\ref{table:AUROC} shows the AUROC, TPR$_0$ and TPR$_{10}$ for the entries in order of AUROC and data set type.  It can be seen that CMU-DeepLens-ResNet-ground3 had the best AUROC for the ground-based set and LASTRO EPFL the best for the space-based set.  The order is different if TPR$_0$ is used to rank the entries as seen in table~\ref{table:TPR0}.  Here Manchester SVM and 
+Table~\ref{table:AUROC} shows the AUROC, TPR$_0$ and TPR$_{10}$ for the entries in order of AUROC and dataset type.  It can be seen that CMU-DeepLens-ResNet-ground3 had the best AUROC for the ground-based set and LASTRO EPFL the best for the space-based set.  The order is different if TPR$_0$ is used to rank the entries as seen in table~\ref{table:TPR0}.  Here Manchester SVM and 
 CMU-DeepLens-ResNet get the best scores.
 
 \begin{table*}

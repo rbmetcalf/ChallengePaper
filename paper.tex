@@ -45,6 +45,10 @@ Christoph Sch\"{a}fer,$^6$
 Alessandro Sonnenfeld,$^5$ 
 Amit Tagore,$^7$
 \newauthor
+Diego Tuccillo,$^{9,10}$
+Marc Huertas-Company,$^9$
+Santiago Velasco-Forero,$^10$
+Etienne Decenci\`ere,$^10$
 and ?\\
 % List of institutions
 $^{1}$ Departimento di Fisica \& Astronomia, Universit\`a di Bologna, via Gabetti 93/2, 4012 Bologna, Italy \\
@@ -55,6 +59,8 @@ $^{5}$ Kavli IPMU (WPI), UTIAS, The University of Tokyo, Kashiwa, Chiba 277-8583
 $^{6}$ EPFL\\
 $^{7}$ Jodrell Bank Centre for Astrophysics, School of Physics \& Astronomy, University of Manchester, Oxford Rd, Manchester M13 9PL, UK \\
 $^{8}$ Laboratoire Lagrange, Universi\'{e} de Nice Sophia-Antipolis, Centre National de la Recherche Scientifique, Observatoire de la C\^{o}te d'Azur, \\ Parc Valrose, 06108 Nice, France \\
+$^{9}$ LERMA, Observatoire de Paris, CNRS, Université Paris Diderot, 61, Avenue de l’Observatoire F-75014, Paris, France \\
+$^{10}$ Centre for mathematical morphology, Mathematics and Systems department, MINES ParisTech, 35 rue Saint-Honore, Fontainebleau, France \\
 }
 
 \begin{document}
@@ -151,20 +157,23 @@ For the test sets only the final images were provided to participants although a
 \subsection{space-based}
 \label{sec:sim-space-based}
 
-For the space-based datasets a simple Gaussian PSF was applied with a ***** of **** arcsec.  
-The band used was SDSS K.  The noise was a Gaussian random realization ****.
-
-{\bf fractions}
-
+For the space-based datasets the pixel size was set to 0.1 arcsec and 
+a simple Gaussian PSF was applied with a FWHM of 0.18 arcsec.  
+The reference band was SDSS K.  The noise is based on a 1,800 second exposure, a transmission of 0.3, a telescope diameter of 119~cm, a readout noise of 5 electrons per pixel and a sky background of 22.8 magnitudes per sq.arcsec.  
+We use a simple Gaussian random realization of the noise uncorrelated between pixels.
+ 
+ In the challenge set the limiting magnitude for background sources to 28 in K.   60\% of the cases had no background source and were thus labeled as non-lenses.
+ 
 \subsection{ground-based}
 \label{sec:sim-ground-based}
 
-For the ground-based images four bands where *****.  
- The KiDS survey provided a representative PSF map, **** image stamps of their targets and the weights maps for those images.  Some of these images had masked regions to remove stars, cosmic rays and bad pixels. The PSF had a FWHM of *** and was applied to all the images.   Noise was simulated by adding normally distributed numbers with the variance given by the weight maps.  The weight maps where also randomly rotated and flipped.  This resulted in many of the images having large masked regions in them ($\sim$ ***** \%).
- 
-In the test image set some actual KiDS images were used also.  Here a random mass distribution and source was used to produce a lensed source that was added directly to the KiDS image after applying the PSF.  No additional noise was added.
+For the ground-based images four bands where I, G, U and R.  The reference band was R.  For the challenge set 85\% images where made with purely simulated images as outlines above and the other 15\% used actual images taken from a preliminary sample of bright galaxies directly from the KiDS survey.  Lensed source images where added to these real images at the same rate as for the mock images,  in this case 50\%.  No attempt was made to match the halo masses to the observed galaxies in these cases.  These real images where added for more realism and so that, by comparing the results for real and mock images, we can evaluate how realistic our simulations are in this context.
 
-{\bf fractions}
+number of stamps
+
+The KiDS survey provided a representative PSF map in each band that was applied to all mock images.   The pixel size 
+in this case was 0.2~arcsec. 
+Weight maps for the KiDS images were also provided some of which have masked masked regions from remove stars, cosmic rays and bad pixels.  For the mock images the noise was simulated by adding normally distributed numbers with the variance given by the weight maps taken.  The weight maps where also randomly rotated and flipped.  This resulted in many of the images having large masked regions in them ($\sim$ ***** \%).
 
 By chance one of the original KiDS images appears to have been a lens.  When an additional lensed source was added this made a double lens or "jackpot" lens.
 
@@ -384,11 +393,38 @@ where harmonic wavelength $\lambda$, Gaussian spread  $\sigma$ and orientation $
       \includegraphics[width=1\columnwidth]{figures/polarfilter.pdf} 
   \caption{Example of our feature extraction procedure used to transform a ring. The image on the right shows the response of a set of Gabor filters after convolution with a polar transformed image of an Einstein ring. The strongest response is seen in the orientation perpendicular to the radial direction and at the frequency most closely matching that of the ring.}
  \label{gaborring}
-
 \end{figure}
 
 Our final feature extraction procedure first applied a polar transform to each image in order to exploit the edge detection of the Gabor filter, picking out tangential components typical of galaxy-galaxy lensing. Each image was then convolved with several Gabor filters of varying frequency and rotation (see Fig.~\ref{gaborring}). Stability selection methods were used to investigate the classification performance using different combinations of filters. The responses for each Gabor filter when applied to each image were measured by calculating statistical moments for each filtered image. These moments formed  our final input data on which the SVM could be trained and applied. We used brute-force optimisation methods to select a non-linear SVM containing radial basis function (RBF) kernel and tuned a small set of regularisation hyperparameters to achieve good generalisation performance. During training and testing, our final and best scores achieved when testing on the lens finding challenge training data were an AUC of 0.88 for the space set and 0.95 for the ground set. Classification was performed using a modest desktop PC.
 
+\subsection{GAMOCLASS (Tuccillo, Huertas-Company, Velasco-Forero, Decenci\`ere)}
+
+Our algorithm for classification of strong lensed galaxies was developed as a convolutional neural network (CNN) used for binary classification task.
+Our code was trained and tested on the space-based dataset (dataset 0) provided for the Strong lensing challenge, comprising 20,000 stamps of single band simulated galaxies. We used the full dataset in the proportion of 4/5 for training and 1/5 for validation. The training images were labelled with 1 if showing strong lensing and 0 otherwise. Our CNN gives as output a probability [0,1] of the input image being a strongly lensed system.
+The final architecture of our model is illustrated in Fig. \ref{Fig1_gamoclass}. The input image (101x101 pixels) is first processed by a 2D convolution layer with a 3x3 filter size, then subsampled by a 3x3 max pooling layer. Other two identical units follow, with a growing dimensionality of the output space (depth, i.e.output number of filters) in the convolution, for a total of 3 convolutional layers and 3 max pooling layers. Each of these convolutional layers is followed by a rectified linear unit (ReLU) step. The output of these units is then processed through a single fully-connected layer follower by a dropout layer, and, finally, by a one-neuron fully connected layer with sigmoid activation function. For the classification problem we used the binary cross-entropy cost function and for weights updates we used an adaptive moment estimation (ADAM, \citealt{Kingma_2014}) optimization method. The use of the ADAM optimizer improves the learning rate, and previous tests with stochastic gradient descent (SGD) lead to worse results on the classification of the validation sample.
+In order to increase the size of the training set and make the model invariant to specific transformations, we perform several data augmentation steps:
+\begin{itemize}
+\item Random rotation of the image in the range [0, 180$\degree$], using a reflection fill mode to keep constant the size of the images.
+\item The images were randomly shifted of 0.02 times the total width of the image.
+\item Random horizontal and vertical flips of the images
+\end{itemize}
+During the training we initialize the weights of our model with random normal values and we warm up the training \citet{Huang_2016} of the CNN for 25 epochs, using an exponential decay rate (1e-6) and a staring learning rate of α = 0.001. Then the network is trained using an early stopping method, and for a maximum number of 300 epochs. The early stopping method is an effective method to prevent overfitting and consists in stopping the training if a monitored quantity does not improve for a fixed number (called \textit{patience}) of training epochs. The quantity that we monitored was the \textit{accuracy} of the classification of the validation sample. The best architecture was trained over 220 epochs with a parameter of patience equal to 20.
+We implemented our code the Keras framework \citet{Chollet_2015} on top of Theano \citet{Bastien_2012}.
+Our architecture converges with a classification accuracy of 91\% on the validation sample. We further evaluated the performance of our classifier calculating the ROC curve of the classifier, i.e. the True Positive Rate (TPR) against the False Positive Rate. As shown in Fig. \ref{Fig2_gamoclass}, we reach a TPR higher than the 90\% with a FPR < 8\%.
+
+\begin{figure}
+  \centering
+      \includegraphics[width=1\columnwidth]{figures/Fig1_gamoclass.pdf} 
+  \caption{GAMOCLASS}
+ \label{Fig1_gamoclass}
+\end{figure}
+
+\begin{figure}
+  \centering
+      \includegraphics[width=1\columnwidth]{figures/Fig2_gamoclass.pdf} 
+  \caption{GAMOCLASS ROC on training data.}
+ \label{Fig2_gamoclass}
+\end{figure}
 
 \section{results}
 \label{sec:results}

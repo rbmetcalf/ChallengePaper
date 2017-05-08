@@ -35,20 +35,21 @@ Fabio Bellagamba,$^1$
 Emmanuel Bertin,$^3$ 
 \newauthor
 R\'emi Cabanac,$^2$ 
+Etienne Decenci\`ere,$^{10}$
 Remi Flamary,$^8$
 Mario Geiger,$^6$ 
-Philippa Hartley,$^7$
-Neal Jackson,$^7$ 
 \newauthor
+Philippa Hartley,$^7$
+Marc Huertas-Company,$^9$
+Neal Jackson,$^7$ 
 Jean-Paul Kneib,$^6$
+\newauthor
 Christoph Sch\"{a}fer,$^6$ 
 Alessandro Sonnenfeld,$^5$ 
 Amit Tagore,$^7$
-\newauthor
 Diego Tuccillo,$^{9,10}$
-Marc Huertas-Company,$^9$
-Santiago Velasco-Forero,$^10$
-Etienne Decenci\`ere,$^10$
+\newauthor
+Santiago Velasco-Forero,$^{10}$
 and ?\\
 % List of institutions
 $^{1}$ Departimento di Fisica \& Astronomia, Universit\`a di Bologna, via Gabetti 93/2, 4012 Bologna, Italy \\
@@ -56,10 +57,10 @@ $^{2}$ IRAP, University of Toulouse, CNRS, UPS, France.\\
 $^{3}$ Sorbonne Universit\'{e}s, UPMC Univ. Paris 6 and CNRS, UMR 7095, Institut d'Astrophysique de Paris,  98bis Bd Arago, F-75014,\\ Paris France.\\
 $^{4}$ INAF-Osservatorio Astronomico di Bologna, via Ranzani 1, 40127 Bologna, Italy \\
 $^{5}$ Kavli IPMU (WPI), UTIAS, The University of Tokyo, Kashiwa, Chiba 277-8583, Japan\\
-$^{6}$ EPFL\\
+$^{6}$ \red{EPFL}\\
 $^{7}$ Jodrell Bank Centre for Astrophysics, School of Physics \& Astronomy, University of Manchester, Oxford Rd, Manchester M13 9PL, UK \\
 $^{8}$ Laboratoire Lagrange, Universi\'{e} de Nice Sophia-Antipolis, Centre National de la Recherche Scientifique, Observatoire de la C\^{o}te d'Azur, \\ Parc Valrose, 06108 Nice, France \\
-$^{9}$ LERMA, Observatoire de Paris, CNRS, Université Paris Diderot, 61, Avenue de l’Observatoire F-75014, Paris, France \\
+$^{9}$ LERMA, Observatoire de Paris, CNRS, Universit\'e Paris Diderot, 61, Avenue de l'Observatoire F-75014, Paris, France \\
 $^{10}$ Centre for mathematical morphology, Mathematics and Systems department, MINES ParisTech, 35 rue Saint-Honore, Fontainebleau, France \\
 }
 
@@ -224,7 +225,7 @@ There were 24 valid entries into the challenge.  They are listed in table~\ref{t
 This section contains short descriptions of the lens finding methods that were used in 
 the challenge.  Each subsection refers to a team which gave a separate entry.
 
-\subsection{GAHEC IRAP (Remi Cabanac)}
+\subsection{GAHEC IRAP (Cabanac)}
 
 \begin{figure}
  \includegraphics[width=\columnwidth]{figures/arcmethod.pdf}
@@ -237,7 +238,7 @@ For the current SL challenge, arcfinder was tuned to detect long and narrow arcs
 
 \red{Reference to figure \ref{fig:Cabanac}?}
 
-\subsection{AstrOmatic (Emmanuel Bertin)}
+\subsection{AstrOmatic (Bertin)}
 
 The lens detector is based on a convolutional neural network (CNN), trained with the provided training datasets. The CNN is implemented in Python, using the TensorFlow framework\footnote{http://www.tensorflow.org/}. Both ground multichannel and space monochannel image classifiers have the exact same CNN architecture.
 
@@ -249,7 +250,7 @@ Data augmentation is performed in the form of random up-down and left-right imag
 
 The CNN weights are initialized to random values using a truncated Gaussian distribution with mean $\mu=0$ and standard deviation $\sigma=5.10^{-2}$. The network is trained on a Titan-X ``Pascal'' nVidia GPU using the Adam gradient-based optimizer \citep{2014arXiv1412.6980K} during 800 epochs, with an initial learning rate $\eta(t=0)=10^{-3}$ and a learning rate decay $\eta(t+1)/\eta(t)=0.99$, where $t$ is the epoch. Because of a lack of time, tests were limited to assessing the basic classification performance on a subset of the of 1,000 images/datacubes, using the 19,000 others for training.
 
-\subsection{YattaLens Lite (Alessandro Sonnenfeld)}
+\subsection{YattaLens Lite (Sonnenfeld)}
 YattaLensLite is a simpler version of the algorithm YattaLens \citep{Sonnenfeld17}, modified to meet the time constraints of the challenge.
 YattaLensLite subtracts a model surface brightness profile describing the lens galaxy from the $g$-band image, then runs SExtractor to detect tangentially elongated or ring-shaped objects, which are interpreted as lensed images.
 In the ground-based challenge, the model lens surface brightness profile is obtained by taking a rescaled version of the $i$-band image.
@@ -333,7 +334,7 @@ Our code is accessible on github\footnote{\url{https://github.com/antigol/lensfi
     \label{tab:architecture}
 \end{table*}
 
-\subsection{Manchester/Manchester1 (Jackson, Tagore)}
+\subsection{Manchester/Manchester1 (Jackson,Tagore)}
 
 All images (a total of 100000) were examined for each of the space- and
 ground-based datasets. This was done by two observers; AT examined 30000
@@ -399,6 +400,13 @@ Our final feature extraction procedure first applied a polar transform to each i
 
 \subsection{GAMOCLASS (Tuccillo, Huertas-Company, Velasco-Forero, Decenci\`ere)}
 
+\begin{figure}
+  \centering
+      \includegraphics[width=1\columnwidth]{figures/Fig1_gamoclass.pdf} 
+  \caption{GAMOCLASS schematic}
+ \label{Fig1_gamoclass}
+\end{figure}
+
 Our algorithm for classification of strong lensed galaxies was developed as a convolutional neural network (CNN) used for binary classification task.
 Our code was trained and tested on the space-based dataset (dataset 0) provided for the Strong lensing challenge, comprising 20,000 stamps of single band simulated galaxies. We used the full dataset in the proportion of 4/5 for training and 1/5 for validation. The training images were labelled with 1 if showing strong lensing and 0 otherwise. Our CNN gives as output a probability [0,1] of the input image being a strongly lensed system.
 The final architecture of our model is illustrated in Fig. \ref{Fig1_gamoclass}. The input image (101x101 pixels) is first processed by a 2D convolution layer with a 3x3 filter size, then subsampled by a 3x3 max pooling layer. Other two identical units follow, with a growing dimensionality of the output space (depth, i.e.output number of filters) in the convolution, for a total of 3 convolutional layers and 3 max pooling layers. Each of these convolutional layers is followed by a rectified linear unit (ReLU) step. The output of these units is then processed through a single fully-connected layer follower by a dropout layer, and, finally, by a one-neuron fully connected layer with sigmoid activation function. For the classification problem we used the binary cross-entropy cost function and for weights updates we used an adaptive moment estimation (ADAM, \citealt{Kingma_2014}) optimization method. The use of the ADAM optimizer improves the learning rate, and previous tests with stochastic gradient descent (SGD) lead to worse results on the classification of the validation sample.
@@ -411,13 +419,6 @@ In order to increase the size of the training set and make the model invariant t
 During the training we initialize the weights of our model with random normal values and we warm up the training \citet{Huang_2016} of the CNN for 25 epochs, using an exponential decay rate (1e-6) and a staring learning rate of α = 0.001. Then the network is trained using an early stopping method, and for a maximum number of 300 epochs. The early stopping method is an effective method to prevent overfitting and consists in stopping the training if a monitored quantity does not improve for a fixed number (called \textit{patience}) of training epochs. The quantity that we monitored was the \textit{accuracy} of the classification of the validation sample. The best architecture was trained over 220 epochs with a parameter of patience equal to 20.
 We implemented our code the Keras framework \citet{Chollet_2015} on top of Theano \citet{Bastien_2012}.
 Our architecture converges with a classification accuracy of 91\% on the validation sample. We further evaluated the performance of our classifier calculating the ROC curve of the classifier, i.e. the True Positive Rate (TPR) against the False Positive Rate. As shown in Fig. \ref{Fig2_gamoclass}, we reach a TPR higher than the 90\% with a FPR < 8\%.
-
-\begin{figure}
-  \centering
-      \includegraphics[width=1\columnwidth]{figures/Fig1_gamoclass.pdf} 
-  \caption{GAMOCLASS}
- \label{Fig1_gamoclass}
-\end{figure}
 
 \begin{figure}
   \centering

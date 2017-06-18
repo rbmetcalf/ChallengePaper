@@ -208,7 +208,7 @@ For the test sets only the final images were provided to participants although a
 
 For the space-based datasets the pixel size was set to 0.1 arcsec and 
 a simple Gaussian PSF was applied with a FWHM of 0.18 arcsec.  
-The reference band was SDSS K.  The noise is based on a 1,800 second exposure, a transmission of 0.3, a telescope diameter of 119~cm, a readout noise of 5 electrons per pixel and a sky background of 22.8 magnitudes per sq.arcsec.  
+The reference band was SDSS I.  The noise is based on a 1,800 second exposure, a transmission of 0.3, a telescope diameter of 119~cm, a readout noise of 5 electrons per pixel and a sky background of 22.8 magnitudes per sq.arcsec.  
 We use a simple Gaussian random realization of the noise uncorrelated between pixels.
  
  In the challenge set the limiting magnitude for background sources to 28 in K.   60\% of the cases had no background source and were thus labeled as non-lenses.
@@ -702,10 +702,16 @@ Figures~\ref{fig:flux_contrast_space} and \ref{fig:flux_contrast_ground} investi
 \section{Conclusions \& discussion}
 \label{sec:conclusion}
 
-It is clear that the robustness of lens finders against falsely classifying unusual galaxies as lenses was not adequately tested in this challenge.  Some of the methods which appear overly conservative in this test might be better at avoiding false positives in real data.  This can be seen as a form of over fitting to the test set.
-In future challenges we wish to concentrate on this aspect of the problem.
+A large variety of lens finding methods were tested on simulated images that were developed separately.    We found that some methods could recover more than 50\% of the lenses above a lens image brightness or size threshold without a single false positive.  If the data closely resembled the simulations we would already have reasonably good methods whose efficiency and biases can be quantitatively characterized.
 
-Human inspection was the only method to find the jackpot lens
+We have done a fairly good jobs of determining that lenses can be identified in a population of fairly "normal" galaxies.  It is the rare "abnormal" objects that pose the greatest challenge.  When real KiDS data was used in the simulations the classifiers were all less accurate and it was only human inspection that found the one jackpot lens in the data.  Things like ring galaxies, tidal tails in merging galaxies and irregular galaxies can be mistaken for lenses and were not well represented in the simulated data.  Accurately reproducing these objects will be an objective of future work.
+
+It was surprising to some of the authors how well CNN and SVM methods did relative to human inspection.  These methods find differences in the classes of images that are not obvious to a human and can classify things as lenses with high confidence where a human would have doubt.  This ability comes with some danger of over fitting to the training set however.  The distinguishing characteristics might only be a property of simulated data and not of real data.  The confidence one will have in these methods is really the confidence one has in the realism of the simulations.
+
+When initiating this project we had a concern that current methods would be too slow or require too much human intervention to handle large data sets.  Happily this seems not to be a problem with most of the automatic methods.  The CNN and SVM codes take some time to train, but once trained they are very fast in classifying objects.  Billions of objects can be easily handled.
+
+Another lesson is that color information is very important.  Even with lower noise levels, higher resolution, a simpler PSF and no masking the lenses in the space-based set were harder to find than the lenses in the ground-based set.  Having multiple bands clearly makes a big difference.  Euclid will have several infrared bands with lower resolution than the visible images that were not included in the challenge.  Even rather low resolution information from another instrument or telescope when combined with higher resolution data in one band might significantly improve the detection rates.
+
 
 \section*{Acknowledgements}
 

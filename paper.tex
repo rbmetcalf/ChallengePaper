@@ -205,12 +205,9 @@ For the test sets only the final images were provided to participants although a
 \subsection{Space-based}
 \label{sec:sim-space-based}
 
-For the space-based datasets the pixel size was set to 0.1 arcsec and 
-a simple Gaussian PSF was applied with a FWHM of 0.18 arcsec.  
-The reference band was SDSS $i$.  The noise is based on a 1,800 second exposure, a transmission of 0.3, a telescope diameter of 119~cm, a readout noise of 5 electrons per pixel and a sky background of 22.8 magnitudes per sq.arcsec.  
-We use a simple Gaussian random realization of the noise uncorrelated between pixels.
+The space-based datasets were meant to roughly mimic the data quality which is expected from observations by the Euclid telescope in the visible channel. To this end, the pixel size was set to 0.1 arcsec and a Gaussian PSF was applied with a FWHM of 0.18 arcsec. The Gaussian PSF is clearly a simplified model, but a realistic treatment of the PSF is outside the scope of this paper. The typical width of the blurring due to the PSF is anyway realistic. The reference band for background and foreground galaxies was SDSS $i$, which is overlapping with the broader Euclid VIS band. The realisation of the mock images followed the same procedure described in \citet{2004PASP..116..750G} and \citet{2008A&A...482..403M}. As a result, the noise follows a Gaussian distribution with a realistic width and is uncorrelated between pixels. Characteristics of the instrument, filter and exposure times were taken from the Euclid Red Book \citep{2011arXiv1110.3193L}.
  
- In the challenge set the limiting magnitude for background sources to 28 in K.   60\% of the cases had no background source and were thus labeled as non-lenses.
+ In the challenge set the limiting magnitude for background sources to 28 in $i$.   60\% of the cases had no background source and were thus labeled as non-lenses.
  
 \subsection{Ground-based}
 \label{sec:sim-ground-based}

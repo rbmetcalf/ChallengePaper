@@ -85,7 +85,7 @@ Diego Tuccillo,$^{9,10}$
 Santiago Velasco-Forero,$^{10}$
 Camille Avestruz,$^{11,12,13,\dagger}$
 \newauthor
-Nan Li,$^{12,13,14}$
+Nan Li,$^{14}$
 Matthew Lightman,$^{15}$
 and ?\\
 % List of institutions
@@ -102,7 +102,8 @@ $^{10}$ MINES Paristech, PSL Research University, Centre for Mathematical Morpho
 $^{11}${Enrico Fermi Institute, The University of Chicago, Chicago, IL 60637 U.S.A.}\\
 $^{12}${Kavli Institute for Cosmological Physics, The University of Chicago, Chicago, IL 60637 U.S.A.}\\
 $^{13}${Department of Astronomy \& Astrophysics, The University of Chicago, Chicago, IL 60637 U.S.A.}\\
-$^{14}${High Energy Physics Division, Argonne National Laboratory, Lemont, IL 60439}\\
+$^{14}${School of Physics and Astronomy, Nottingham University, University Park, Nottingham, NG7 2RD, UK
+}\\
 $^{15}${JPMorgan Chase, Chicago, IL 60603 U.S.A.}\\
 $^{16}$\red{LAM} \\
 $^{17}$\red{IAP} \\
@@ -139,7 +140,7 @@ Up to this point, the most widely used method for finding lenses in imaging surv
 
 Galaxy scale lenses have also been searched for spectroscopicly by looking for high redshift stellar lines in the spectra of lower redshift large galaxies.  Notably this was done in the Sloan Lens ACS (SLACS) survey to producing a relatively well defined and pure sample of Einstein ring lenses \citep{2006ApJ...638..703B}.  However, spectroscopy is telescope-time consuming and for the foreseeable future we are not likely to have spectroscopic surveys that cover anywhere near the number of objects as the planned imaging surveys.
 
-Some automated algorithms have been developed in the past to detect lenses in images.  These have been designed to detect arc-like features \citep{2006astro.ph..6757A,2007A&A...472..341S} and rings \citep{2014ApJ...785..144G,2014A&A...566A..63J}.  They have been applied to survey data and found of order 200 lenses \citep{2007A&A...461..813C,2012ApJ...749...38M,2016A&A...592A..75P}.  Another approach has been to use a lens modeling code to fit a model to all the candidates and pick out the ones that fit the model well \citep{2009ApJ...694..924M,2010A&A...517A..25S}.
+Some automated algorithms have been developed in the past to detect lenses in images.  These have been designed to detect arc-like features \citep{2006astro.ph..6757A,2007A&A...472..341S} and rings \citep{2014ApJ...785..144G,2014A&A...566A..63J}.  They have been applied to survey data and found of order 200 lenses \citep{2007A&A...461..813C,2012ApJ...749...38M,2016A&A...592A..75P}.  Another approach has been to use a lens modeling code to fit a model to all the candidates and pick out the ones that fit the model well \citep{2009ApJ...694..924M,2010A&A...517A..25S,2017arXiv170401585S}.
 
 More recently machine learning techniques that have become widely used in the fields computer image processing and artificial intelligence 
 have been applied to this problem and others in astronomy, in particular, artificial neural networks (ANNs) and support vector machines (SVM). These algorithms do not pick out particular predefined features, but learn from a training set which features are most important for distinguishing categories of objects.  These have been used widely for such tasks as handwriting and facial recognition.  In astronomy they are beginning to be used for catagorizing galaxies morphologies \citep{2015MNRAS.450.1441D}, photometric redshifts \citep{2017MNRAS.465.1959C,2016PASP..128j4502S,2017NewA...51..169S}, supernova classification \citep{2016ApJS..225...31L} and the lens finding problem \citep{2017arXiv170207675P,2017MNRAS.465.4325O}.
@@ -297,14 +298,14 @@ The CNN weights are initialized to random values using a truncated Gaussian dist
 {\red MM: May be we could separate the methods into three categories: machine-learning, arc-finders, visual inspection and group them accordingly}
 
 \subsection{YattaLens Lite (Sonnenfeld)}
-YattaLensLite is a simpler version of the algorithm YattaLens \citep{Sonnenfeld17}, modified to meet the time constraints of the challenge.
+YattaLensLite is a simpler version of the algorithm YattaLens \citep{2017arXiv170401585S}, modified to meet the time constraints of the challenge.
 YattaLensLite subtracts a model surface brightness profile describing the lens galaxy from the $g$-band image, then runs SExtractor to detect tangentially elongated or ring-shaped objects, which are interpreted as lensed images.
 In the ground-based challenge, the model lens surface brightness profile is obtained by taking a rescaled version of the $i$-band image.
 The difference in color between lens and source usually allows the lensed images to still be detectable after the lens subtraction process.
-However in order to avoid subtracting off the lensed images in systems with similar colors between lens source, we radially truncate the model lens surface brightness.
-at the smallest radius between the position where the surface brightness is comparable to the sky background level or the position of a positive radial gradient in surface brightness, if detected.
+However, in order to avoid subtracting off the lensed images in systems with similar colors between lens source, we radially truncate the model lens surface brightness.
+The model lens light is truncated at the smallest radius between the position where the surface brightness is comparable to the sky background level, or the position of a positive radial gradient in surface brightness, if detected.
 
-In the space-based challenge it is not possible to separate lens and source based on color, because only data in one band is provided. The lens light model then is produced by taking a centrally-inverted image and then using the same truncation prescription used with ground-based data. The central inversion step is taken to reduce the chances of subtracting flux from lensed images, which are in general not centrally symmetric as opposed to typical lens galaxies.
+In the space-based challenge, it is not possible to separate lens and source based on color, because only data in one band is provided. The lens light model then is produced by taking a centrally-inverted image and then using the same truncation prescription used with ground-based data. The central inversion step is taken to reduce the chances of subtracting flux from lensed images, which are in general not centrally symmetric as opposed to typical lens galaxies.
 
 In the full version of YattaLens, a lens modeling step is performed to improve the purity of the sample. However, such a procedure is too time consuming and was not performed in this challenge.
 

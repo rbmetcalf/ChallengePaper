@@ -90,7 +90,7 @@ Matthew Lightman,$^{15}$
 and ?\\
 % List of institutions
 $^{1}$ Departimento di Fisica \& Astronomia, Universit\`a di Bologna, via Gabetti 93/2, 4012 Bologna, Italy \\
-$^{2}$ IRAP, University of Toulouse, CNRS, UPS, France.\\
+$^{2}$ IRAP, Universit\'e de Toulouse, CNRS, UPS, Toulouse, France.\\
 $^{3}$ Sorbonne Universit\'{e}s, UPMC Univ. Paris 6 and CNRS, UMR 7095, Institut d'Astrophysique de Paris,  98bis Bd Arago, F-75014,\\ Paris France.\\
 $^{4}$ INAF-Osservatorio Astronomico di Bologna, via Ranzani 1, 40127 Bologna, Italy \\
 $^{5}$ Kavli IPMU (WPI), UTIAS, The University of Tokyo, Kashiwa, Chiba 277-8583, Japan\\
@@ -276,10 +276,8 @@ the challenge.  Each subsection refers to a team which gave a separate entry.
  \label{fig:Cabanac}
 \end{figure}
 
-Arcfinder \citep{astronaut.ph..6757A,2007A&A...461..813C,2012ApJ...749...38M} \red{(seems to have lost this first reference)} is a fast linear method that computes a pixel wise elongation parameter (ratio of first-order moments in a n-pix window oriented in proper reference frame) for all pixels of mexican-hat-smoothed FITS images. Arcfinder then extracts contiguous pixels above a given background and computes the candidate arcs length, width, area, radius of curvature and peak surface brightness. A final thresholding is set to maximize purity over completeness on a few typical arcs of the dataset.
+Arcfinder \citep{2006astro.ph..6757A,2007A&A...461..813C,2012ApJ...749...38M} illustrated Figure \ref{fig:Cabanac}, is a fast linear method that computes a pixel wise elongation parameter (ratio of first-order moments in a n-pix window oriented in proper reference frame) for all pixels of mexican-hat-smoothed FITS images. Arcfinder then extracts contiguous pixels above a given background and computes the candidate arcs length, width, area, radius of curvature and peak surface brightness. A final thresholding is set to maximize purity over completeness on a few typical arcs of the dataset.
 For the current SL challenge, arcfinder was tuned to detect long and narrow arcs, and was optimized on a subset of 1000 simulated images with a grid covering a range of elongation windows and arc areas.  A python wrapper allows users to change parameters in a flexible way and run the arcfinder C code as a linux line command. Arcfinder took a couple of hours to run on the entire dataset with some overheads due to the dataset format. The code is publicly available at https://github.com/rcabanac/arcfinder.
-
-\red{Reference to figure \ref{fig:Cabanac}?}
 
 \subsection{AstrOmatic (Bertin)}
 

@@ -87,6 +87,10 @@ Camille Avestruz,$^{11,12,13,\dagger}$
 \newauthor
 Nan Li,$^{14}$
 Matthew Lightman,$^{15}$
+Cl\'ecio R. Bom,$^{18,19}$
+Manuel B. Valent\'in,$^{19}$
+Martin Makler,$^{19}$
+\newauthor
 and ?\\
 % List of institutions
 $^{1}$ Departimento di Fisica \& Astronomia, Universit\`a di Bologna, via Gabetti 93/2, 4012 Bologna, Italy \\
@@ -107,6 +111,8 @@ $^{14}${School of Physics and Astronomy, Nottingham University, University Park,
 $^{15}${JPMorgan Chase, Chicago, IL 60603 U.S.A.}\\
 $^{16}$\red{LAM} \\
 $^{17}$\red{IAP} \\
+$^{18}${Centro Federal de Educa\c{c}\~ao Tecnol\'ogica Celso Suckow da Fonseca, CEP 23810-000,  Itagua\'i, RJ, Brazil}\\
+$^{19}${Centro Brasileiro de Pesquisas F\'isicas, CEP 22290-180, Rio de Janeiro, RJ, Brazil}\\
 $^\dagger${Provost's Postdoctoral Scholar at the University of Chicago}\\
 }
 
@@ -143,7 +149,7 @@ Galaxy scale lenses have also been searched for spectroscopically by looking for
 Some automated algorithms have been developed in the past to detect lenses in images.  These have been designed to detect arc-like features \citep{2006astro.ph..6757A,2007A&A...472..341S} and rings \citep{2014ApJ...785..144G,2014A&A...566A..63J}.  They have been applied to survey data and found of order 200 lenses \citep{2007A&A...461..813C,2012ApJ...749...38M,2016A&A...592A..75P}.  Another approach has been to use a lens modeling code to fit a model to all the candidates and pick out the ones that fit the model well \citep{2009ApJ...694..924M,2010A&A...517A..25S,2017arXiv170401585S}.
 
 More recently machine learning techniques that have become widely used in the fields computer image processing and artificial intelligence 
-have been applied to this problem and others in astronomy, in particular, artificial neural networks (ANNs) and support vector machines (SVM). These algorithms do not pick out particular predefined features, but learn from a training set which features are most important for distinguishing categories of objects.  These have been used widely for such tasks as handwriting and facial recognition.  In astronomy they are beginning to be used for categorizing galaxy morphologies \citep{2015MNRAS.450.1441D}, photometric redshifts \citep{2017MNRAS.465.1959C,2016PASP..128j4502S,2017NewA...51..169S}, supernova classification \citep{2016ApJS..225...31L} and the lens finding problem \citep{2017MNRAS.471..167J,2017arXiv170207675P,2017MNRAS.465.4325O}.
+have been applied to this problem and others in astronomy, in particular, artificial neural networks (ANNs) and support vector machines (SVM). These algorithms do not pick out particular predefined features, but learn from a training set which features are most important for distinguishing categories of objects.  These have been used widely for such tasks as handwriting and facial recognition.  In astronomy they are beginning to be used for categorizing galaxy morphologies \citep{2015MNRAS.450.1441D}, photometric redshifts \citep{2017MNRAS.465.1959C,2016PASP..128j4502S,2017NewA...51..169S}, supernova classification \citep{2016ApJS..225...31L} and the lens finding problem \citep{2017MNRAS.471..167J,2017arXiv170207675P,2017MNRAS.465.4325O,2017A&A...597A.135B}.
 
 Given the future of this field with large amounts of data coming soon and many new ideas emerging, it is timely to stage a series of challenges to stimulate new work, determine what can realistically be done in lens finding and get a better idea of the strengths and weaknesses to different methods.  The long term goal is to get a set of algorithms that can handle Euclid, LSST or SKA data sets and produce high purity and high completeness lens samples with well defined efficiency or selection.  We anticipate further challenges in the future in which the realism of the data simulations will become progressively better.  Here we have chosen to concentrate on galaxy/small group scale lenses where the background source is a galaxy because we feel that this is where the most progress can be made and the scientific return is the highest, but QSO lenses and cluster/group lenses challenges may follow.
 
@@ -243,14 +249,14 @@ There were 24 valid entries into the challenge.  They are listed in table~\ref{t
   9 & CMU-DeepLens-Resnet-Voting & Ground-Based & Ma, Lanusse \& C. Li   \\ 
   10 & YattaLensLite & Space-Based &  Sonnenfeld  \\ 
   11 & NeuralNet2 & Space-Based &  Davies  \\ 
-  12 & CAST & Ground-Based &  Roque De Bom, Valent\"{\i}n \&  Makler  \\ 
+  12 & CAST & Ground-Based &  Roque De Bom, Valent\'{\i}n \&  Makler  \\ 
   13 & CMU-DeepLens-ResNet-ground3 & Ground-Based &  Lanusse, Ma, Ravanbakhsh \& C. Li \\ 
   14 & GAMOCLASS & Space-Based & Marc Huertas-Company, Tuccillo, Velasco-Forero \& Decenci\~{a}re \\ 
   15 & LASTRO EPFL (CNN) & Space-Based & Geiger, Sch\"{a}fer \& Kneib \\ 
   16 & Manchester SVM & Space-Based &  Hartley  \\ 
   17 & CMU-DeepLens-ResNet-aug & Space-Based & Ma,  Lanusse, Ravanbakhsh \& C. Li \\ 
   18 & LASTRO EPFL & Ground-Based & Geiger, Sch\"{a}fer \& Kneib   \\ 
-  19 & CAST & Space-Based & Roque De Bom, Valent\"{\i}n \& Makler  \\ 
+  19 & CAST & Space-Based & Roque De Bom, Valent\'{\i}n \& Makler  \\ 
   20 & AstrOmatic & Ground-Based & Bertin  \\ 
   21 & All-now & Space-Based & Avestruz, N. Li \& Lightman   \\ 
   22 & Manchester-NA2 & Ground-Based & Jackson \& Tagore  \\ 
@@ -511,6 +517,54 @@ search over $C_{LogReg}$, splitting the test images into 80\% training
 and and 20\% test to avoid overfitting the data.  We use the best
 parameters to then train the entire dataset for the final model
 classifier that we used to evaluate the competition data.
+
+%-------------------------------------------------%
+\subsection{CAST (Bom, Valent\'in, Makler)}
+%-------------------------------------------------%
+[Note: we are placing this section here, but we agree it is good to group the methods. Perhaps machine learning based methods could go on a separate section and a unified description can be given to CNN-based methods, as most follow under this category.]
+
+The CBPF Arc Search Team (CAST) tested several arcfinding schemes using as core a CNN. For both the space-based and ground-based samples we carried out a simple preprocessing phase to enhance the objects in the images in order to check if they improve the automated arc detection with CNN. We chose a contrast adjustment with $0.1\%$ pixel saturation and apply a low pass band Wiener filter \citep{wiener1964extrapolation} to reduce the effect of the noise. 
+
+We used a native CNN from Matlab\footnote{\texttt{https://www.mathworks.com/products/matlab.html}, \texttt{https://www.mathworks.com/help/nnet/convolutional-neural-networks.html}}, which has Convolutional 2D layers with 20 5x5 filters. This CNN can work either with one or three input images, representing greyscale and colour images.
+Therefore, we employed different strategies for the two samples available for the challenge, which involve combinations of the available bands running in one or more CNN, using or not the preprocessing, and combining the output with the aid of other machine learning methods.
+In each case we used the simulations made available for the challenge both to train and to validate the results and we used the area under the ROC to determine which combination of methods gives the best result.    
+We selected 
+%We evaluate the ROC curves for all configurations tested, selecting 
+$90\%$ of the images, chosen randomly, for the training and $10\%$ to validate. We repeated the process $10$ times to avoid bias due a specific choice of training/validation set and to define an uncertainty in our ROC.
+
+For the space-based data set we tested only two configurations: i) using the CNN straightforwardly for classification and ii) with the preprocessing described above. 
+We found that the results, accounting for the uncertainties,  
+were clearly superior for the area under the ROC in the case 
+including the preprocessing. Therefore, this is the configuration we have used for the challenge. 
+
+As mentioned above, the CNN used can take 3 images as input. Thus, if we want to use the information on the $4$ available bands, we will have to either combine $2$ of the $4$ bands to end up with $3$ bands for a single RGB CNN (configuration I below) or we use multiple CNNs to use the information available (configuration II to VI below). To combine the outputs of several CNNs we use a Support Vector Machine \citep[hereafter SVM; see e.g., ][]{rebentrost2014quantum} also implemented in Matlab. The SVM is used to combine the outputs $p_i$ of the several CNN (configurations II, III, IV and VI). Instead of using only $p_i$ as inputs to the SVM we also tested providing the SVM with image features obtained by the CNN (feature maps, configuration V) as inputs. In all cases we tested with and without the preprocessing
+
+A more detailed description of each configuration tested is presented below:
+\begin{enumerate}
+\item Combination of bands r and i with the average between bands u and g. Use one CNN for classification.
+\item Creation of $1$ CNN for each band (total of $4$). The $4$ outputs are used as input to a SVM classifier which returns the final classification $p$. 
+\item Combination into 4 different combinations of bands:  RGB $\rightarrow$ (\textit{u,g,r}), (\textit{u,g,i}), (\textit{u,r,i}) and (\textit{g,r,i}). One CNN for each combination of bands and then use of the output score as input to an SVM classifier.
+%Mediatrix features used as input of an SVM classifier.
+%
+%IV) Use of wavelet decomposition for each band then use of these decomposed images in the same combinations of case III.
+\item  Average of bands in different combinations RGB $\rightarrow$ (\textit{ug,r,i}), (\textit{u,gr,i}) and (\textit{u,g,ri}). The outputs of these 3 CNNs are inputs to a SVM classifier.
+\item Use of CNN-activations (CNN feature maps) as inputs to a SVM classifier, using same combinations of bands of III. The output of each CNN is used as input to a SVM classifier.
+\item Use of wiener filter and contrast adjustment on each band, then using the resulting images in the same architecture as in (iii). 
+\end{enumerate}
+
+For the ground based cases three configurations with highest area under ROC were III,IV and VI. Although the areas are very similar between IV and VI the last one is superior in the low fake positives end. Thus, for the Strong Lensing Challenge in the ground base sample, we used configuration VI. This final scheme is ilustraded in figure \ref{colorCASTCNN}.
+
+The area under ROC, in both space based configurations were, in general, smaller than in the multi-band case, which suggests how the CNNs are sensitive to color information to find Strong Lensing. Particularly,  ground base configuration II used one CNN per band thus not considering color information and has the similar area under ROC as our best single band configuration. 
+
+%In total we tested XX configurations for the ground based challenge.
+
+%Based on the ROC, we picked for the blind challenge XX, which is illustrated in figure \ref{colorCASTCNN}.
+
+\begin{figure}
+ \includegraphics[width=\columnwidth]{figures/SLchallengeCAST.png}
+ \caption{CAST Lens finder pipeline for the ground based sample. Illustration of the chosen architecture for the CAST search in the case of ground-based simulated images.}
+ \label{colorCASTCNN}
+\end{figure}
 
 \section{results}
 \label{sec:results}

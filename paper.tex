@@ -23,6 +23,7 @@
 \usepackage{ae,aecompl}
 \usepackage{hyperref}
 
+\newcommand{\fl}[1]{{\color{magenta}FL: #1}}
 \newcommand{\red}[1]{{\color{red} #1}}
 \newcommand{\degree}{^{\circ}}
 
@@ -91,6 +92,8 @@ Cl\'ecio R. Bom,$^{18,19}$
 Manuel B. Valent\'in,$^{19}$
 Martin Makler,$^{19}$
 \newauthor
+Fran\c{c}ois Lanusse,$^{20}$ Quanbin Ma,$^{21}$ Chun-Liang Li,$^{21}$
+\newauthor
 and ?\\
 % List of institutions
 $^{1}$ Departimento di Fisica \& Astronomia, Universit\`a di Bologna, via Gabetti 93/2, 4012 Bologna, Italy \\
@@ -113,6 +116,8 @@ $^{16}$\red{LAM} \\
 $^{17}$\red{IAP} \\
 $^{18}${Centro Federal de Educa\c{c}\~ao Tecnol\'ogica Celso Suckow da Fonseca, CEP 23810-000,  Itagua\'i, RJ, Brazil}\\
 $^{19}${Centro Brasileiro de Pesquisas F\'isicas, CEP 22290-180, Rio de Janeiro, RJ, Brazil}\\
+$^{20}${McWilliams Center for Cosmology, Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}\\
+$^{21}${School of Computer Science, Carnegie Mellon University, Pittsburgh, PA 15213, USA}\\
 $^\dagger${Provost's Postdoctoral Scholar at the University of Chicago}\\
 }
 
@@ -565,6 +570,67 @@ The area under ROC, in both space based configurations were, in general, smaller
  \caption{CAST Lens finder pipeline for the ground based sample. Illustration of the chosen architecture for the CAST search in the case of ground-based simulated images.}
  \label{colorCASTCNN}
 \end{figure}
+
+\subsection{CMU DeepLens (Lanusse, Ma, Li, Ravanbakhsh)}
+
+\subsubsection{Convolutional Neural Networks}
+\fl{I'm placing this section here but it's intended as a global introduction to CNNs. Feel free to move/modify/discard as you want. Also I tried to keep things concise but some concepts may still require a little bit explanations, let me know.}
+
+A Convolutional Neural Network (CNN) \citep{Lecun1998} is a multi-layer feed-forward neural network model particularly well suited for processing natural images. With the very recent advances of the \textit{Deep Learning} framework \citep{Lecun2015}, models based on CNN architectures have reached or even surpassed human accuracy in image classification tasks \citep{He2015a}.
+
+The fundamental building block of a CNN is the \textit{convolutional layer}. This element applies a set of convolution filters on an input image to produce a series of so-called \textit{feature maps}. The coefficients of these filters are free parameters that are learned by the model. We will use the notation 
+$n \times n - n_c$ to denote a convolutional layer using filters of size $n \times n$ pixels and outputting $n_c$ feature maps \fl{As Massimo pointed out, I think it's useful to introduce this notation and harmonize its use}. In typical architectures, the size of these convolution filters is kept small (i.e. 3x3 or 5x5 pixels) to limit the complexity of the model. To capture features on larger scales, CNNs rely on a multi-resolution approach by interleaving convolutional layers with \textit{pooling layers} which apply a downsampling operation to the feature maps. The most common downsampling schemes are the max-pooling and average pooling strategies, which downsample an input image by taking respectively the maximum or average values within a given region (e.g. 2x2 patches for a downsampling of factor 2).
+
+A CNN architecture is therefore a stack of convolution layers and pooling layers, converting the input image into an increasing number of feature maps of progressively coarser resolution. The final feature maps can capture information on large scales and can reach a high-level of abstraction. To perform the classification itself from these feature maps, the CNN is typically topped by a fully-connected neural network outputting the class probability of the input image.
+
+For a binary classification problem such as the one involved in strong lens detection, the training is performed by optimizing the weights of the model as to minimize the \textit{binary cross-entropy} objective:
+\begin{equation}
+	- \sum_{n=1}^{N} y[n] \log \hat{y}[n] + (1 - y[n])\log(1 - \hat{y}[n]) \;,
+\end{equation}
+where $N$ is the number of training instances, $y \in \{0,1\}$ is the true class of the image and $\hat{y} \in [0,1]$ is the class probability predicted by the model. This optimization is performed by a Stochastic Gradient Descent (SGD) algorithm which updates the model iteratively by taking small gradient steps over randomly selected subsamples of the training set (so called \textit{mini-batches}). All the CNN-based methods presented in this work rely on the ADAM \citep{Kingma_2014} algorithm, an accelerated variant of SGD algorithm.
+
+\fl{Things I still have to mention: activation function, dropout, batch normalisation}.
+
+% Francois: This is an attempt at comparing the different CNN-based methods, not sure it's really useful
+%\begin{table*}
+%\begin{tabular}{|c|c|c|c|c|c|c|}
+%\hline 
+%Method       & Depth & Activation & Optimizer & Regularisation &   Pre-processing &  learning rate\\ 
+%\hline 
+%AstrOmatic &  3 + 2 & ELU             & ADAM       &   Dropout            &   asinh                   &     0.001  +decay\\
+%LastroEPFL &   12    & ReLU           &  ADAM      &  Batch norm       & rotations and stuf  & 0.001 + decay\\
+%GLAMOCLASS & 3 + 1 & ReLU    &  ADAM      &   dropout last layer & rotations and stuff & 0.001 + decay \\
+%CMU DeepLens	& 47  & ELU 	    	 &  ADAM       &  batch norm     & rotations and stuff & 0.001 + decay drop \\
+%\hline 
+%\end{tabular} 
+%\caption{Comparison of CNN based methods}
+%\end{table*}
+
+
+\subsubsection{CMU DeepLens}
+
+\texttt{CMU DeepLens} is based on a residual network (or \textit{resnet}) architecture \citep{He2015a}, a modern variant of CNNs which can reach much greater depths (over 1000 layers) while still gaining accuracy. We provide a short overview of our model below but a full description of our architecture can be found in \citet{Lanusse2017}.
+
+Much like conventional CNNs, resnets are based on convolutional and pooling layers. However, resnet differ from CNNs by the introduction of so-called shortcut connections bypassing blocks of several convolutional layers. As a result, instead of learning the full mapping from their input to their output these residual blocks only have to learn the difference to the identity. In practice, this difference allows residual networks to be trained even for very deep models. For a more thorough description of this architecture, we refer the interested reader to Section~2.3 of \citet{Lanusse2017}.
+
+Our baseline model is composed of a first 7x7-32 convolutional layer which can accommodate either single-band or multi-band images. The rest of the model is composed of 5 successive blocks, each block being made of 3 resnet units (specifically, pre-activated bottleneck residual units \citep{He2016}). At each block, the signal is downsampled by a factor 2 and the number of feature maps is in turn multiplied by 2. The model is topped by an average-pooling layer followed by a single fully-connected sigmoid layer with a single output. Apart from the final layer, we use the ELU activation throughout. The weights of the model are initialized using random normal values, following the strategy advocated in \citet{He2015a}. 
+
+Training was performed using the ADAM optimizer with mini-batches of size 128 over 120 epochs, with an initial learning rate of $\alpha=0.001$, subsequently decreased by a factor 10 every 40 epochs. This multi-step training procedure is important to progressively refine the model parameters of the model and achieve our final accuracy.
+
+We adopt a minimal pre-processing pre-processing strategy for the input images, removing the mean image and normalising by the noise standard deviation $\sigma$ in each band, these statistic being evaluated over the whole training set. In addition, we clip extreme values above $250 \sigma$ to limit the dynamic range of the input. Bad-pixels are simply set to 0 after this pre-processing step.
+
+Given the relatively small training set preventing overfitting is an important consideration. In our final model, we combine several data augmentation strategies: random rotations (in the range $[-90, \ 90^\circ]$), random mirroring along both axes, and random resizing (by a small factor in the range $[0.9, \ 1]$).
+
+The architecture presented above is the one that lead to our best results in both branches of the challenge, i.e. \texttt{CMU-DeepLens-Resnet} for space-based and \texttt{CMU-DeepLens-Resnet-ground3} for ground-based. We also submitted results for two variants of this baseline model, named \texttt{-aug} and \texttt{-Voting}. 
+The first variant introduced several data-augmentation schemes, including the ones mentioned above and the addition of Gaussian noise to the input images. We found however that the introduction of noise was not necessary as the other methods were enough to prevent overfitting. 
+The second variant was used to explore a voting strategy between three different models. These models differed by the type of residual blocks (bottleneck vs wide) and by their handling of missing pixels (setting to 0 or to the median value of the image). The predictions of the best 2 out of 3 models were then averaged to produce the final classification probability.
+
+Our model is implemented using the \texttt{Theano}\footnote{\url{http://deeplearning.net/software/theano/}} and \texttt{Lasagne}\footnote{\url{https://github.com/Lasagne/Lasagne}} libraries. On an Nvidia Titan Xp GPU, our full training procedure requires approximately 6 hours on the ground-based challenge, but classification of the whole testing set is performed in a couple of minutes. Finally, in the interest of reproducible research, our code is made publicly available at
+\begin{center}
+\url{https://github.com/McWilliamsCenter} 
+\end{center}
+This repository also contains a notebook detailing how to reproduce our challenge submission.
+
 
 \section{results}
 \label{sec:results}

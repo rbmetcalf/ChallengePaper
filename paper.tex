@@ -58,7 +58,7 @@
 
 
 \title[SL Challenge]{The Strong Gravitational  Lens Finding Challenge}
-
+%C.~E.~Petrillo$^{1}$,  C.~Tortora$^{1}$, L.~V.~E.~Koopmans$^{1}$, \and G.~Verdoes~Kleijn$^{1}$
 \author[R. B. Metcalf {\it et al.}]{
 R. Benton Metcalf,$^{1,4}$\thanks{E-mail: robertbenton.metcalf@unibo.it} 
 M. Meneghetti,$^4$ 
@@ -77,12 +77,16 @@ Neal Jackson,$^7$
 \newauthor
 Eric Jullo,$^{16}$
 Jean-Paul Kneib,$^6$
+Leon Koopmans,$^{11}$
+Carlo Enrico Petrillo,$^{11}$ 
 Christoph Sch\"{a}fer,$^6$ 
 Alessandro Sonnenfeld,$^5$ 
 \newauthor
 Amit Tagore,$^7$
+Crescenzo Tortora,$^{11}$
 Diego Tuccillo,$^{9,10}$
 Santiago Velasco-Forero,$^{10}$
+Gijs Verdoes Kleijn,$^{11}$ 
 Camille Avestruz,$^{11,12,13,\dagger}$
 \newauthor
 Nan Li,$^{14}$
@@ -117,6 +121,7 @@ $^{18}${Centro Federal de Educa\c{c}\~ao Tecnol\'ogica Celso Suckow da Fonseca, 
 $^{19}${Centro Brasileiro de Pesquisas F\'isicas, CEP 22290-180, Rio de Janeiro, RJ, Brazil}\\
 $^{20}${McWilliams Center for Cosmology, Department of Physics, Carnegie Mellon University, Pittsburgh, PA 15213, USA}\\
 $^{21}${School of Computer Science, Carnegie Mellon University, Pittsburgh, PA 15213, USA}\\
+$^{22}${Kapteyn Astronomical Institute, University of Groningen, Postbus 800, 9700 AV, Groningen, The Netherlands}\\
 $^\dagger${Provost's Postdoctoral Scholar at the University of Chicago}\\
 }
 
@@ -630,6 +635,45 @@ Our model is implemented using the \texttt{Theano}\footnote{\url{http://deeplear
 \end{center}
 This repository also contains a notebook detailing how to reproduce our challenge submission.
 
+\subsection{Kapteyn Resnet (Petrillo, Tortora, Verdoes Kleijn, Koopmans) }
+Our lens-finder is based on a Convolutional Neural Network (CNN), following the strategy adopted recently in our previous work \citep{petrillo2017}. 
+
+We decide to treat the problem as a three-class classification problem where the classes are \textit{non-lenses}, \textit{clear lenses} and \textit{dubious lenses}. We define the \textit{dubious lenses} as the lenses with lensing features with less than 160 pixels and the \textit{clear lenses} those with more than 160 pixels belonging to the lensed source. This choice is motivated by the fact that specializing the network in recognizing different class could lead to a more robust classification. In addition, in a hypothetical application of the method to real data from a survey, this could be a way to select the most blatant lenses.  
+
+Given the rules of the challenge, we had to submit a prediction for each source in the test-set as a single number: a number in the interval [0,1] or either a 0 or a 1. Unfortunately, to satisfy this requirement we had to collapse one of the class into another: we provided a 0 when the source is classified as a \textit{non-lens} and 1 if it is classified as a \textit{clear lenses} or as a \textit{dubious lenses}. Moreover, this did not allow to build a continuous ROC curve but only a binary one. \textbf{(We need to test if this was an improvement or not. I have the submission ready.)}
+
+Ihe final submission is made using the average values of the predictions from the same network trained three different times.
+
+\subsubsection{Implementation}
+The CNN is implemented in Python 2.7 using the open-source libraries \textsc{Lasagne}\footnote{\href{http://github.com/Lasagne/Lasagne/}{\tt http://github.com/Lasagne/Lasagne/}} 
+and \textsc{Theano}
+\footnote{\href{http://deeplearning.net/software/theano/}{\tt http://deeplearning.net/software/theano/}} \citep{theano}.  
+The training of the CNN is executed on a GeForce GTX 760 in parallel with the data augmentation performed on the CPU using the \textsc{scikit-image}\footnote{\href{http://scikit-image.org/}{\tt http://scikit-image.org/}} package \citep{van2014scikit}. 
+
+\subsubsection{Architecture}
+We used the CNN architecture called ResNet described in \citep{he2015deep} with three stacks of residual blocks of 5 layers. 
+
+The output layer is composed by three units. Each units gives in output a number between 0 and 1 that represents, respectively, the probability of being a non-lens, a small-lens, a big-lens.
+
+\subsubsection{Preprocessing}
+The training fits files are preprocessed with the software \textsc{STIFF}\footnote{\href{http://www.astromatic.net/software/stiff}{\tt http://www.astromatic.net/software/stiff}} which automatically converts the fits files to gray-scale TIFF images operating a non-linear intensity transformations to enhance the low-brightness features of the image.   
+
+Due to memory limitations we down-sampled the images to 84 by 84 pixels. Most likely, this leads to a worse classification accuracy than using the original image resolution.
+
+We augmented the training images in the following way: i) random rotation of 90, 180 or 270 degrees; ii) random shift in both $x$ and $y$ direction between -2 and +2 pixels; iii) $50\%$ probability of horizontally flipping the image. 
+
+Finally, the image border is cropped in order to have 80 by 80 pixel input images.
+
+\subsubsection{Training}
+The network is trained by minimizing the categorical cross-entropy loss function
+\begin{equation}
+L = -\sum_j t_{j}\log p_{j}
+\label{EQloss}
+\end{equation}
+where the $t_j$ and $p_j$ are respectively the label and the prediction for the class $j$. 
+The minimization is done via mini-batch stochastic gradient descent with \textit{ADAM} updates \citep{kingma2014adam}. We used a batch size of 56 and performed  46000 gradient updates. We started with a learning rate of $4 \times 10^{-4}$, decrease it to $4 \times 10^{-5}$ after 35000 updates and to $4 \times 10^{-6}$ after 43000 updates.
+The initial values of the biases are set to zero and the weights of each filter are initialized from a random normal distribution with variance ${2/n}$ where $n$ is the number of inputs of the unit (see \citep{he2015delving}).  
+We use L2-norm regularization with $\lambda= 9 \times 10^{-3}$.
 
 \section{results}
 \label{sec:results}

@@ -77,16 +77,16 @@ Neal Jackson,$^7$
 \newauthor
 Eric Jullo,$^{16}$
 Jean-Paul Kneib,$^6$
-Leon Koopmans,$^{11}$
-Carlo Enrico Petrillo,$^{11}$ 
+Leon Koopmans,$^{22}$
+Carlo Enrico Petrillo,$^{22}$ 
 Christoph Sch\"{a}fer,$^6$ 
 Alessandro Sonnenfeld,$^5$ 
 \newauthor
 Amit Tagore,$^7$
-Crescenzo Tortora,$^{11}$
+Crescenzo Tortora,$^{22}$
 Diego Tuccillo,$^{9,10}$
 Santiago Velasco-Forero,$^{10}$
-Gijs Verdoes Kleijn,$^{11}$ 
+Gijs Verdoes Kleijn,$^{22}$ 
 Camille Avestruz,$^{11,12,13,\dagger}$
 \newauthor
 Nan Li,$^{14}$
@@ -270,7 +270,7 @@ There were 24 valid entries into the challenge.  They are listed in table~\ref{t
   21 & All-now & Space-Based & Avestruz, N. Li \& Lightman   \\ 
   22 & Manchester-NA2 & Ground-Based & Jackson \& Tagore  \\ 
   23 & YattaLensLite & Ground-Based & Sonnenfeld   \\ 
-  24 & Kapteyn & Space-Based & Petrillo, Koopmans, Kleijn, Tortora \& Vernardos \\ 
+  24 & Kapteyn Resnet & Space-Based & Petrillo, Koopmans, Kleijn, Tortora \& Vernardos \\ 
    \hline
 \end{tabular}
 \caption{Entries to the challenges.}
@@ -306,7 +306,7 @@ Prior to entering the first convolutional layer, input image data are rescaled a
 \mathrm{arcsinh} (10^{11} x)$, and bad pixels are simply set to 0.
 Data augmentation is performed in the form of random up-down and left-right image flipping, plus $k\pi/2$ rotations, where $k$ is a random integer in the $[0,3]$ range. Additionally, a small rotation with random angle $\theta$ is applied, involving bicubic image resampling. $\theta$ follows a Gaussian distribution with mean $\mu=0$ and standard deviation $\sigma_{\theta}=5^{\circ}$. No attempt was made to generate and randomize bad pixel masks in the data augmentation process.
 
-The CNN weights are initialized to random values using a truncated Gaussian distribution with mean $\mu=0$ and standard deviation $\sigma=5.10^{-2}$. The network is trained on a Titan-X ``Pascal'' nVidia GPU using the Adam gradient-based optimizer \citep{2014arXiv1412.6980K} during 800 epochs, with an initial learning rate $\eta(t=0)=10^{-3}$ and a learning rate decay $\eta(t+1)/\eta(t)=0.99$, where $t$ is the epoch. Because of a lack of time, tests were limited to assessing the basic classification performance on a subset of the of 1,000 images/datacubes, using the 19,000 others for training.
+The CNN weights are initialized to random values using a truncated Gaussian distribution with mean $\mu=0$ and standard deviation $\sigma=5.10^{-2}$. The network is trained on a Titan-X ``Pascal'' nVidia GPU using the \textit{Adam} gradient-based optimizer \citep{2014arXiv1412.6980K} during 800 epochs, with an initial learning rate $\eta(t=0)=10^{-3}$ and a learning rate decay $\eta(t+1)/\eta(t)=0.99$, where $t$ is the epoch. Because of a lack of time, tests were limited to assessing the basic classification performance on a subset of the of 1,000 images/datacubes, using the 19,000 others for training.
 
 {\red MM: May be we could separate the methods into three categories: machine-learning, arc-finders, visual inspection and group them accordingly}
 
@@ -334,7 +334,7 @@ As activation function, we used a scaled and shifted ReLU (Rectifier Linear Unit
 to satisfy the properties required by the normalization propagation.
 In our implementation of batch normalization, instead of using only the moments computed over the current batch, we used a low-pass filter ($\bar\mu_i \longleftarrow (1-\eta) \; \bar\mu_{i-1} + \eta \; \mu_i(\text{batch})$, $\eta$ set to $1$ at the beginning and decay with the iterations).
 For the training, the 20k provided images were split into two sets, 17k for training and 3k for validation.
-Each iteration of the gradient descent (more precisely ADAM \citep{adam}) minimizes the cross entropy, 
+Each iteration of the gradient descent (more precisely \textit{Adam} \citep{adam}) minimizes the cross entropy, 
 \begin{equation} \label{eq:xent}
     \left\{
     \begin{array}{ll}
@@ -636,7 +636,7 @@ Our model is implemented using the \texttt{Theano}\footnote{\url{http://deeplear
 This repository also contains a notebook detailing how to reproduce our challenge submission.
 
 \subsection{Kapteyn Resnet (Petrillo, Tortora, Verdoes Kleijn, Koopmans) }
-Our lens-finder is based on a Convolutional Neural Network (CNN), following the strategy adopted recently in our previous work \citep{petrillo2017}. 
+Our lens-finder is based on a Convolutional Neural Network (CNN), following the strategy adopted recently in \citep{2017arXiv170207675P}. 
 
 We decide to treat the problem as a three-class classification problem where the classes are \textit{non-lenses}, \textit{clear lenses} and \textit{dubious lenses}. We define the \textit{dubious lenses} as the lenses with lensing features with less than 160 pixels and the \textit{clear lenses} those with more than 160 pixels belonging to the lensed source. This choice is motivated by the fact that specializing the network in recognizing different class could lead to a more robust classification. In addition, in a hypothetical application of the method to real data from a survey, this could be a way to select the most blatant lenses.  
 
@@ -671,7 +671,7 @@ L = -\sum_j t_{j}\log p_{j}
 \label{EQloss}
 \end{equation}
 where the $t_j$ and $p_j$ are respectively the label and the prediction for the class $j$. 
-The minimization is done via mini-batch stochastic gradient descent with \textit{ADAM} updates \citep{kingma2014adam}. We used a batch size of 56 and performed  46000 gradient updates. We started with a learning rate of $4 \times 10^{-4}$, decrease it to $4 \times 10^{-5}$ after 35000 updates and to $4 \times 10^{-6}$ after 43000 updates.
+The minimization is done via mini-batch stochastic gradient descent with \textit{Adam} updates \citep{Kingma_2014}. We used a batch size of 56 and performed  46000 gradient updates. We started with a learning rate of $4 \times 10^{-4}$, decrease it to $4 \times 10^{-5}$ after 35000 updates and to $4 \times 10^{-6}$ after 43000 updates.
 The initial values of the biases are set to zero and the weights of each filter are initialized from a random normal distribution with variance ${2/n}$ where $n$ is the number of inputs of the unit (see \citep{he2015delving}).  
 We use L2-norm regularization with $\lambda= 9 \times 10^{-3}$.
 
@@ -728,7 +728,7 @@ In addition to these considerations, the performance of a classifier is a functi
   CMU-DeepLens-Resnet-Voting & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
   AstrOmatic & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
    CMU-DeepLens-ResNet-aug & Space-Based & 0.91 & 0.00 & 0.00 & CNN \\ 
-   Kapteyn & Space-Based & 0.82 & 0.00 & 0.00 & CNN \\ 
+   Kapteyn Resnet & Space-Based & 0.82 & 0.00 & 0.00 & CNN \\ 
    CAST & Space-Based & 0.81 & 0.07 & 0.12 & CNN \\ 
   Manchester1 & Space-Based & 0.81 & 0.01 & 0.17 & Human Inspection \\ 
    Manchester SVM & Space-Based & 0.81 & 0.03 & 0.08 & SVM / Gabor \\ 
@@ -770,7 +770,7 @@ CMU-DeepLens-ResNet get the best scores.
    LASTRO EPFL & Space-Based & 0.93 & 0.00 & 0.08 & CNN \\ 
    GAHEC IRAP & Space-Based & 0.66 & 0.00 & 0.01 & arc finder \\ 
    AstrOmatic & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
-   Kapteyn & Space-Based & 0.82 & 0.00 & 0.00 & CNN \\ 
+   Kapteyn Resnet& Space-Based & 0.82 & 0.00 & 0.00 & CNN \\ 
    CMU-DeepLens-ResNet-aug & Space-Based & 0.91 & 0.00 & 0.00 & CNN \\ 
    CMU-DeepLens-Resnet-Voting & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
    NeuralNet2 & Space-Based & 0.76 & 0.00 & 0.00 & CNN / wavelets \\ 

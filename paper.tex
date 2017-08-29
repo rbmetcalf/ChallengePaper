@@ -158,7 +158,7 @@ Galaxy scale lenses have also been searched for spectroscopically by looking for
 Some automated algorithms have been developed in the past to detect lenses in images.  These have been designed to detect arc-like features \citep{2006astro.ph..6757A,2007A&A...472..341S, 2017A&A...597A.135B} and rings \citep{2014ApJ...785..144G,2014A&A...566A..63J}.  They have been applied to survey data and found of order 200 lenses \citep{2007A&A...461..813C,2012ApJ...749...38M,2016A&A...592A..75P}.  Another approach has been to use a lens modeling code to fit a model to all the candidates and pick out the ones that fit the model well \citep{2009ApJ...694..924M,2010A&A...517A..25S,2017arXiv170401585S}.
 
 More recently machine learning techniques that have become widely used in the fields computer image processing and artificial intelligence 
-have been applied to this problem and others in astronomy, in particular, artificial neural networks (ANNs) and support vector machines (SVM). These algorithms do not pick out particular predefined features, but learn from a training set which features are most important for distinguishing categories of objects.  These have been used widely for such tasks as handwriting and facial recognition.  In astronomy they are beginning to be used for categorizing galaxy morphologies \citep{2015MNRAS.450.1441D}, photometric redshifts \citep{2017MNRAS.465.1959C,2016PASP..128j4502S,2017NewA...51..169S}, supernova classification \citep{2016ApJS..225...31L} and the lens finding problem \citep{2017MNRAS.471..167J,2017arXiv170207675P,2017MNRAS.465.4325O,2017A&A...597A.135B}.
+have been applied to this problem and others in astronomy, in particular, artificial neural networks (ANNs) and support vector machines (SVM). \red{PH: These algorithms require a set of predefined features from which a discriminating model can be learned. Convolutional neural networks (CNN), however,} do not require a pre-selected feature set, but instead learn from a training set which features are most important for distinguishing categories of objects.  These have been used widely for such tasks as handwriting and facial recognition.  In astronomy these families of algorithms are beginning to be used for categorizing galaxy morphologies \citep{2015MNRAS.450.1441D}, photometric redshifts \citep{2017MNRAS.465.1959C,2016PASP..128j4502S,2017NewA...51..169S}, supernova classification \citep{2016ApJS..225...31L} and the lens finding problem \citep{2017MNRAS.471..167J,2017arXiv170207675P,2017MNRAS.465.4325O,2017A&A...597A.135B,hartley2017support}.
 
 Given the future of this field with large amounts of data coming soon and many new ideas emerging, it is timely to stage a series of challenges to stimulate new work, determine what can realistically be done in lens finding and get a better idea of the strengths and weaknesses to different methods.  The long term goal is to get a set of algorithms that can handle Euclid, LSST or SKA data sets and produce high purity and high completeness lens samples with well defined efficiency or selection.  We anticipate further challenges in the future in which the realism of the data simulations will become progressively better.  Here we have chosen to concentrate on galaxy/small group scale lenses where the background source is a galaxy because we feel that this is where the most progress can be made and the scientific return is the highest, but QSO lenses and cluster/group lenses challenges may follow.
 
@@ -251,9 +251,9 @@ There were 24 valid entries into the challenge.  They are listed in table~\ref{t
   2 & GAHEC IRAP & Space-Based & Cabanac  \\ 
   3 & CAS Swinburne Melb & Ground-Based & Jacobs   \\ 
   4 & ALL-star & Ground-Based & Avestruz, N.Li \& Lightman  \\ 
-  5 & Manchester1 & Space-Based & Jackson, Hartley \& Tagore  \\ 
+  5 & Manchester1 & Space-Based & Jackson \& Tagore  \\ 
   6 & CMU-DeepLens-Resnet-Voting & Space-Based & Ma, Lanusse \& C. Li  \\ 
-  7 & Manchester SVM & Ground-Based & Hartley   \\ 
+  7 & Manchester SVM & Ground-Based & Hartley \& Flamary  \\ 
   8 & CMU-DeepLens-ResNet & Space-Based & Francois Lanusse, Ma, C. Li \& Ravanbakhsh \\ 
   9 & CMU-DeepLens-Resnet-Voting & Ground-Based & Ma, Lanusse \& C. Li   \\ 
   10 & YattaLensLite & Space-Based &  Sonnenfeld  \\ 
@@ -262,7 +262,7 @@ There were 24 valid entries into the challenge.  They are listed in table~\ref{t
   13 & CMU-DeepLens-ResNet-ground3 & Ground-Based &  Lanusse, Ma, Ravanbakhsh \& C. Li \\ 
   14 & GAMOCLASS & Space-Based & Marc Huertas-Company, Tuccillo, Velasco-Forero \& Decenci\~{a}re \\ 
   15 & LASTRO EPFL (CNN) & Space-Based & Geiger, Sch\"{a}fer \& Kneib \\ 
-  16 & Manchester SVM & Space-Based &  Hartley  \\ 
+  16 & Manchester SVM & Space-Based &  Hartley  \& Flamary\\ 
   17 & CMU-DeepLens-ResNet-aug & Space-Based & Ma,  Lanusse, Ravanbakhsh \& C. Li \\ 
   18 & LASTRO EPFL & Ground-Based & Geiger, Sch\"{a}fer \& Kneib   \\ 
   19 & CAST & Space-Based & Bom, Valent\'{\i}n \& Makler  \\ 

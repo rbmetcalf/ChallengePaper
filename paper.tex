@@ -62,45 +62,47 @@
 \author[R. B. Metcalf {\it et al.}]{
 R. Benton Metcalf,$^{1,4}$\thanks{E-mail: robertbenton.metcalf@unibo.it} 
 M. Meneghetti,$^4$ 
+Camille Avestruz,$^{11,12,13,\dagger}$
+\newauthor
 Fabio Bellagamba,$^1$
+Cl\'ecio R. Bom,$^{18,19}$
 Emmanuel Bertin,$^3$ 
 \newauthor
 R\'emi Cabanac,$^2$ 
 Etienne Decenci\`ere,$^{10}$
 R\'emi Flamary,$^8$
-Raphael Gavazzi,$^{17}$ 
 \newauthor
+Raphael Gavazzi,$^{17}$ 
 Mario Geiger,$^6$ 
 Philippa Hartley,$^7$
+\newauthor
 Marc Huertas-Company,$^9$
 Neal Jackson,$^7$ 
-\newauthor
 Eric Jullo,$^{16}$
+\newauthor
+Gijs Verdoes Kleijn,$^{22}$ 
 Jean-Paul Kneib,$^6$
 Leon Koopmans,$^{22}$
-Carlo Enrico Petrillo,$^{22}$ 
 \newauthor
-Christoph Sch\"{a}fer,$^6$ 
-Alessandro Sonnenfeld,$^5$ 
-Amit Tagore,$^7$
-Crescenzo Tortora,$^{22}$
+Fran\c{c}ois Lanusse,$^{20}$ 
+Chun-Liang Li,$^{21}$
+Quanbin Ma,$^{21}$ 
 \newauthor
-Diego Tuccillo,$^{9,10}$
-Santiago Velasco-Forero,$^{10}$
-Gijs Verdoes Kleijn,$^{22}$ 
-\newauthor
-Camille Avestruz,$^{11,12,13,\dagger}$
+Martin Makler,$^{19}$
 Nan Li,$^{14}$
 Matthew Lightman,$^{15}$
-Cl\'ecio R. Bom,$^{18,19}$
+\newauthor
+Carlo Enrico Petrillo,$^{22}$
+Christoph Sch\"{a}fer,$^6$ 
+Alessandro Sonnenfeld,$^5$ 
+\newauthor
+Amit Tagore,$^7$
+Crescenzo Tortora,$^{22}$
+Diego Tuccillo,$^{9,10}$
 \newauthor
 Manuel B. Valent\'in,$^{19}$
-Martin Makler,$^{19}$
-Fran\c{c}ois Lanusse,$^{20}$ Quanbin Ma,$^{21}$ 
-\newauthor
-Chun-Liang Li,$^{21}$
-\newauthor
-and ?\\
+and Santiago Velasco-Forero,$^{10}$
+\\
 % List of institutions
 $^{1}$ Departimento di Fisica \& Astronomia, Universit\`a di Bologna, via Gabetti 93/2, 4012 Bologna, Italy \\
 $^{2}$ IRAP, Universit\'e de Toulouse, CNRS, UPS, Toulouse, France.\\
@@ -140,7 +142,8 @@ $^\dagger${Provost's Postdoctoral Scholar at the University of Chicago}\\
 
 % Abstract of the paper
 \begin{abstract}
-We present a description and results of an open gravitational lens finding challenge.  Participants were asked to classify 100,000 candidate objects as to whether they were gravitational lenses or not with the goal of developing better automated methods for finding lenses in large data sets.   
+\red{Preamble}
+We present a description and results of an open gravitational lens finding challenge.  Participants were asked to classify 100,000 candidate objects as to whether they were gravitational lenses or not with the goal of developing better automated methods for finding lenses in large data sets.   \red{Mehtods used.} \red{Conclusions}
 \end{abstract}
 
 \begin{keywords}
@@ -152,29 +155,28 @@ gravitational lensing -- cosmology
 \label{sec:introduction}
 
 Strong gravitational lenses are rare cases where a distant galaxy or quasar is aligned so closely with a foreground galaxy or cluster of galaxies  that the gravitational field of the foreground object creates multiple, highly distorted images of the background object.  These take the form of multiple images of a quasar and Einstein rings surrounding a galaxy and of highly distorted arcs seen through galaxy groups and clusters.  The first strong lens was discovered in 1979 \citep{1979Natur.279..381W} and since then many valuable scientific uses have been found for them.  They have been used to study how dark matter is distributed in galaxies and clusters \citep[e.g.][]{1991ApJ...373..354K,2001ApJ...554.1216C,2002ApJ...568L...5K,2003ApJ...587..143R,2003ApJ...583..606K,2005MNRAS.360.1333W,2005ApJ...623...31D,2009MNRAS.392..945V,2016MNRAS.463.3115T}.  They have been used to measure the Hubble constant and other cosmological parameters \citep[e.g.][]{1964MNRAS.128..307R,1992ARA&A..30..311B,2000ApJ...544...98W,2013ApJ...766...70S,2016A&ARv..24...11T}.
-Their magnification has been used as a natural telescope to observe otherwise undetectable objects \citep[e.g][]{2007ApJ...671.1196M,2017MNRAS.464.4823B,2016ApJ...833..264S}.   They have put limits on the self interaction of dark matter and on the theory of gravitation.  Through microlensing they have been used to study the structure of quasars \citep{2008ApJ...689..755M,2008ApJ...673...34P,2011ApJ...729...34B}.   To access this wealth of information the first step is to find the lenses.  \red{Could use some citations in this paragraph.}
+Their magnification has been used as a natural telescope to observe otherwise undetectable objects \citep[e.g][]{2007ApJ...671.1196M,2017MNRAS.464.4823B,2016ApJ...833..264S}.   They have put limits on the self interaction of dark matter and on the theory of gravitation. \red{Citation?} Through microlensing they have been used to study the structure of quasars \citep{2008ApJ...689..755M,2008ApJ...673...34P,2011ApJ...729...34B}.   To access this wealth of information the first step is to find the lenses.
 
-The Square Kilometer Array (SKA)\footnote{http://skatelescope.org/}, the Large Synoptic Survey Telescope (LSST)\footnote{https://www.lsst.org/} and the Euclid space telescope\footnote{https://www.euclid-ec.org/} are expected to increase the number of potential lenses by orders of magnitude \citep{collett_15,euclidSLWGwhitepaper,2015aska.confE..84M,2010MNRAS.405.2579O}.   For example it is estimated that there will be approximately 200,000 observable galaxy-galaxy lenses in the Euclid data set among \red{tens of billions (better number??)} of potential objects .  So far, less than a thousand lenses have been found in total across many heterogeneous data sets.  These surveys will bring a new era for strong lensing where large relatively well defined samples of lenses will be possible.  It will also require handling much larger quantities of data than has been customary in this field.
+The Square Kilometer Array (SKA)\footnote{http://skatelescope.org/}, the Large Synoptic Survey Telescope (LSST)\footnote{https://www.lsst.org/} and the Euclid space telescope\footnote{https://www.euclid-ec.org/} are expected to increase the number of potential lenses by orders of magnitude \citep{collett_15,euclidSLWGwhitepaper,2015aska.confE..84M,2010MNRAS.405.2579O}.   For example it is estimated that there will be approximately 200,000 observable galaxy-galaxy lenses in the Euclid data set among tens of billions of potential objects .  So far, less than a thousand lenses have been found in total across many heterogeneous data sets.  These surveys will bring a new era for strong lensing where large relatively well defined samples of lenses will be possible.  It will also require handling much larger quantities of data than has been customary in this field.
 
-Up to this point, the most widely used method for finding lenses in imaging surveys has been by visual inspection of a samples candidates that have been selected on the bases of luminosity and/or color.  This has been done in the radio \citep{2003MNRAS.341...13B} and in the visible with space and ground based data \citep{2008MNRAS.389.1311J,2008ApJS..176...19F,2014MNRAS.439.3392P} \red{(Maybe there are some others to cite here?)}.  A related method pioneered by the SPACE WARPS project \citep{2016MNRAS.455.1171M,2016MNRAS.455.1191M,2015MNRAS.452..502G} has been to crowd source the visual inspection through an online platform.  These efforts have proved very fruitful, but they deal with orders of magnitude fewer candidates and lenses than will be necessary in the future.  Dealing with such large quantities of data will not be practical for any visual inspection approach.  In addition, the efficiency and detection bias of human inspection methods are difficult to rigorously quantify.
+Up to this point, the most widely used method for finding lenses in imaging surveys has been by visual inspection of candidates that have been selected on the bases of luminosity and/or color.  This has been done in the radio \citep{2003MNRAS.341...13B} and in the visible with space and ground based data \citep{2008MNRAS.389.1311J,2008ApJS..176...19F,2014MNRAS.439.3392P} \red{(Maybe there are some others to cite here?)}.  A related method pioneered by the SPACE WARPS project \citep{2016MNRAS.455.1171M,2016MNRAS.455.1191M,2015MNRAS.452..502G} has been to crowd source the visual inspection through an online platform.  These efforts have proved very fruitful, but they deal with orders of magnitude fewer candidates and lenses than will be necessary in the future.  Dealing with such large quantities of data will not be practical for any visual inspection approach.  In addition, the efficiency and detection bias of human inspection methods are difficult to rigorously quantify.
 
-Galaxy scale lenses have also been searched for spectroscopically by looking for high redshift stellar lines in the spectra of lower redshift large galaxies.  Notably this was done in the Sloan Lens ACS (SLACS) survey, producing a relatively well defined and pure sample of Einstein ring lenses \citep{2006ApJ...638..703B}.  However, spectroscopy is telescope-time consuming and for the foreseeable future we are not likely to have spectroscopic surveys that cover anywhere near the number of objects as the planned imaging surveys.
+Spectroscopic searches for galaxy scale lenses have also been done by looking for high redshift stellar lines in the spectra of lower redshift large galaxies.  Notably this was done in the Sloan Lens ACS (SLACS) survey, producing a relatively well defined and pure sample of Einstein ring lenses \citep{2006ApJ...638..703B}.  However, spectroscopy is telescope-time consuming and for the foreseeable future we are not likely to have spectroscopic surveys that cover anywhere near the number of objects as the planned imaging surveys.
 
 Some automated algorithms have been developed in the past to detect lenses in images.  These have been designed to detect arc-like features \citep{2006astro.ph..6757A,2007A&A...472..341S, 2017A&A...597A.135B} and rings \citep{2014ApJ...785..144G,2014A&A...566A..63J}.  They have been applied to survey data and found of order 200 lenses \citep{2007A&A...461..813C,2012ApJ...749...38M,2016A&A...592A..75P}.  Another approach has been to use a lens modeling code to fit a model to all the candidates and pick out the ones that fit the model well \citep{2009ApJ...694..924M,2010A&A...517A..25S,2017arXiv170401585S}.
 
-More recently machine learning techniques that have become widely used in the fields computer image processing and artificial intelligence 
-have been applied to this problem and others in astronomy, in particular, artificial neural networks (ANNs) and support vector machines (SVM). These algorithms require a set of predefined features from which a discriminating model can be learned. Convolutional neural networks (CNN), however, do not require a pre-selected feature set, but instead learn from a training set which features are most important for distinguishing categories of objects.  These have been used widely for such tasks as handwriting and facial recognition.  In astronomy these families of algorithms are beginning to be used for categorizing galaxy morphologies \citep{2015MNRAS.450.1441D}, photometric redshifts \citep{2017MNRAS.465.1959C,2016PASP..128j4502S,2017NewA...51..169S}, supernova classification \citep{2016ApJS..225...31L} and the lens finding problem \citep{2017MNRAS.471..167J,2017arXiv170207675P,2017MNRAS.465.4325O,2017A&A...597A.135B,hartley2017support}.
+More recently, machine learning techniques that have become widely used in the fields of computer image processing and artificial intelligence have been applied to this problem and others in astronomy.  In particular, artificial neural networks (ANNs) and support vector machines (SVM).  SVMs and other logistic regression methods learn from a training set how to classify objects using predefined features which characterize each instance while ANNs (and a popular variant convolutional neural networks (CNNs) ) can learn directly from a training set which features are most important for distinguishing categories of objects.  These have been used widely for such tasks as handwriting and facial recognition.  In astronomy, these families of algorithms are beginning to be used for categorizing galaxy morphologies \citep{2015MNRAS.450.1441D}, photometric redshifts \citep{2017MNRAS.465.1959C,2016PASP..128j4502S,2017NewA...51..169S}, supernova classification \citep{2016ApJS..225...31L} and the lens finding problem \citep{2017MNRAS.471..167J,2017arXiv170207675P,2017MNRAS.465.4325O,2017A&A...597A.135B,hartley2017support}.
 
 Given the future of this field with large amounts of data coming soon and many new ideas emerging, it is timely to stage a series of challenges to stimulate new work, determine what can realistically be done in lens finding and get a better idea of the strengths and weaknesses to different methods.  The long term goal is to get a set of algorithms that can handle Euclid, LSST or SKA data sets and produce high purity and high completeness lens samples with well defined efficiency or selection.  We anticipate further challenges in the future in which the realism of the data simulations will become progressively better.  Here we have chosen to concentrate on galaxy/small group scale lenses where the background source is a galaxy because we feel that this is where the most progress can be made and the scientific return is the highest, but QSO lenses and cluster/group lenses challenges may follow.
 
-The paper is organized as follows.  The form of the challenge and its rules are described in the next section.  The methods used to simulate mock images of galaxies and gravitational lenses are described in section~\ref{sec:simulation}.  In section~\ref{sec:entries} each of the methods that were used to solve the challenge are briefly described.  We discuss the metrics used to evaluate entries in section~\ref{sec:figure_of_merit}.  The performance of each of the methods broken down in different ways is presented in section~\ref{sec:performance}.  Finally,  in section~\ref{sec:conclusion}, we conclude with a discussion of what was learned and how methods can be improved in the future.
+The paper is organized as follows.  The form of the challenge and its rules are described in the next section.  The methods used to simulate mock images of galaxies and gravitational lenses are described in section~\ref{sec:simulation}.  In section~\ref{sec:entries}, each of the methods that were used to solve the challenge are briefly described.  We discuss the metrics used to evaluate entries in section~\ref{sec:figure_of_merit}.  The performance of each of the methods broken down in different ways is presented in section~\ref{sec:performance}.  Finally,  in section~\ref{sec:conclusion}, we conclude with a discussion of what was learned and how methods can be improved in the future.
 
 \section{The Challenge}
 \label{sec:challenge}
 
-The challenge was in fact two separate challenges that could be entered independently.  One was designed to mimic a single band of a future imaging data set from a satellite survey such as Euclid \citep{***} \red{(the latest description)}.  The other was designed to mimic ground based data with multiple bands, roughly modeled on the Kilo-Degree Survey (KiDS)\footnote{http://kids.strw.leidenuniv.nl/} \citep{2013ExA....35...25D}. In neither case were the simulated images meant to precisely mock these surveys, but the surveys were used as guides to set noise levels, pixel sizes, sensitivities, and other parameters.
+The challenge was in fact two separate challenges that could be entered independently.  One was designed to mimic a single band of a future imaging data set from a satellite survey such as Euclid.  The other was designed to mimic ground based data with multiple bands, roughly modeled on the Kilo-Degree Survey (KiDS)\footnote{http://kids.strw.leidenuniv.nl/} \citep{2013ExA....35...25D}. In neither case were the simulated images meant to precisely mock these surveys, but the surveys were used as guides to set noise levels, pixel sizes, sensitivities, and other parameters.
 
-In each case, a training set of 20,000 images in each band was provided for download at any time along with a key giving some properties of the object including whether it was a gravitational lens.  Each image was $101\times101$ pixels.  The researchers were free to download these sets and train their algorithms on them.  To enter the contest the participants needed to register with a team name at which point they would be given a unique key and the address of a test data set.  These data sets contained 100,000 candidates.  In the case of the multi-band ground-based set this was 400,000 images. The participant had 48 hours to upload a classification of all candidates consisting of a score between 0 and 1 -- 0 signifying the lowest confidence that it is a lens and 1 signifying the highest confidence that it is a lens.  This ranking could have been a simple binary (0 or 1) classification  or it could have been a continuous range of numbers representing the probability of being a lens or it could have been a finite number of confidence levels.  
+In each case, a training set of 20,000 images in each band was provided for download at any time along with a key giving some properties of the object including whether it was a gravitational lens.  Each image was $101\times101$ pixels.  The participants were free to download these sets and train their algorithms on them.  To enter the contest the participants needed to register with a team name at which point they would be given a unique key and the address of a test data set.  These data sets contained 100,000 candidates.  In the case of the multi-band ground-based set this was 400,000 images. The participant had 48 hours to upload a classification of all candidates consisting of a score between 0 and 1 -- 0 signifying the lowest confidence that it is a lens and 1 signifying the highest confidence that it is a lens.  This ranking could have been a simple binary (0 or 1) classification  or it could have been a continuous range of numbers representing the probability of being a lens or it could have been a finite number of confidence levels.  
 
 The challenge was opened on November 25, 2016 and closed on February 5, 2017.
 

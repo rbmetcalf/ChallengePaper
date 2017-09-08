@@ -431,13 +431,24 @@ and and 20\% test to avoid overfitting the data.  We use the best
 parameters to then train the entire dataset for the final model
 classifier that we used to evaluate the competition data.
 
-\subsection{Convolutional Neural Networks ((Lanusse)}
+\subsection{Convolutional Neural Networks}
 
 Since Convolutional Neural Networks (CNNs) are central to many of the methods that will be described later a brief general description of them will be useful.
-A CNN \citep{Lecun1998} is a multi-layer feed-forward neural network model particularly well suited for processing natural images. With the very recent advances of the \textit{Deep Learning} framework \citep{Lecun2015}, models based on CNN architectures have reached or even surpassed human accuracy in image classification tasks \citep{He2015a}.
+A CNN \citep{Fukushima1980,Lecun1998} is a multi-layer feed-forward neural network model particularly well suited for processing natural images. With the very recent advances of the \textit{Deep Learning} framework \citep{Lecun2015}, models based on CNN architectures have reached or even surpassed human accuracy in image classification tasks \citep{He2015a}.
 
 The fundamental building block of a CNN is the \textit{convolutional layer}. This element applies a set of convolution filters on an input image to produce a series of so-called \textit{feature maps}. The coefficients of these filters are free parameters that are learned by the model. We will use the notation 
-$n \times n - n_c$ to denote a convolutional layer using filters of size $n \times n$ pixels and outputting $n_c$ feature maps.\red{(Need to make everyone conform to this notation.)}  In typical architectures, the size of these convolution filters is kept small (i.e. 3x3 or 5x5 pixels) to limit the complexity of the model. To capture features on larger scales, CNNs rely on a multi-resolution approach by interleaving convolutional layers with \textit{pooling layers} which apply a downsampling operation to the feature maps. The most common downsampling schemes are the max-pooling and average pooling strategies, which downsample an input image by taking respectively the maximum or average values within a given region (e.g. 2x2 patches for a downsampling of factor 2).
+$n \times n - n_c$ to denote a convolutional layer using filters of size $n \times n$ pixels and outputting $n_c$ feature maps.  In typical architectures, the size of these convolution filters is kept small (i.e. 3x3 or 5x5 pixels) to limit the complexity of the model. 
+
+Similarly to conventional fully-connected neural networks, convolution layers are typically followed  by an element-wise activation function which allows for the modeling of complex functional forms  by introducing non-linearities in the model.  Classical choices  for  activation functions  include the sigmoid-shaped logistic  function (or just sigmoid) $f(x) = 1/ (1  + \exp(-x))$ or the hyperbolic tangent function $f(x) = \tanh(x)$. However, much of the success of Deep Learning is due to the  introduction of activation functions that do not saturate, allowing for the  efficient training  of very deep architectures. The most common choice in modern deep learning models  is the simple ReLU activation (for rectified linear unit) \citep{Nair2010} defined as $f(x) = \max(x, 0 )$. A closely related  common alternative is the ELU activation (for Exponential Linear Unit) \citep{2015arXiv151107289C} defined as 
+\begin{equation}
+	f(x ) = \begin{cases}
+    x & \text{if } x\geq 0\\
+    e^{x } - 1,              & \text{otherwise}
+\end{cases}\;,
+\end{equation}
+which often leads to better results in practice.
+
+Because the filters used in convolution layers are  typically  just a few pixels in size, to capture features on larger scales, CNNs rely on a multi-resolution approach by interleaving convolutional layers with \textit{pooling layers} which apply a downsampling operation to the feature maps. The most common downsampling schemes are the max-pooling and average pooling strategies, which downsample an input image by taking respectively the maximum or average values within a given region (e.g. 2x2 patches for a downsampling of factor 2).
 
 A CNN architecture is therefore a stack of convolution layers and pooling layers, converting the input image into an increasing number of feature maps of progressively coarser resolution. The final feature maps can capture information on large scales and can reach a high-level of abstraction. To perform the classification itself from these feature maps, the CNN is typically topped by a fully-connected neural network outputting the class probability of the input image.
 
@@ -447,8 +458,11 @@ For a binary classification problem such as the one involved in strong lens dete
 \end{equation}
 where $N$ is the number of training instances, $y \in \{0,1\}$ is the true class of the image and $\hat{y} \in [0,1]$ is the class probability predicted by the model. This optimization is usually performed by a Stochastic Gradient Descent (SGD) algorithm which updates the model iteratively by taking small gradient steps over randomly selected subsamples of the training set (so called \textit{mini-batches}). All the CNN-based methods presented in this work rely on the ADAM \citep{Kingma_2014} algorithm, an accelerated variant of SGD algorithm. \red{True?}
 
-\fl{Things I still have to mention: activation function, dropout, batch normalisation}.
-
+\fl{Missing components:
+\begin{itemize}
+	\item dropout \citep{2012arXiv1207.0580H,JMLR:v15:srivastava14a} 
+	\item batch norm \citep{batch_norm}
+\end{itemize}}
 
 \red{Blue terms in following need to be defined.}
 
@@ -456,14 +470,15 @@ where $N$ is the number of training instances, $y \in \{0,1\}$ is the true class
 
 The lens detector is based on a CNN, trained with the provided training datasets. The CNN is implemented in Python, using the TensorFlow framework\footnote{http://www.tensorflow.org/}. Both ground multichannel and space monochannel image classifiers have the exact same CNN architecture.
 
-The network itself consists of three convolutional layers ($11\times 11 - 32$, $5\times 5 - 64$ and $3\times 3 - 64$), followed by two fully-connected layers ($256$ and $64$ neurons) and an output \blue{softmax layer}. The first five layers use the ELU (Exponential Linear Unit) \blue{activation function} \citep{2015arXiv151107289C}, which in our tests led to significantly faster convergence compared to ReLU and even SoftPlus activation. Dropout regularization \citep{2012arXiv1207.0580H,JMLR:v15:srivastava14a} is applied to both convolutional and fully connected layers, with ``keep'' probabilities $p=2/3$ and $p=1/2$, respectively.
+%The network itself consists of three convolutional layers (11x11-32, 5x5-64 and 3x3-64), followed by two fully-connected layers ($256$ and $64$ neurons) and an output softmax layer . The first five layers use the ELU (Exponential Linear Unit) activation function \citep{2015arXiv151107289C}, which in our tests led to significantly faster convergence compared to ReLU and even SoftPlus activation. Dropout regularization \citep{2012arXiv1207.0580H,JMLR:v15:srivastava14a} is applied to both convolutional and fully connected layers, with ``keep'' probabilities $p=2/3$ and $p=1/2$, respectively.
+The network itself consists of three convolutional layers (11x11-32, 5x5-64 and 3x3-64), followed by two fully-connected layers ($256$ and $64$ neurons) and an output softmax layer . The first five layers use the ELU activation function, which in our tests led to significantly faster convergence compared to ReLU and even SoftPlus activation. Dropout regularization is applied to both convolutional and fully connected layers, with ``keep'' probabilities $p=2/3$ and $p=1/2$, respectively.
 
 Prior to entering the first convolutional layer, input image data are rescaled and dynamic-range compressed with function $f(x) =
 \mathrm{arcsinh} (10^{11} x)$, and bad pixels are simply set to 0.
 \blue{Data augmentation} is performed in the form of random up-down and left-right image flipping, plus $k\pi/2$ rotations, where $k$ is a random integer in the $[0,3]$ range. Additionally, a small rotation with random angle $\theta$ is applied, involving bicubic image resampling. $\theta$ follows a Gaussian distribution with mean $\mu=0$ and standard deviation $\sigma_{\theta}=5^{\circ}$. No attempt was made to generate and randomize bad pixel masks in the data augmentation process.
 
-The CNN weights are initialized to random values using a truncated Gaussian distribution with mean $\mu=0$ and standard deviation $\sigma=5.10^{-2}$. The network is trained on a Titan-X ``Pascal'' nVidia GPU using the \textit{Adam} gradient-based optimizer \citep{2014arXiv1412.6980K} during 800 epochs, with an initial learning rate $\eta(t=0)=10^{-3}$ and a learning rate decay $\eta(t+1)/\eta(t)=0.99$, where $t$ is the epoch. Because of a lack of time, tests were limited to assessing the basic classification performance on a subset of the of 1,000 images/datacubes, using the 19,000 others for training.
-
+%The CNN weights are initialized to random values using a truncated Gaussian distribution with mean $\mu=0$ and standard deviation $\sigma=5.10^{-2}$. The network is trained on a Titan-X ``Pascal'' nVidia GPU using the \textit{Adam} gradient-based optimizer \citep{2014arXiv1412.6980K} during 800 epochs, with an initial learning rate $\eta(t=0)=10^{-3}$ and a learning rate decay $\eta(t+1)/\eta(t)=0.99$, where $t$ is the epoch. Because of a lack of time, tests were limited to assessing the basic classification performance on a subset of the of 1,000 images/datacubes, using the 19,000 others for training.
+The CNN weights are initialized to random values using a truncated Gaussian distribution with mean $\mu=0$ and standard deviation $\sigma=5.10^{-2}$. The network is trained on a Titan-X ``Pascal'' nVidia GPU using the \textit{Adam} gradient-based optimizer during 800 epochs, with an initial learning rate $\eta(t=0)=10^{-3}$ and a learning rate decay $\eta(t+1)/\eta(t)=0.99$, where $t$ is the epoch. Because of a lack of time, tests were limited to assessing the basic classification performance on a subset of the of 1,000 images/datacubes, using the 19,000 others for training.
 
 
 \subsubsection{LASTRO EPFL (Geiger, Sch\"{a}fer)}

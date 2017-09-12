@@ -81,9 +81,8 @@ Marc Huertas-Company,$^9$
 Neal Jackson,$^7$ 
 Eric Jullo,$^{16}$
 \newauthor
-Gijs Verdoes Kleijn,$^{22}$ 
 Jean-Paul Kneib,$^6$
-Leon Koopmans,$^{22}$
+L\'{e}on V. E. Koopmans,$^{22}$
 \newauthor
 Fran\c{c}ois Lanusse,$^{20}$ 
 Chun-Liang Li,$^{21}$
@@ -102,7 +101,8 @@ Crescenzo Tortora,$^{22}$
 Diego Tuccillo,$^{9,10}$
 \newauthor
 Manuel B. Valent\'in,$^{19}$
-and Santiago Velasco-Forero,$^{10}$
+Santiago Velasco-Forero,$^{10}$
+and Gijs A. Verdoes Kleijn$^{22}$ 
 \\
 % List of institutions
 \vspace{0.5cm}\\
@@ -668,15 +668,13 @@ Our model is implemented using the \texttt{Theano}\footnote{\url{http://deeplear
 This repository also contains a notebook detailing how to reproduce our challenge submission.
 
 \subsubsection{Kapteyn Resnet (Petrillo, Tortora, Verdoes Kleijn, Koopmans) }
-\red{This is a bit ragged and another submission needs to be analysed.}
+\red{Another submission needs to be analysed.}
 
 Our lens-finder is based on a CNN, following the strategy adopted recently in \citep{2017arXiv170207675P}. 
-
 We decide to treat the problem as a three-class classification problem where the classes are \textit{non-lenses}, \textit{clear lenses} and \textit{dubious lenses}. We define the \textit{dubious lenses} as the lenses with lensing features with less than 160 pixels and the \textit{clear lenses} those with more than 160 pixels belonging to the lensed source. This choice is motivated by the fact that specializing the network in recognizing different class could lead to a more robust classification. In addition, in a hypothetical application of the method to real data from a survey, this could be a way to select the most blatant lenses.  
 
-Given the rules of the challenge, we had to submit a prediction for each source in the test-set as a single number: a number in the interval [0,1] or either a 0 or a 1. Unfortunately, to satisfy this requirement we had to collapse one of the class into another: we provided a 0 when the source is classified as a \textit{non-lens} and 1 if it is classified as a \textit{clear lenses} or as a \textit{dubious lenses}. Moreover, this did not allow to build a continuous ROC curve but only a binary one. \textbf{(We need to test if this was an improvement or not. I have the submission ready.)}
-
-Ihe final submission is made using the average values of the predictions from the same network trained three different times.
+Given the rules of the challenge, we had to submit a prediction for each source in the test-set as a single number: a number in the interval [0,1] or either a 0 or a 1. For satisfying this requirement we had to collapse one of the class into another: we provided a 0 when a source is classified as a \textit{non-lens} and a 1 when is classified as a \textit{clear lens} or as a \textit{dubious lenses}. This configuration did not allow to build a continuous ROC curve but only a binary one. \textbf{(We need to test if this was an improvement or not. I have the submission ready.)}
+The final submission was produced averaging the values of the predictions from three CNNs with the same architecture.
 
 {\bf Implementation}
 The CNN is implemented in Python 2.7 using the open-source libraries \textsc{Lasagne}\footnote{\href{http://github.com/Lasagne/Lasagne/}{\tt http://github.com/Lasagne/Lasagne/}} 
@@ -686,16 +684,12 @@ The training of the CNN is executed on a GeForce GTX 760 in parallel with the da
 
 {\bf Architecture}
 We used the CNN architecture called ResNet described in \citep{he2015deep} with three stacks of residual blocks of 5 layers. 
-
-The output layer is composed by three units. Each units gives in output a number between 0 and 1 that represents, respectively, the probability of being a non-lens, a small-lens, a big-lens.
+The output layer is composed by three units. Each units gives in output a number between 0 and 1 that represents, respectively, the probability of being a \textit{non-lens}, a \textit{dubious lens}, a \textit{certain lens}.
 
 {\bf Preprocessing}
 The training fits files are preprocessed with the software \textsc{STIFF}\footnote{\href{http://www.astromatic.net/software/stiff}{\tt http://www.astromatic.net/software/stiff}} which automatically converts the fits files to gray-scale TIFF images operating a non-linear intensity transformations to enhance the low-brightness features of the image.   
-
 Due to memory limitations we down-sampled the images to 84 by 84 pixels. Most likely, this leads to a worse classification accuracy than using the original image resolution.
-
 We augmented the training images in the following way: i) random rotation of 90, 180 or 270 degrees; ii) random shift in both $x$ and $y$ direction between -2 and +2 pixels; iii) $50\%$ probability of horizontally flipping the image. 
-
 Finally, the image border is cropped in order to have 80 by 80 pixel input images.
 
 {\bf Training}
@@ -706,7 +700,7 @@ L = -\sum_j t_{j}\log p_{j}
 \end{equation}
 where the $t_j$ and $p_j$ are respectively the label and the prediction for the class $j$. 
 The minimization is done via mini-batch stochastic gradient descent with \textit{Adam} updates \citep{Kingma_2014}. We used a batch size of 56 and performed  46000 gradient updates. We started with a learning rate of $4 \times 10^{-4}$, decrease it to $4 \times 10^{-5}$ after 35000 updates and to $4 \times 10^{-6}$ after 43000 updates.
-The initial values of the biases are set to zero and the weights of each filter are initialized from a random normal distribution with variance ${2/n}$ where $n$ is the number of inputs of the unit (see \citep{he2015delving}).  
+The initial values of the biases are set to zero and the weights of each filter are initialized from a random normal distribution with variance ${2/n}$ where $n$ is the number of inputs of the unit \citep{He2015a}.  
 We use L2-norm regularization with $\lambda= 9 \times 10^{-3}$.
 
 \section{results}

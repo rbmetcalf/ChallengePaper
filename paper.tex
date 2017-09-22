@@ -101,7 +101,9 @@ Diego Tuccillo,$^{9,10}$
 \newauthor
 Manuel B. Valent\'in,$^{19}$
 Santiago Velasco-Forero,$^{10}$
-and Gijs A. Verdoes Kleijn$^{22}$ 
+Gijs A. Verdoes Kleijn,$^{22}$
+\newauthor
+and Georgios Vernardos$^{22}$
 \\
 % List of institutions
 \vspace{0.5cm}\\
@@ -110,8 +112,7 @@ $^{2}$ IRAP, Universit\'e de Toulouse, CNRS, UPS, Toulouse, France.\\
 $^{3}$ Sorbonne Universit\'{e}s, UPMC Univ. Paris 6 and CNRS, UMR 7095, Institut d'Astrophysique de Paris,  \\ 98bis Bd Arago, F-75014, Paris France.\\
 $^{4}$ INAF-Osservatorio Astronomico di Bologna, via Ranzani 1, 40127 Bologna, Italy \\
 $^{5}$ Kavli IPMU (WPI), UTIAS, The University of Tokyo, Kashiwa, Chiba 277-8583, Japan\\
-$^{6}$ \red{Ecole Polytechnique F\'ed\'erale de Lausanne (EPFL)
-Observatoire de Sauverny CH - 1290 Versoix Switzerland} \\
+$^{6}$ Institute of Physics, Laboratory of Astrophysics, Ecole Polytechnique F\'ed\'erale de Lausanne (EPFL), Observatoire de Sauverny, 1290 Versoix, Switzerland \\
 $^{7}$ Jodrell Bank Centre for Astrophysics, School of Physics \& Astronomy, University of \\ Manchester, Oxford Rd, Manchester M13 9PL, UK \\
 $^{8}$ Laboratoire Lagrange, Universi\'{e} de Nice Sophia-Antipolis, Centre National de la Recherche Scientifique,\\ Observatoire de la C\^{o}te d'Azur, Parc Valrose, 06108 Nice, France \\
 $^{9}$ LERMA, Observatoire de Paris, CNRS, Universit\'e Paris Diderot, 61, Avenue de l'Observatoire F-75014, Paris, France \\
@@ -122,8 +123,7 @@ $^{13}${Department of Astronomy \& Astrophysics, The University of Chicago, Chic
 $^{14}${School of Physics and Astronomy, Nottingham University, University Park, Nottingham, NG7 2RD, UK
 }\\
 $^{15}${JPMorgan Chase, Chicago, IL 60603 U.S.A.}\\
-$^{16}$\red{ LAM - Laboratory of Astrophysics of Marseille P\^ole de l'\'Etoile Website of Ch\^ateau-Gombert 
-38,} \\ \red{rue Fr\'ed\'eric Joliot-Curie 13388 Marseille cedex 13 FRANCE} \\
+$^{16}$Aix Marseille Universit\'e, CNRS, LAM (Laboratoire d'Astrophysique de Marseille) UMR 7326, 13388, Marseille, France \\
 $^{17}$\red{Institut d'Astrophysique de Paris (IAP)- 98 bis boulevard Arago - 75014 Paris } \\
 $^{18}${Centro Federal de Educa\c{c}\~ao Tecnol\'ogica Celso Suckow da Fonseca, CEP 23810-000,  Itagua\'i, RJ, Brazil}\\
 $^{19}${Centro Brasileiro de Pesquisas F\'isicas, CEP 22290-180, Rio de Janeiro, RJ, Brazil}\\
@@ -495,7 +495,11 @@ As activation function, we used a scaled and shifted ReLU (Rectifier Linear Unit
     \frac{1}{\sqrt{\pi-1}} (\sqrt{2 \pi} \max(0,x) - 1),
 \end{equation}
 to satisfy the properties required by the normalization propagation.
-In our implementation of batch normalization, instead of using only the moments computed over the current batch, we used a low-pass filter ($\bar\mu_i \longleftarrow (1-\eta) \; \bar\mu_{i-1} + \eta \; \mu_i(\text{batch})$, $\eta$ set to $1$ at the beginning and decay with the iterations).
+Our batch normalization implementation computes the mean of the activation function $\bar\mu_i$ using the following equation 
+\begin{equation} \label{eq:batchnorm}
+    \bar\mu_i \longleftarrow (1-\eta) \; \bar\mu_{i-1} + \eta \; \mu_i(\text{batch}).
+\end{equation}
+$\bar\mu_i$ is computed using the mean value $\mu_i$ over the batch in combination with the previous mean $\bar\mu_{i-1}$ using an inertia value $\eta$ set to $1$ at the beginning and decaying with the iterations.
 For the training, the 20k provided images were split into two sets, 17k for training and 3k for validation.
 Each iteration of the gradient descent (more precisely \textit{Adam} \citep{adam}) minimizes the cross entropy, 
 \begin{equation} \label{eq:xent}
@@ -507,14 +511,14 @@ Each iteration of the gradient descent (more precisely \textit{Adam} \citep{adam
     \right.,
 \end{equation}
 where $p$ is the output of the neural network, computed over a batch of 30 images, 15 lenses and 15 nonlenses, picked from the training set.
-Making batches of 30 images adds noise to the gradient \red{which?} makes the iterations faster.
+The small batches with only 30 images were easier to handle computationally but add more noise to the gradient which we considered negligible due to there being only two classes to classify.
 
 To augment the training set, each image of the batch is transformed with a random transformation of the dihedral group (rotations of 90 degrees and mirrors), its pixel values multiplied by a factor picked between $0.8$ and $1.2$ and shifted by a random value between $-0.1$ and $0.1$.
 To prevent the overfitting, we used some dropout \citep{dropout} (with a keeping probability decreasing with the iterations).
 The masked region of the ground based images are handled by simply setting them to zero.
 Each final prediction is made of the product of the predictions of the 8 transformations of the image by the dihedral group.
 The architecture is implemented in Tensorflow\footnote{\url{http://tensorflow.org/}}.
-Our code is accessible on github\footnote{\url{https://github.com/antigol/lensfinder-euclid}}.
+Our code is accessible on github\footnote{\url{https://github.com/antigol/lensfinder-euclid}}. Additional details can be found in \citet{2017Schaefer}.
 
 \begin{table*}
     \centering
@@ -924,6 +928,7 @@ RBM's research was partly part of project GLENCO, funded under the European Seve
 AT acknowledges receipt of an STFC postdoctoral research
 assistantship.
 \red{We thank the International Space Science Institute (ISSI) for hosting and funding our workshop.\footnote{http://www.issibern.ch/}}
+JPK and CS acknowledge support from the ERC advanced grant LIDA and the ESA-NPI grant 491-2016.
 CA acknowledges support from the Enrico Fermi
 Institute at the University of Chicago, and the University of Chicago
 Provost's Office. NL would like to thank the funding support from

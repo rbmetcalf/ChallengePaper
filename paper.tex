@@ -673,7 +673,7 @@ The architecture presented above is the one that lead to our best results in bot
 The first variant introduced several data-augmentation schemes, including the ones mentioned above and the addition of Gaussian noise to the input images. We found however that the introduction of noise was not necessary as the other methods were enough to prevent overfitting. 
 The second variant was used to explore a voting strategy between three different models. These models differed by the type of residual blocks (bottleneck vs wide) and by their handling of missing pixels (setting to 0 or to the median value of the image). The predictions of the best 2 out of 3 models were then averaged to produce the final classification probability.
 
-\red{B: would be nice to have a figure about the resnet architecture}
+\red{Barnabas: would be nice to have a figure about the resnet architecture}
 
 Our model is implemented using the \texttt{Theano}\footnote{\url{http://deeplearning.net/software/theano/}} and \texttt{Lasagne}\footnote{\url{https://github.com/Lasagne/Lasagne}} libraries. On an Nvidia Titan Xp GPU, our full training procedure requires approximately 6 hours on the ground-based challenge, but classification of the whole testing set is performed in a couple of minutes. Finally, in the interest of reproducible research, our code is made publicly available on GitHub\footnote{\url{https://github.com/McWilliamsCenter} }.
 This repository also contains a notebook detailing how to reproduce our challenge submission.

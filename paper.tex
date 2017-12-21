@@ -276,7 +276,7 @@ There were 24 valid entries into the challenge.  They are listed in Table~\ref{t
   21 & All-now & Space-Based & Avestruz, N. Li \& Lightman   \\ 
   22 & Manchester-NA2 & Ground-Based & Jackson \& Tagore  \\ 
   23 & YattaLensLite & Ground-Based & Sonnenfeld   \\ 
-  24 & Kapteyn Resnet & Space-Based & Petrillo, Koopmans, Kleijn, Tortora \& Vernardos \\ 
+  24 & Kapteyn Resnet & Space-Based & Petrillo, Tortora, Verdoes Kleijn, Koopmans \& Vernardos \\ 
    \hline
 \end{tabular}
 \caption{Entries to the challenges.}
@@ -677,9 +677,9 @@ This repository also contains a notebook detailing how to reproduce our challeng
 \subsubsection{Kapteyn Resnet (Petrillo, Tortora, Verdoes Kleijn, Koopmans) }
 
 Our lens-finder is based on a CNN, following the strategy adopted recently in \citep{2017arXiv170207675P}. 
-We decide to treat the problem as a three-class classification problem where the classes are \textit{non-lenses}, \textit{clear lenses} and \textit{dubious lenses}. We define the \textit{dubious lenses} as the lenses with lensing features with less than 160 pixels and the \textit{clear lenses} those with more than 160 pixels belonging to the lensed source. This choice is motivated by the fact that specializing the network in recognizing different class could lead to a more robust classification. In addition, in a hypothetical application of the method to real data from a survey, this could be a way to select the most blatant lenses.  
+We decide to treat the problem as a three-class classification problem where the classes are \textit{non-lenses}, \textit{clear lenses} and \textit{dubious lenses}. We define the \textit{dubious lenses} as the lenses with lensing features with less than 160 pixels and the \textit{clear lenses} those with more than 160 pixels belonging to the lensed source. This choice is motivated by the fact that specializing the network in recognizing different classes could lead to a more robust classification. In addition, in a hypothetical application of the method to real data from a survey, this could be a way to select the most blatant lenses.  
 
-Given the rules of the challenge, we had to submit a prediction for each source in the test-set as a single number: a number in the interval [0,1] or either a 0 or a 1. For satisfying this requirement we had to collapse one of the class into another: we provided a 0 when a source is classified as a \textit{non-lens} and a 1 when is classified as a \textit{clear lens} or as a \textit{dubious lenses}. This configuration did not allow to build a continuous ROC curve but only a binary one. \textbf{(We need to test if this was an improvement or not. I have the submission ready.)}
+Given the rules of the challenge, we had to submit a prediction for each source in the test-set as a single number: a number in the interval [0,1] or either a 0 or a 1. For satisfying this requirement we had to collapse one of the class into another: we provided a 0 when a source is classified as a \textit{non-lens} and a 1 when is classified as a \textit{clear lens} or as a \textit{dubious lens}. This choice did not allow to build a continuous ROC curve but only a binary one.
 The final submission was produced averaging the values of the predictions from three CNNs with the same architecture.
 
 {\bf Implementation}

@@ -560,12 +560,12 @@ Our code is accessible on github\footnote{\url{https://github.com/antigol/lensfi
 
 \subsubsection{GAMOCLASS (Tuccillo, Huertas-Company, Velasco-Forero, Decenci\`ere)}
 
-\begin{figure}
+\begin{figure*}
   \centering
-      \includegraphics[width=1\columnwidth]{figures/Fig1_gamoclass.pdf} 
+      \includegraphics[width=1\textwidth]{figures/Fig1_gamoclass.pdf} 
   \caption{GAMOCLASS schematic}
  \label{Fig1_gamoclass}
-\end{figure}
+\end{figure*}
 
 Our algorithm for classification of strong lensed galaxies was developed as a CNN used for binary classification task.
 Our code was trained and tested on the space-based dataset (dataset 0) provided for the Ssrong lensing challenge, comprising 20,000 stamps of single band simulated galaxies. We used the full dataset in the proportion of 4/5 for training and 1/5 for validation. The training images were labelled with 1 if showing strong lensing and 0 otherwise. Our CNN gives as output a probability [0,1] of the input image being a strongly lensed system.

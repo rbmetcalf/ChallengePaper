@@ -60,7 +60,8 @@
 
 \title[SL Challenge]{The Strong Gravitational  Lens Finding Challenge}
 %C.~E.~Petrillo$^{1}$,  C.~Tortora$^{1}$, L.~V.~E.~Koopmans$^{1}$, \and G.~Verdoes~Kleijn$^{1}$
-\author[R. B. Metcalf {\it et al.}]{R. Benton Metcalf,$^{1,4}$\thanks{E-mail: robertbenton.metcalf@unibo.it} 
+\author[R. B. Metcalf {\it et al.}]{
+R. Benton Metcalf,$^{1,4}$\thanks{E-mail: robertbenton.metcalf@unibo.it} 
 M. Meneghetti,$^4$ 
 Camille Avestruz,$^{11,12,13,\dagger}$
 \newauthor
@@ -106,7 +107,6 @@ Gijs A. Verdoes Kleijn,$^{21}$
 and Georgios Vernardos$^{21}$
 \\
 % List of institutions
-%\vspace{0.5cm}\\
 $^{1}$ Departimento di Fisica \& Astronomia, Universit\`a di Bologna, via Gabetti 93/2, 4012 Bologna, Italy \\
 $^{2}$ IRAP, Universit\'e de Toulouse, CNRS, UPS, Toulouse, France.\\
 $^{3}$ Institut d'Astrophysique de Paris, Sorbonne Universit\'e, CNRS,  UMR 7095, 98 bis bd Arago, 75014 Paris, France.\\
@@ -131,6 +131,7 @@ $^{20}${School of Computer Science, Carnegie Mellon University, Pittsburgh, PA 1
 $^{21}${Kapteyn Astronomical Institute, University of Groningen, Postbus 800, 9700 AV, Groningen, The Netherlands}\\
 $^\dagger${Provost's Postdoctoral Scholar at the University of Chicago}\\
 }
+
 
 \begin{document}
 
@@ -184,7 +185,7 @@ The challenge was opened on November 25, 2016 and closed on February 5, 2017.
 \section{the simulations}
 \label{sec:simulation}
 
-Creating the mock images started with a cosmological N-body simulation.  In this case it was the Millennium simulation \citep{2009MNRAS.398.1150B}.   A catalog of dark matter halos within a light-cone is constructed within the Millennium Observatory project \citep{2013MNRAS.428..778O}.   The challenge sets were based on a 1.6 sq.deg. light cone extending out to redshift $z=6$.  The halos are found with a friends-of-friends algorithm and characterised by a total mass, size and half mass radius.  They include subhalos of larger halos.  The halo catalog is read into the GLAMER lensing code \citep{2014MNRAS.445.1942M,2014MNRAS.445.1954P} to do all the ray-tracing.    Within the code a Navarro, Frenk \& White (NFW) \citep{1996ApJ...462..563N} profile is fit to the three parameters given above.  The halos are projected onto a series of lens planes, in this case 20,  and the deflection angle at any point in each plane can be calculated by summing the effects of all the halos with a hybrid tree method.  In this way the halos have the mass, concentration and clustering properties from the N-body simulation, but within each strong lens the mass resolution is not limited by the original simulation, but follows the analytic mass profile.   An additional mass component that will be discussed later is added to each halo to represent the stellar and gas mass \red{I don't see any further reference to the gas component}.
+Creating the mock images started with a cosmological N-body simulation.  In this case it was the Millennium simulation \citep{2009MNRAS.398.1150B}.   A catalog of dark matter halos within a light-cone is constructed within the Millennium Observatory project \citep{2013MNRAS.428..778O}.   The challenge sets were based on a 1.6 sq.deg. light cone extending out to redshift $z=6$.  The halos are found with a friends-of-friends algorithm and characterised by a total mass, size and half mass radius.  They include subhalos of larger halos.  The halo catalog is read into the GLAMER lensing code \citep{2014MNRAS.445.1942M,2014MNRAS.445.1954P} to do all the ray-tracing.    Within the code a Navarro, Frenk \& White (NFW) \citep{1996ApJ...462..563N} profile is fit to the three parameters given above.  The halos are projected onto a series of lens planes, in this case 20,  and the deflection angle at any point in each plane can be calculated by summing the effects of all the halos with a hybrid tree method.  In this way the halos have the mass, concentration and clustering properties from the N-body simulation, but within each strong lens the mass resolution is not limited by the original simulation, but follows the analytic mass profile.   An additional mass component that will be discussed later is added to each halo to represent the stellar mass.
 
 With GLAMER we identify and map out all the caustics within the light-cone for 33 source planes -- z=1 to 3 in intervals of 0.1 and 3 to 6 in intervals of 0.25.  We take every caustic that corresponded to a critical curve with an Einstein radius larger than 1.5 times the resolution of the final images.  The Einstein radius is estimated here and in all that follows as $R_{\rm ein}=\sqrt{A_{\rm ein}/\pi}$ where $A_{\rm ein}$ is the angular area within the critical curve.
 
@@ -245,7 +246,6 @@ By chance one of the original KiDS images appears to have been a lens.  When an 
 \section{The Entries}
 \label{sec:entries}
 
-There were 24 valid entries into the challenge.  They are listed in Table~\ref{table:entries}.  There were a variety of different methods used and participants come from a variety of different backgrounds, most were professional astronomers, but there were also entries from researchers outside of the field.  
 
 \begin{table*}
 \centering
@@ -286,7 +286,9 @@ There were 24 valid entries into the challenge.  They are listed in Table~\ref{t
 \section{lens finding methods}
 \label{sec:methods}
 
-This section contains short descriptions of the lens finding methods that were used in 
+There were 24 valid entries into the challenge.  They are listed in Table~\ref{table:entries}.  There were a variety of different methods used and participants come from a variety of different backgrounds, most were professional astronomers, but there were also entries from researchers outside of the field.  
+
+The following sections contain short descriptions of the lens finding methods that were used in 
 the challenge.  Each subsection refers to a team which gave a separate entry.  We have grouped the 
 methods into four categories according to the type of method used.
 
@@ -431,10 +433,10 @@ classifier that we used to evaluate the competition data.
 Since Convolutional Neural Networks (CNNs) are central to many of the methods that will be described later, here we provide a brief general description of them.
 A CNN \citep{Fukushima1980,Lecun1998} is a multi-layer feed-forward neural network model, which is particularly well-suited for processing natural images. With the very recent advances of the \textit{Deep Learning} framework \citep{Lecun2015}, models based on CNN architectures have reached or even surpassed human accuracy in image classification tasks \citep{He2015a}.
 
-The fundamental building block of a CNN is the \textit{convolutional layer}. This element applies a set of convolution filters on an input image to produce a series of so-called \textit{feature maps}. The coefficients of these filters are free parameters that are learned by the model. We will use the notation 
-$n \times n - n_c$ to denote a convolutional layer using filters of size $n \times n$ pixels and outputting $n_c$ feature maps.  In typical architectures, the size of these convolution filters is kept small (i.e. 3x3 or 5x5 pixels) to limit the complexity of the model. 
+The fundamental building block of a CNN is the \textit{convolutional layer}. This element applies a set of convolution filters on an input image to produce a series of so-called \textit{feature maps}. The coefficients of these filters are free parameters that are learned by the model. The notation 
+$n \times n - n_c$ to denote a convolutional layer using filters of size $n \times n$ pixels and outputting $n_c$ feature maps will be used.  In typical architectures, the size of these convolution filters is kept small (i.e. 3x3 or 5x5 pixels) to limit the complexity of the model. 
 
-Similarly to conventional fully-connected neural networks, convolution layers are typically followed  by an element-wise activation function, which allows for the modeling of complex functional forms  by introducing non-linearities in the model.  Classical choices  for  activation functions  include the sigmoid-shaped logistic  function (or just sigmoid) $f(x) = 1/ (1  + \exp(-x))$ or the hyperbolic tangent function $f(x) = \tanh(x)$. However, much of the success of Deep Learning is due to the  introduction of activation functions that do not saturate, allowing for the  efficient training  of very deep architectures. The most common choice in modern deep learning models  is the simple ReLU activation (for rectified linear unit) \citep{Nair2010} defined as $f(x) = \max(x, 0 )$. A closely related  common alternative is the ELU activation (for Exponential Linear Unit) \citep{2015arXiv151107289C} defined as 
+Similarly to conventional fully-connected neural networks, convolution layers are typically followed  by an element-wise activation function, which allows for the modeling of complex functional forms  by introducing non-linearities in the model.  Classical choices  for  activation functions  include the sigmoid-shaped logistic  function (or just sigmoid) $f(x) = 1/ (1  + \exp(-x))$ or the hyperbolic tangent function $f(x) = \tanh(x)$. However, much of the success of Deep Learning is due to the  introduction of activation functions that do not saturate (become very close to one with very small derivatives), allowing for the  efficient training  of very deep architectures. The most common choice in modern deep learning models  is the simple ReLU activation (for rectified linear unit) \citep{Nair2010} defined as $f(x) = \max(x, 0 )$. A closely related  common alternative is the ELU activation (for Exponential Linear Unit) \citep{2015arXiv151107289C} defined as 
 \begin{equation}
 	f(x ) = \begin{cases}
     x & \text{if } x\geq 0\\
@@ -453,13 +455,13 @@ For a binary classification problem such as the one involved in strong lens dete
 \end{equation}
 where $N$ is the number of training instances, $y \in \{0,1\}$ is the true class of the image and $\hat{y} \in [0,1]$ is the class probability predicted by the model. This optimization is usually performed by a Stochastic Gradient Descent (SGD) algorithm or its variants (e.g. ADAM \citep{Kingma_2014}, Adagrad \citep{duchi12adaptive}, RMSprop \citep{Tieleman12RMSProp}, or accelerated gradients \citep{nesterov83method}). SGD updates the model iteratively by taking small gradient steps over randomly selected subsamples of the training set (so called \textit{mini-batches}). All the CNN-based methods presented in this work rely on the ADAM optimisation algorithm, which also uses past gradients from previous iterations to adaptively estimate lower-order moments. Empirically it has been found that in many problems ADAM converges faster than SGD \citep{Ruder16overview}.
 
-To avoid overfitting in neural networks, we used the Dropout regularisation technique \citep{2012arXiv1207.0580H,JMLR:v15:srivastava14a}. During training, we randomly drop a certain percent of neurones and their connections from the neural
-network. This regularisation technique reduces overfitting  by preventing complex co-adaptations of neurones on training data. 
+Neural networks often suffer from overfitting to the training set.  A common way to mitigate this is to use a regularisation scheme.  For example, the Dropout regularisation technique \citep{2012arXiv1207.0580H,JMLR:v15:srivastava14a}, were a certain percentage of the neurones and their connections are  randomly drop  from the neural network. This regularisation techniques reduces overfitting  by preventing complex co-adaptations of neurones on training data. 
 
-Training multi-layer neural networks with gradient descent based approaches can be very challenging. One of the main reasons behind this is the effect of \textit{vanishing gradients}: it has been empirically observed that in many multi-layer neural networks the gradients in higher-level layers often become too small to be effective in gradient descent based optimisation. Another difficulty is that the distribution of each layers inputs changes during training as the parameters of the previous layers change. These issues make difficult to find the best learning rates.
+Training multi-layer neural networks with gradient descent based approaches can be very challenging. One of the main reasons behind this is the effect of \textit{vanishing gradients}: it has been empirically observed that in many multi-layer neural networks the gradients in higher-level layers often become too small to be effective in gradient descent based optimisation. Another difficulty is that the distribution of each layers inputs changes during training as the parameters of the previous layers change. These issues make it difficult to find the best learning rates.
 
-To address these challenges, we use batch normalisation layers \citep{batch_norm}: Let the activities of a given neurone in a mini-batch be denoted by $x_1,\ldots,x_m$. The batch normalisation layers i) calculate the empirical mean ($\mu = \frac{1}{m}\sum_{i=1}^m x_i $) and variance ($\sigma^2 = \frac{1}{m}\sum_{i=1}^m (x_i-\mu)^2 $) of the neural activities using the mini-batch data, ii) standardise the neurone activities to make them zero mean with variance one, that is $\hat x_i = (x_i-\mu)/\sigma$, iii) linearly transform these activities with adjustable parameters $\beta, \gamma \in \mathbb{R}$: $y_i=\gamma\hat x_i +\beta$. Here $y_i$ denotes the output after applying the batch normalisation layer on the neurone with activities $x_i$. It has been empirically demonstrated that batch normalisation can often accelerate the training procedure and help mitigate the above described challenges.
+Batch normalisation layers \citep{batch_norm} are one way of addressing these challenges.  Let the activities of a given neurone in a mini-batch be denoted by $x_1,\ldots,x_m$. The batch normalisation layers i) calculate the empirical mean ($\mu = \frac{1}{m}\sum_{i=1}^m x_i $) and variance ($\sigma^2 = \frac{1}{m}\sum_{i=1}^m (x_i-\mu)^2 $) of the neural activities using the mini-batch data, ii) standardise the neurone activities to make them zero mean with variance one, that is $\hat x_i = (x_i-\mu)/\sigma$, iii) linearly transform these activities with adjustable parameters $\beta, \gamma \in \mathbb{R}$: $y_i=\gamma\hat x_i +\beta$. Here $y_i$ denotes the output after applying the batch normalisation layer on the neurone with activities $x_i$. It has been empirically demonstrated that batch normalisation can often accelerate the training procedure and help mitigate the above described challenges.
 
+There are many variations on these techniques and concepts some of which are represented in the following descriptions of particular methods.  
 %\fl{Missing components:
 %\begin{itemize}
 %\item dropout
@@ -735,7 +737,8 @@ Since only about one in a thousand objects will be lenses (perhaps somewhat more
 
 The {\bf TPR$_0$} will be defined as the highest TPR reached, as a function of $p$ threshold, before a single false positive occurs in the test set of 100,000 cases.  This is the point were the ROC meets the FPR = 0 axis.  This quantity highly penalizes classifiers with discrete ranking which often get TPR$_0$ = 0 because their highest classification level is not conservative enough to eliminate all false positives.  We also define {\bf TPR$_{10}$} which is the TPR at the point were less than ten false positives are made.  If the TP rate is boosted from the FPR by a factor of 1,000 in a realistic data set this would correspond to about a 10\% contamination.
 
-In addition to these considerations, the performance of a classifier is a function of many characteristics of the lens system.  It might be that one classifier is good at finding systems with large Einstein radii and incomplete arcs, but not as good at finding small complete Einstein rings that are blended with the light of the lens galaxy.  Also a lens may have a source that is too faint to be detected by any algorithm or is too far from the lens to be very distorted, but will be classified as a lens in the test dataset \red{How could this latter happen? For a lens to be classified as a lens, it should exceed a minimum magnification threshold}.   We want to include these objects because we want to test the limits of the classifiers.  As we will see, if you restrict your objectives to detecting only lensed images with surface brightness above threshold, for example, the "best" algorithm might change and the TPR will change.  For this reason we plot the AUROC, TPR$_0$ and TPR$_{10}$ as a function of several variables for all the entries.  This is done by removing all the lenses that do not exceed the threshold and then recalculating  these quantities, the number of non-lenses remains the same.
+In addition to these considerations, the performance of a classifier is a function of many characteristics of the lens system.  It might be that one classifier is good at finding systems with large Einstein radii and incomplete arcs, but not as good at finding small complete Einstein rings that are blended with the light of the lens galaxy.  Also a lens may have a source that is too faint to be detected by any algorithm or is too far from the lens to be very distorted, but will be classified as a lens in the test dataset.    We do not impose a definitive arc/ring magnification, brightness or surface brightness limit for a system to be considered a lens because we 
+want to include these objects because we want to test the limits of the classifiers.  As we will see, if you restrict your objectives to detecting only lensed images with surface brightness above threshold, for example, the "best" algorithm might change and the TPR will change.  For this reason we plot the AUROC, TPR$_0$ and TPR$_{10}$ as a function of several variables for all the entries.  This is done by removing all the lenses that do not exceed the threshold and then recalculating  these quantities, the number of non-lenses remains the same.
 
 \subsection{Performance of methods}
 \label{sec:performance}

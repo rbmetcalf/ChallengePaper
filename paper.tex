@@ -201,7 +201,7 @@ The visible galaxies associated with the lens must also be simulated. There  are
 \begin{align}
 \log( n_s )= 0.4 \log\left[ {\rm max}\left(\frac{B}{T},0.03\right)\right] + 0.1 x 
 \end{align}
-where $\frac{B}{T}$ is the bulge to total flux ratio and $x$ is a uniform random number between -1 and 1.  This approximately reproduces the observed correlation between these quantities \red{REF?}. 
+where $\frac{B}{T}$ is the bulge to total flux ratio and $x$ is a uniform random number between -1 and 1.  This very approximately reproduces the observed correlation between these quantities \citep{2001AJ....121..820G}. 
 
 In addition to the basic disk and bulge models we introduce some spiral arms.  The surface brightness of 
 the disks are given by
@@ -255,7 +255,7 @@ By chance one of the original KiDS images appears to have been a lens.  When an 
   \hline
   1 & AstrOmatic & Space-Based & Bertin   \\ 
   2 & GAHEC IRAP & Space-Based & Cabanac  \\ 
-  3 & \red{CAS Swinburne Melb} & Ground-Based & Jacobs   \\ 
+  3 & CAS Swinburne Melb$^\dagger$& Ground-Based & Jacobs   \\ 
   4 & ALL-star & Ground-Based & Avestruz, N. Li \& Lightman  \\ 
   5 & Manchester1 & Space-Based & Jackson \& Tagore  \\ 
   6 & CMU-DeepLens-Resnet-Voting & Space-Based & Ma, Lanusse \& C. Li  \\ 
@@ -263,7 +263,7 @@ By chance one of the original KiDS images appears to have been a lens.  When an 
   8 & CMU-DeepLens-ResNet & Space-Based & Francois Lanusse, Ma, C. Li \& Ravanbakhsh \\ 
   9 & CMU-DeepLens-Resnet-Voting & Ground-Based & Ma, Lanusse \& C. Li   \\ 
   10 & YattaLensLite & Space-Based &  Sonnenfeld  \\ 
-  11 & \red{NeuralNet2} & Space-Based &  Davies  \\ 
+  11 & NeuralNet2$^\dagger$ & Space-Based &  Davies  \\ 
   12 & CAST & Ground-Based &  Roque De Bom, Valent\'{\i}n \&  Makler  \\ 
   13 & CMU-DeepLens-ResNet-ground3 & Ground-Based &  Lanusse, Ma, Ravanbakhsh \& C. Li \\ 
   14 & GAMOCLASS & Space-Based &  Huertas-Company, Tuccillo, Velasco-Forero \& Decenci\`{e}re \\ 
@@ -278,6 +278,7 @@ By chance one of the original KiDS images appears to have been a lens.  When an 
   23 & YattaLensLite & Ground-Based & Sonnenfeld   \\ 
   24 & Kapteyn Resnet & Space-Based & Petrillo, Tortora, Verdoes Kleijn, Koopmans \& Vernardos \\ 
    \hline
+   & & &$\dagger$ No description was submitted for this paper.
 \end{tabular}
 \caption{Entries to the challenges.}
 \label{table:entries}
@@ -671,7 +672,7 @@ The architecture presented above is the one that lead to our best results in bot
 The first variant introduced several data-augmentation schemes, including the ones mentioned above and the addition of Gaussian noise to the input images. We found however that the introduction of noise was not necessary as the other methods were enough to prevent overfitting. 
 The second variant was used to explore a voting strategy between three different models. These models differed by the type of residual blocks (bottleneck vs wide) and by their handling of missing pixels (setting to 0 or to the median value of the image). The predictions of the best 2 out of 3 models were then averaged to produce the final classification probability.
 
-\red{Barnabas: would be nice to have a figure about the resnet architecture}
+%\red{Barnabas: would be nice to have a figure about the resnet architecture}
 
 Our model is implemented using the \texttt{Theano}\footnote{\url{http://deeplearning.net/software/theano/}} and \texttt{Lasagne}\footnote{\url{https://github.com/Lasagne/Lasagne}} libraries. On an Nvidia Titan Xp GPU, our full training procedure requires approximately 6 hours on the ground-based challenge, but classification of the whole testing set is performed in a couple of minutes. Finally, in the interest of reproducible research, our code is made publicly available on GitHub\footnote{\url{https://github.com/McWilliamsCenter} }.
 This repository also contains a notebook detailing how to reproduce our challenge submission.

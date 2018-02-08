@@ -20,7 +20,7 @@
 \def\nat{Nature}
 
 
-\usepackage{newtxtext,newtxmath}
+%\usepackage{newtxtext,newtxmath}
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
 \usepackage{hyperref}
@@ -617,7 +617,7 @@ In order to increase the size of the training set and make the model invariant t
 \item The images were randomly shifted of 0.02 times the total width of the image.
 \item Random horizontal and vertical flips of the images
 \end{itemize}
-During the training we initialize the weights of our model with random normal values and we warm up the training \citet{Huang_2016} of the CNN for 25 epochs, using an exponential decay rate ($10^{-6}$) and a staring learning rate of Î± = 0.001. Then the network is trained using an early stopping method, and for a maximum number of 300 epochs. The early stopping method is an effective method to prevent overfitting and consists in stopping the training if a monitored quantity does not improve for a fixed number (called \textit{patience}) of training epochs. The quantity that we monitored was the \textit{accuracy} of the classification of the validation sample. The best architecture was trained over 220 epochs with a parameter of patience equal to 20.
+During the training we initialize the weights of our model with random normal values and we warm up the training \citet{Huang_2016} of the CNN for 25 epochs, using an exponential decay rate ($10^{-6}$) and a staring learning rate of  0.001. Then the network is trained using an early stopping method, and for a maximum number of 300 epochs. The early stopping method is an effective method to prevent overfitting and consists in stopping the training if a monitored quantity does not improve for a fixed number (called \textit{patience}) of training epochs. The quantity that we monitored was the \textit{accuracy} of the classification of the validation sample. The best architecture was trained over 220 epochs with a parameter of patience equal to 20.
 We implemented our code in the Keras framework \citep{Chollet_2015} on top of Theano \citep{Bastien_2012}.
 Our architecture converges with a classification accuracy of 91\% on the validation sample. We further evaluated the performance of our classifier calculating the ROC curve of the classifier, i.e. the True Positive Rate (TPR) against the False Positive Rate. As shown in Fig. \ref{Fig2_gamoclass}, we reach a TPR higher than the 90\% with a FPR < 8\%.
 

@@ -1,0 +1,129 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{R.B. Metcalf}
+\begin{document}
+Referee Report
+
+{\bf 
+Overall, this work is an important milestone towards exploring the usefulness of strong gravitational lenses in many applications in astrophysics, and after significant copy-editing and clarifications should be published.  I particularly agree that the emphasis on attempting to understand the most successful lens-candidate identification approaches and on the role of false positives is important. 
+
+The submitted manuscript is full of incorrectly assigned or compiled references.  The Sections’ organizational structure is incomplete and mis-referenced. Furthermore, the paper seems not to have been proof-read carefully as there are many minor grammatical and typesetting errors that are avoidable and distracting.  This includes typos within equations.  All of these must be corrected and scrupulously proof-read for re-submission.  
+
+The long-term goal of this collaboration of maturing algorithms for delivering automated gravitational lens detection across datasets as diverse as Euclid, LSST, and SKA, is timely and an important effort for the community.  Developing such flexible infrastructure is going to be challenging, and as the authors themselves point out, the realism of the simulated datasets will be an essential element. To that end, it makes sense that the present work gives a taste of what this may look like, by considering two parallel efforts in tandem, focusing on the single-band space-based Euclid and the multiple-band ground-based Kilo-Degree Survey (KiDS) datasets. 
+}
+
+{\bf
+The paper seems to have been written towards an audience that is already closely familiar with gravitational lensing topics, which misses an opportunity to have a broader impact. For example, in stating “These take the form of multiple images of a quasar and Einstein rings surrounding a galaxy and of highly distorted arcs seen through galaxy groups and clusters.” conflates several lens geometries and situations in a way that e.g. a student would need to disentangle. 
+}
+
+The paper is generally targeted toward astronomers, but the point is taken.  The first paragraph of the introduction has been expanded to better describe gravitational lensing.  We do not wish to take up to much space describing the whole field when this can be read about elsewhere.
+
+{\bf
+In the abstract (but nowhere else it seems) there is a summary result that “several methods are able to identify upwards of half the lenses”.  It seems that this is a statement of significance or interpretation and so it seems incomplete.  Or is it simply a statement of fact? 
+}
+
+This is referred to in paragraph 4 of section 6.2.  It is a conclusion drawn from figures 9 and 10.  We are not sure what the referee is asking here.
+
+{\bf
+What was the rationale for the 20.000 size of the training sets and the choice of the 101x101 pixels? 
+}
+
+No particularly rational reason.  The 101x101 pixels originally was the size of some early stage cutouts from KIDS.  20,000 was a convenient number for processing time and storage reasons.  We have added a comment on this.
+
+{\bf
+The challenge dataset is stated as having 100.000 objects, and in one place only there is a reference that in “the case of the multi-band ground-based set this was 400,000 images.”  There’s never another reference to the 400.000, however, so this setup description is confusing or incomplete. 
+}
+
+It is clearly stated several times that there were 4 bands in the ground based set which makes 400,000 images for 100,000 objects.
+
+{\bf
+Understanding how the simulation set was prepared is significant for understanding the entire project and its results.  The Millennium simulation was used to identify galaxies.  The generally available Millennium catalog is at redshift zero, rather than at the various lens-plane redshifts given.  If some epoch-matching was made, please explain this, or justify the use of redshift-zero galaxy properties.  I do note a description of the adopted catalog being projected to a series of twenty lens planes with the total deflection calculated through a sum, but remain unclear about the process.  I also do not follow what “A NFW profile is fit to the [total mass, size, and half mass radius] parameters” actually means for this application.  As galaxies identified within Millennium were used, these are generally sub-critical to strong lensing, unless an additional central baryonic steepening has been applied. Please clarify.  
+}
+
+We did not use just the zero redshift galaxies.  The details of the light-cone construction is given in Overzier, et al. 2013 MNRAS 428, 778.  They used a semi-analytic model to populate the halos with galaxies.  The galaxies are accounted for in both light (section 3 paragraph 8 through 11, formerly 7 through 10) and mass 
+(section 3 paragraphs 12 and 13, formerly 11-12).  We have tried to make this clearer  by changing the first paragraph of the section.
+
+{\bf
+In the Introduction’s description of imaging searches for lenses, references to past work is quite incomplete, and it would be appreciated to have these developed further.  For example, while there is a passing reference to the Marshall et al HAGGLeS work, this is arguably a significant precursor to the present paper so it is surprising that it is not discussed at all.  I think that giving depth of context to readers is critical for this paper. 
+}
+
+We have added a little more discussion of this paper in the introduction and conclusion.
+
+{\bf
+The dismissal of spectroscopic surveys for lenses seems flippant in addition to being incomplete. There are several spectroscopic lens projects after SLACS, and if the spectroscopic approach does return “well defined and pure” samples, it seems that at least some reference to the potential of DESI and PFS is expected to be in comparison to imaging surveys. 
+}
+
+We added a reference to these instruments in the introduction.
+
+{\bf
+It is good to see arc finders included in this challenge, though there is scant quantitative information about how the analysis was set up with these techniques to be able to judge or comment on them. In a comment related to the CNNs’ below, what are development or advancement areas that the Arc Finder community already knew, or learned based on this work, that will be addressed in the future?  
+}
+
+?????
+
+{\bf
+The Machine Learning / Support Vector Machine approaches seem clear enough, though these sections also include spare or undefined information.  I happen to know that AUC means area under a curve and how it pertains to the ROC exercise at hand, but this is quite mysterious and incomplete as presented. This can and must be improved significantly in the re-editing of the manuscript.}
+
+Yes, unfortunately the ROC is not defined until section 6.1.  We have put in a reference to this section so that the reader knows where to find the definition if they don't know it.
+
+{\bf Incidentally, the “AUC of 0.88 for the space set and 0.95 for the ground set” stated in section 5.3.1 are different numbers from what are given in Tables 3 \& 4, further casting doubt on the validation of all results here.  
+}
+
+That is the AUC on the training set not the challenge set.
+
+{\bf
+The Convolutional Neural Networks general description is well done.  This is a complex and rich topic that is certainly still developing within astrophysics, and this section gives enough sense of the uncertainty and nuance behind exactly how the network methodologies may be set up for particular analyses.  Note that “neurones” are “neurons”, suggesting that additional care is needed in verifying the presentation in this section.   
+}
+
+"neurones" is the British spelling.  The spelling has been standardized to "neurons" and "neuron".
+
+{\bf
+How the training sets are handled by each CNN approach is very interesting reading, and there is a great deal to digest about the choices for convolution layers, neuron numbers, and classification metrics.  The variety of how rotation/reflection/spatial transformations of the training sets are treated is interesting, as is the varied use of multiple bands’ images or not.  Given the focus on CNN methods, the reader may expect some greater discussion after the lens-finding conclusions on what areas of advancement or improvement emerged from this exercise, even at high level.   This is offered as an observation.  
+}
+
+?????
+
+{\bf
+In fact, some of the algorithm descriptions are rather spare in their details, and so difficult to judge or intercompare.  The reader (and this referee) is forced to take much at face value, which perhaps is acceptable for the scope of an “overview” report such as this.  It is a little disappointing, all the same.  A uniform template in the structure of each contributor’s report could have helped mitigate that, so that similar context or informational questions would at least have a chance of being reported.  The additional descriptive detail given by some of the contributors, in particular LASTRO, GAMOCLASS, and CAST are appreciated. 
+}
+
+??????
+
+{\bf
+The receiver operating characteristic (ROC) curve technique is referred to via its acronym in many places in the manuscript without explanation or definition, and even in the Results Section the description is 
+}
+
+Added this.
+
+{\bf
+There is a brief discussion about rare “abnormal” objects including merging and irregular galaxies potentially being “the greatest challenge” for a full realistic application. 
+An accurate representation of these objects is promised for future work. Can the authors elaborate how this may be done? 
+}
+
+We are working on this.  There are several approaches we are considering.  They would 
+involve randomizing existing images.
+
+{\bf
+This referee agrees forcefully with the statement in the Conclusions \& Discussion section that application of SVM and CNN methods have “some danger of over-fitting to the training set”, and that there is enormous weight on how realistic the simulations are.  This discussion draws no conclusions, however, about how confident the community may reasonable expect to become with this or future work, and how to get there.  A brief discussion of this should be included.  
+}
+
+This is a good question and one I don't think was fully answered by the challenge.  You might have 
+thought that visual inspection is the gold standard, but it seems that you can do better.  But maybe 
+that is just over-fitting.  It might be that unsupervised learning techniques have a part to play.  
+
+A little discussion has been added to the conclusion, but any more would be pure speculation.
+
+{\bf
+The overall conclusion or claim that ground-based multi-band data are more successful than low SNR single-band space-based data is a quite strong and even disturbing statement.  The way it is cast here, it seems to imply that we should not bother with space-based (Euclid) data at all for detecting strong lenses.  Is that the ultimate message the authors wish to convey to their audience?  Are there factors of solid angle, depth, or data stability and robustness that may be factors in the near future if not just at present?  The final statement on the importance of colour information for Euclid, whether from the infrared bands that were not presently included or by the combination with other ground-based data, is well done. Is future work planned that will include these dimensions? 
+}
+
+It is true that mono-band space based data might not be a big step up for this purpose, but 
+multi-band data exists and even if it is of lower resolution, as it will be for Euclid, it should 
+make space based searches more successful than ground based ones.  Yes, we are fallowing 
+up with Euclid UV simulations.  We have tried to change this impression by adding a note to the abstract.
+
+\end{document}

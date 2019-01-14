@@ -11,8 +11,11 @@ Referee Report
 {\bf 
 Overall, this work is an important milestone towards exploring the usefulness of strong gravitational lenses in many applications in astrophysics, and after significant copy-editing and clarifications should be published.  I particularly agree that the emphasis on attempting to understand the most successful lens-candidate identification approaches and on the role of false positives is important. 
 
-The submitted manuscript is full of incorrectly assigned or compiled references.  The Sections’ organizational structure is incomplete and mis-referenced. Furthermore, the paper seems not to have been proof-read carefully as there are many minor grammatical and typesetting errors that are avoidable and distracting.  This includes typos within equations.  All of these must be corrected and scrupulously proof-read for re-submission.  
+The submitted manuscript is full of incorrectly assigned or compiled references.  The Sections’ organizational structure is incomplete and mis-referenced. Furthermore, the paper seems not to have been proof-read carefully as there are many minor grammatical and typesetting errors that are avoidable and distracting.  This includes typos within equations.  All of these must be corrected and scrupulously proof-read for re-submission.  }
 
+We acknowledge the poor proof reading of the draft.  There was some miscommunication about responsibilities between the authors.  We have edited the text more carefully and made many small corrections corrections. 
+
+{\bf
 The long-term goal of this collaboration of maturing algorithms for delivering automated gravitational lens detection across datasets as diverse as Euclid, LSST, and SKA, is timely and an important effort for the community.  Developing such flexible infrastructure is going to be challenging, and as the authors themselves point out, the realism of the simulated datasets will be an essential element. To that end, it makes sense that the present work gives a taste of what this may look like, by considering two parallel efforts in tandem, focusing on the single-band space-based Euclid and the multiple-band ground-based Kilo-Degree Survey (KiDS) datasets. 
 }
 
@@ -26,7 +29,7 @@ The paper is generally targeted toward astronomers, but the point is taken.  The
 In the abstract (but nowhere else it seems) there is a summary result that “several methods are able to identify upwards of half the lenses”.  It seems that this is a statement of significance or interpretation and so it seems incomplete.  Or is it simply a statement of fact? 
 }
 
-This is referred to in paragraph 4 of section 6.2.  It is a conclusion drawn from figures 9 and 10.  We are not sure what the referee is asking here.
+This is referred to in paragraph 4 of section 6.2.  It is a conclusion drawn from figures 9 and 10.  It is also mentioned in the first paragraph of the conclusion where we added a reference to the figures it is based on.
 
 {\bf
 What was the rationale for the 20.000 size of the training sets and the choice of the 101x101 pixels? 
@@ -45,7 +48,8 @@ Understanding how the simulation set was prepared is significant for understandi
 }
 
 We did not use just the zero redshift galaxies.  The details of the light-cone construction is given in Overzier, et al. 2013 MNRAS 428, 778.  They used a semi-analytic model to populate the halos with galaxies.  The galaxies are accounted for in both light (section 3 paragraph 8 through 11, formerly 7 through 10) and mass 
-(section 3 paragraphs 12 and 13, formerly 11-12).  We have tried to make this clearer  by changing the first paragraph of the section.
+(section 3 paragraphs 12 and 13, formerly 11-12).  We have tried to make this clearer  by changing the first paragraph of the section 3.  The NFW profile has three free parameters which can be taken to be the mass, radius and concentration.  Since many of the halos are substructures the size is not always the virial radius.
+This parameters are fit so that the mass, size and half mass radius are the same as the ones given in the halo catalog.
 
 {\bf
 In the Introduction’s description of imaging searches for lenses, references to past work is quite incomplete, and it would be appreciated to have these developed further.  For example, while there is a passing reference to the Marshall et al HAGGLeS work, this is arguably a significant precursor to the present paper so it is surprising that it is not discussed at all.  I think that giving depth of context to readers is critical for this paper. 
@@ -79,19 +83,16 @@ That is the AUC on the training set not the challenge set.
 The Convolutional Neural Networks general description is well done.  This is a complex and rich topic that is certainly still developing within astrophysics, and this section gives enough sense of the uncertainty and nuance behind exactly how the network methodologies may be set up for particular analyses.  Note that “neurones” are “neurons”, suggesting that additional care is needed in verifying the presentation in this section.   
 }
 
-"neurones" is the British spelling.  The spelling has been standardized to "neurons" and "neuron".
+"neurones" is the British spelling.  The spelling has been standardized to "neurons" and "neuron". 
 
 {\bf
 How the training sets are handled by each CNN approach is very interesting reading, and there is a great deal to digest about the choices for convolution layers, neuron numbers, and classification metrics.  The variety of how rotation/reflection/spatial transformations of the training sets are treated is interesting, as is the varied use of multiple bands’ images or not.  Given the focus on CNN methods, the reader may expect some greater discussion after the lens-finding conclusions on what areas of advancement or improvement emerged from this exercise, even at high level.   This is offered as an observation.  
-}
 
-?????
-
-{\bf
 In fact, some of the algorithm descriptions are rather spare in their details, and so difficult to judge or intercompare.  The reader (and this referee) is forced to take much at face value, which perhaps is acceptable for the scope of an “overview” report such as this.  It is a little disappointing, all the same.  A uniform template in the structure of each contributor’s report could have helped mitigate that, so that similar context or informational questions would at least have a chance of being reported.  The additional descriptive detail given by some of the contributors, in particular LASTRO, GAMOCLASS, and CAST are appreciated. 
 }
 
-??????
+Yes, this was difficult to pinpoint.  The very large number of possible CNN configurations and the lack of overlaps between the methods tested makes it hard to conclude what specifically about architecture of one CNN makes it better than another.   The performance of a CNN will also depend critically on the nature of the data.  The best CNN for one data set might not be the best one for another data set so they will need to be developed for specific surveys using real data in the training process.  This study can be 
+viewed as an exploration of how properties of the data (noise, pixel size, psf, etc.) and the data simulations affect lens finding rather than a systematic study of how to build the best lens finder.
 
 {\bf
 The receiver operating characteristic (ROC) curve technique is referred to via its acronym in many places in the manuscript without explanation or definition, and even in the Results Section the description is 

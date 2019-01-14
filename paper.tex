@@ -1,5 +1,6 @@
 %\documentclass[onecolumn]{aa}
 \documentclass{aa}
+%\documentclass[referee]{aa}
 
 \usepackage{graphicx}
 \usepackage{float}
@@ -236,7 +237,7 @@ The participants were free to download these sets and train their algorithms on 
 
 The challenge was opened on November 25, 2016 and closed on February 5, 2017.
 
-\section{the simulations}
+\section{The simulations}
 \label{sec:simulation}
 
 Creating the mock images started with a cosmological N-body simulation, in this case the Millennium simulation \citep{2009MNRAS.398.1150B}.   A catalog of dark matter halos and galaxies  within a light-cone was constructed within the Millennium Observatory project \citep{2013MNRAS.428..778O}.   The challenge sets were based on a 1.6 sq.deg. light cone extending out to redshift $z=6$ using all the simulation snapshots.  The halos were found with a friends-of-friends algorithm and characterised by a total mass, size and half mass radius.  They included subhalos of larger halos.  The halos where populated with galaxies based on their merger history using the semi-analytic model  (SAM) of \cite{2011MNRAS.413..101G}.
@@ -336,7 +337,7 @@ By chance one of the original KiDS images appears to have been a lens.  When an 
 \label{table:entries}
 \end{table*}
 
-\section{lens finding methods}
+\section{Lens finding methods}
 \label{sec:entries}
 
 There were 24 valid entries into the challenge which are listed in Table~\ref{table:entries}.  There were a variety of different methods used and participants came from a variety of different backgrounds, most were professional astronomers, but there were also entries from researchers outside of the field.  
@@ -776,7 +777,7 @@ Our lens finder included wavelet prefiltering. The image was convolved with the 
 \mathcal{L} = \sum_{i=1}^{n} \big[ y_{i}$ $log(p_{i}) + (1 $ - $ y_{i})$ $log(1 $ - $ p_{i}) \big]
 \end{equation} where $\mathcal{L}$ is the loss function, $n$ is the number of inputs, $y_{i}$ is the true value of the $i^{th}$ input , and $p_{i}$ is the predicted value for the $i^{th}$ input from the network. A perfect loss of $0$ was generated once every predicted value matched the true value for every input. The network was made and trained in Python 2.7 using the open-source libraries \textsc{theano} and \textsc{keras}\footnote{\href{https://github.com/keras-team/keras}{\tt https://github.com/keras-team/keras}}. A more developed version of our lens finder will appear in Davies, Bromley and Serjeant (in preparation).
 
-\section{results}
+\section{Results}
 \label{sec:results}
 
 In this section we summarize the analysis of the submissions.  In section~\ref{sec:figure_of_merit} we discuss how to judge a classifier in this particular case and define some metrics of success.  The results for all the submissions are given in section~\ref{sec:performance}.
@@ -972,7 +973,7 @@ The two human inspectors, NJ and AT, got significantly different scores on the g
 \section{Conclusions \& discussion}
 \label{sec:conclusion}
 
-A large variety of lens finding methods were tested on simulated images that were developed separately.    We found that some methods could recover more than 50\% of the lenses above a lensed image brightness or size threshold without a single false positive out of 100,000 candidates.  If the data closely resembled the simulations we would already have reasonably good methods whose efficiency and biases can be quantitatively characterized.
+A large variety of lens finding methods were tested on simulated images that were developed separately.    Based on figures~\ref{fig:einstein_space} and \ref{fig:einstein_ground}, we found that some methods could recover more than 50\% of the lenses above a lensed image brightness or size threshold without a single false positive out of 100,000 candidates.  If the data closely resembled the simulations we would already have reasonably good methods whose efficiency and biases can be quantitatively characterized.
 
 We have done a fairly good job of determining that lenses can be identified in a population of fairly "normal" galaxies.  It is the rare "abnormal" objects that pose the greatest challenge.  When real KiDS data was used in the simulations the classifiers were all less accurate and it was only human inspection that found the one jackpot lens (a double Einstein ring with two background sources) in the data.  Things like ring galaxies, tidal tails in merging galaxies and irregular galaxies can be mistaken for lenses and were not well represented in the simulated data.  Accurately reproducing these objects will be an objective of future work.  This might be done by including more real images in the challenge or images based on real images with some random elements added.
 

@@ -267,7 +267,7 @@ where $\frac{B}{T}$ is the bulge to total flux ratio and $x$ is a uniform random
 In addition to the basic disk and bulge models we introduce some spiral arms.  The surface brightness of 
 the disks are given by
 \begin{align}
-S(\theta,r) &= e^{-r/R_h} \left( 1 + A \cos(N_a\theta + \phi_r \right) ~, \\
+S(\theta,r) &= e^{-r/R_h} \left[ 1 + A \cos(N_a\theta + \phi_r ) \right]~, \\
 \phi_r &= \alpha\log(2 r/ R_h) + \phi_d \nonumber
 \end{align}
 where $R_h$ is the scale height of the disk.  The phase angle of the arms, $\phi_d$, is chosen at random.  The parameters $A$, $\alpha$ and $N_a$ are chosen from distributions that are judged by eye to produce realistic 
@@ -306,38 +306,37 @@ By chance one of the original KiDS images appears to have been a lens.  When an 
 
 \begin{table*}
 \centering
-\begin{tabular}{rlll}
+\begin{tabular}{rllll}
   \hline
- & Name & type & authors \\ 
+ & Name & type & authors & section \\ 
   \hline
-  1 & AstrOmatic & Space-Based & Bertin   \\ 
-  2 & GAHEC IRAP & Space-Based & Cabanac  \\ 
-  3 & CAS Swinburne Melb$^\dagger$& Ground-Based & Jacobs   \\ 
-  4 & ALL-star & Ground-Based & Avestruz, N. Li \& Lightman  \\ 
-  5 & Manchester1 & Space-Based & Jackson \& Tagore  \\ 
-  6 & CMU-DeepLens-Resnet-Voting & Space-Based & Ma, Lanusse \& C. Li  \\ 
-  7 & Manchester SVM & Ground-Based & Hartley \& Flamary  \\ 
-  8 & CMU-DeepLens-ResNet & Space-Based & Francois Lanusse, Ma, C. Li \& Ravanbakhsh \\ 
-  9 & CMU-DeepLens-Resnet-Voting & Ground-Based & Ma, Lanusse \& C. Li   \\ 
-  10 & YattaLensLite & Space-Based &  Sonnenfeld  \\ 
-  11 & NeuralNet2 & Space-Based &  Davies  \\ 
-  12 & CAST & Ground-Based &  Roque De Bom, Valent\'{\i}n \&  Makler  \\ 
-  13 & CMU-DeepLens-ResNet-ground3 & Ground-Based &  Lanusse, Ma, Ravanbakhsh \& C. Li \\ 
-  14 & GAMOCLASS & Space-Based &  Huertas-Company, Tuccillo, Velasco-Forero \& Decenci\`{e}re \\ 
-  15 & LASTRO EPFL (CNN) & Space-Based & Geiger, Sch\"{a}fer \& Kneib \\ 
-  16 & Manchester SVM & Space-Based &  Hartley  \& Flamary\\ 
-  17 & CMU-DeepLens-ResNet-aug & Space-Based & Ma,  Lanusse, Ravanbakhsh \& C. Li \\ 
-  18 & LASTRO EPFL & Ground-Based & Geiger, Sch\"{a}fer \& Kneib   \\ 
-  19 & CAST & Space-Based & Bom, Valent\'{\i}n \& Makler  \\ 
-  20 & AstrOmatic & Ground-Based & Bertin  \\ 
-  21 & All-now & Space-Based & Avestruz, N. Li \& Lightman   \\ 
-  22 & Manchester-NA2 & Ground-Based & Jackson \& Tagore  \\ 
-  23 & YattaLensLite & Ground-Based & Sonnenfeld   \\ 
-  24 & Kapteyn Resnet & Space-Based & Petrillo, Tortora, Verdoes Kleijn, Koopmans \& Vernardos \\ 
+  1 & AstrOmatic & Space-Based & Bertin  & \ref{sec:AstrOmatic}  \\ 
+  2 & GAHEC IRAP & Space-Based & Cabanac & \ref{sec:IRAP} \\ 
+  3 & CAS Swinburne Melb & Ground-Based & Jacobs   & \ref{sec:CASSwinburne} \\ 
+  4 & ALL-star & Ground-Based & Avestruz, N. Li \& Lightman  & \ref{sec:ALL} \\ 
+  5 & Manchester1 & Space-Based & Jackson \& Tagore  & \ref{sec:manchester} \\ 
+  6 & CMU-DeepLens-Resnet-Voting & Space-Based & Ma, Lanusse \& C. Li  & \ref{sec:CMU_DeepLens} \\ 
+  7 & Manchester SVM & Ground-Based & Hartley \& Flamary  & \ref{sec:Gabor-SVM} \\ 
+  8 & CMU-DeepLens-Resnet & Space-Based & Francois Lanusse, Ma, C. Li \& Ravanbakhsh  & \ref{sec:CMU_DeepLens} \\ 
+  9 & CMU-DeepLens-Resnet-Voting & Ground-Based & Ma, Lanusse \& C. Li  & \ref{sec:CMU_DeepLens} \\ 
+  10 & YattaLensLite & Space-Based &  Sonnenfeld  & \ref{sec:YettaLens} \\ 
+  11 & NeuralNet2 & Space-Based &  Davies \& Serjeant & \ref{sec:NeuralNet2} \\ 
+  12 & CAST & Ground-Based &  Roque De Bom, Valent\'{\i}n \&  Makler  & \ref{sec:CAST} \\ 
+  13 & CMU-DeepLens-Resnet-ground3 & Ground-Based &  Lanusse, Ma, Ravanbakhsh \& C. Li  & \ref{sec:CMU_DeepLens} \\ 
+  14 & GAMOCLASS & Space-Based &  Huertas-Company, Tuccillo, Velasco-Forero \& Decenci\`{e}re & \ref{sec:GAMOCLASS} \\ 
+  15 & LASTRO EPFL (CNN) & Space-Based & Geiger, Sch\"{a}fer \& Kneib  & \ref{sec:LASTRO} \\ 
+  16 & Manchester SVM & Space-Based &  Hartley  \& Flamary & \ref{sec:Gabor-SVM} \\ 
+  17 & CMU-DeepLens-Resnet-aug & Space-Based & Ma,  Lanusse, Ravanbakhsh \& C. Li  & \ref{sec:CMU_DeepLens} \\ 
+  18 & LASTRO EPFL & Ground-Based & Geiger, Sch\"{a}fer \& Kneib  & \ref{sec:LASTRO} \\ 
+  19 & CAST & Space-Based & Bom, Valent\'{\i}n \& Makler  & \ref{sec:LASTRO} \\ 
+  20 & AstrOmatic & Ground-Based & Bertin  & \ref{sec:AstrOmatic} \\ 
+  21 & ALL-now & Space-Based & Avestruz, N. Li \& Lightman  & \ref{sec:ALL} \\ 
+  22 & Manchester2 & Ground-Based & Jackson \& Tagore  & \ref{sec:manchester} \\ 
+  23 & YattaLensLite & Ground-Based & Sonnenfeld  & \ref{sec:YettaLens} \\ 
+  24 & Kapteyn Resnet & Space-Based & Petrillo, Tortora, Kleijn, Koopmans \& Vernardos & \ref{sec:KapteynResnet} \\ 
    \hline
-   & & &$\dagger$ No description was submitted for this entry.
 \end{tabular}
-\caption{Entries to the challenges.}
+\caption{Entries to the challenges.  Descriptions of the methods are in the sections listed on the right.}
 \label{table:entries}
 \end{table*}
 
@@ -351,7 +350,8 @@ the challenge.  Each subsection refers to a team which gave a separate entry.  W
 methods into four categories according to the type of method used.   The Receiver Operating Characteristic (ROC) curve and the area under this curve are referred to in these sections.  The ROC is defined in section~\ref{sec:figure_of_merit} where methods for evaluating the entries is discussed.  A reader unfamiliar with the ROC might want to refer to that section.
 
 \subsection{Visual Inspection}
-\subsubsection{Manchester/Manchester1 (Jackson,Tagore)}
+\subsubsection{Manchester1/Manchester2 (Jackson,Tagore)}
+\label{sec:manchester}
 
 All images (a total of 100000) were examined for each of the space- and
 ground-based datasets. This was done by two observers; AT (Amit Tagore) examined 30000
@@ -396,7 +396,8 @@ around 25\% for the space-based images and 20\% for the ground-based.
 These methods seek to identify gravitationally lensed arcs and differentiate between them and 
 other objects such as spiral arms and edge on spirals using their width, colour, curvature and other pre-selected criterion.
 
-\subsubsection{ IRAP (Cabanac)}
+\subsubsection{ GAHEC IRAP (Cabanac)}
+\label{sec:IRAP}
 
 \begin{figure}
  \includegraphics[width=\columnwidth]{figures/arcmethod.pdf}
@@ -408,6 +409,7 @@ Arcfinder \citep{2006astro.ph..6757A,2007AandA...461..813C,2012ApJ...749...38M} 
 For the current strong lensing challenge, arcfinder was tuned to detect long and narrow arcs, and was optimized on a subset of 1000 simulated images with a grid covering a range of elongation windows and arc areas.  A python wrapper allows users to change parameters in a flexible way and run the arcfinder C code from the linux  command line. Arcfinder took a couple of hours to run on the entire dataset with some overheads due to the dataset format. The code is publicly available at https://github.com/rcabanac/arcfinder.
 
 \subsubsection{YattaLens Lite (Sonnenfeld)}
+\label{sec:YettaLens}
 
 YattaLensLite is a simpler version of the algorithm YattaLens \citep{2017arXiv170401585S}, modified to meet the time constraints of the challenge.
 YattaLensLite subtracts a model surface brightness profile describing the lens galaxy from the $g$-band image, then runs SExtractor to detect tangentially elongated or ring-shaped objects, which are interpreted as lensed images.
@@ -424,7 +426,8 @@ In the full version of YattaLens, a lens modeling step is performed to improve t
 
 These are methods that classify the objects by making linear or nonlinear boundaries in a feature space.  The features are properties of the image and are typically chosen by the user with a combination of knowledge, intuition, and trial-and-error.  Using the training set, the optimal boundaries are found according to a criterion that depends on the method.  The machine learns how to use the features best for distinguishing between lenses and non-lenses.
 
-\subsubsection{Gabor-SVM (Hartley, Flamary)}
+\subsubsection{Manchester-SVM (Hartley, Flamary)}
+\label{sec:Gabor-SVM}
 
 A Support Vector Machine (SVM) is a supervised machine learning method which uses labeled training data to determine a classification model (see e.g., \citet{vapnik79estimation}, \citet{Cortes1995} and \citet{Burges1998}). A preprocessing stage first extracts a set of useful features from input samples, before projecting each sample as a vector into a high-, possibly infinite-dimensional space. The model then separates classes of data by maximising the margin between a defining hyperplane and a set of so-called support-vectors at the inner edge of each class. The process of classification is computationally inexpensive since the optimisation depends only on the dot products of the support vector subset. Feature extraction, however,  requires both an extensive exploration of the feature space during the development of a model, and potentially intensive computer resources in order to transform the original samples. Our full method is described in detail in \citet{hartley2017support} and was developed using the Python scikit-learn and scikit-image packages \citep{scikit-learn,scikit-image}.
 
@@ -448,6 +451,7 @@ Our final feature extraction procedure first applied a polar transform to each i
 
 %-------------------------------------------------%
 \subsubsection{ALL (Avestruz, Li, Lightman)}
+\label{sec:ALL}
 %-------------------------------------------------%
 
 The ALL team methodology is detailed in \citet{avestruz_etal17}. The
@@ -526,6 +530,7 @@ There are many variations on these techniques and concepts some of which are rep
 %\end{itemize}}
 
 \subsubsection{AstrOmatic (Bertin)}
+\label{sec:AstrOmatic}
 
 The lens detector is based on a CNN, trained with the provided training datasets. The CNN is implemented in Python, using the TensorFlow framework\footnote{http://www.tensorflow.org/}. Both ground multichannel and space monochannel image classifiers have the exact same CNN architecture.
 
@@ -542,6 +547,7 @@ The CNN weights are initialized to random values using a truncated Gaussian dist
 
 
 \subsubsection{LASTRO EPFL (Geiger, Sch\"{a}fer)}
+\label{sec:LASTRO}
 
 We used a CNN \citep{Fukushima1980,Lecun1998} with a simple architecture of 12 layers (inspired by \citep{symmetry}), see table \ref{tab:architecture}.
 To avoid the problem of the data flow distribution getting out of the comfort zone of the activation functions ("Internal Covariate Shift"), we used a mix of normalization propagation \citep{norm_prop} (without the constraint on the weights but a proper initialization) and batch normalization \citep{batch_norm} (slowly disabled over the iterations).
@@ -619,6 +625,7 @@ Our code is accessible on github\footnote{\url{https://github.com/antigol/lensfi
 
 
 \subsubsection{GAMOCLASS (Tuccillo, Huertas-Company, Velasco-Forero, Decenci\`ere)}
+\label{sec:GAMOCLASS}
 
 \begin{figure*}
   \centering
@@ -650,6 +657,7 @@ Our architecture converges with a classification accuracy of 91\% on the validat
 
 %-------------------------------------------------%
 \subsubsection{CAST (Bom, Valent\'in, Makler)}
+\label{sec:CAST}
 %-------------------------------------------------%
 
 The CBPF Arc Search Team (CAST) tested several arcfinding schemes with CNNs at their core.  
@@ -698,7 +706,7 @@ The area under ROC, in both space based configurations were, in general, smaller
 \end{figure}
 
 \subsubsection{CMU DeepLens (Lanusse, Ma, Li, Ravanbakhsh)}
-
+\label{sec:CMU_DeepLens}
 
 % Francois: This is an attempt at comparing the different CNN-based methods, not sure it's really useful
 %\begin{table*}
@@ -737,6 +745,7 @@ Our model is implemented using the \texttt{Theano}\footnote{\url{http://deeplear
 This repository also contains a notebook detailing how to reproduce our challenge submission.
 
 \subsubsection{Kapteyn Resnet (Petrillo, Tortora, Vernardos, Kleijn, Koopmans) }
+\label{sec:KapteynResnet}
 
 Our lens-finder is based on a CNN, following the strategy adopted recently in \citep{2017arXiv170207675P}. 
 We decide to treat the problem as a three-class classification problem where the classes are \textit{non-lenses}, \textit{clear lenses} and \textit{dubious lenses}. We define the \textit{dubious lenses} as the lenses with lensing features with less than 160 pixels and the \textit{clear lenses} those with more than 160 pixels belonging to the lensed source. This choice is motivated by the fact that specializing the network in recognizing different classes could lead to a more robust classification. In addition, in a hypothetical application of the method to real data from a survey, this could be a way to select the most blatant lenses.  
@@ -750,7 +759,7 @@ and \textsc{Theano}
 The training of the CNN is executed on a GeForce GTX 760 in parallel with the data augmentation performed on the CPU using the \textsc{scikit-image}\footnote{\href{http://scikit-image.org/}{\tt http://scikit-image.org/}} package \citep{van2014scikit}. 
 
 {\bf Architecture}:
-We used the CNN architecture called ResNet described in \citep{he2015deep} with three stacks of residual blocks of 5 layers. 
+We used the CNN architecture called Resnet described in \citep{he2015deep} with three stacks of residual blocks of 5 layers. 
 The output layer is composed by three units. Each unit gives as an output a number between 0 and 1 that represents, respectively, the probability of being a \textit{non-lens}, a \textit{dubious lens}, a \textit{certain lens}.  We then collapsed one of the classes into another to give a binary classification : 0 when a source is classified as a \textit{non-lens} and a 1 when is classified as a \textit{clear lens} or as a \textit{dubious lens}. This choice did not allow for building  a continuous ROC (see section \ref{sec:figure_of_merit})  curve but only a binary one.
 The final submission was produced by averaging the values of the predictions from three CNNs with the same architecture.
 
@@ -775,6 +784,7 @@ The weights of each filter are initialized from a random normal distribution wit
 We use L2-norm regularization with $\lambda= 9 \times 10^{-3}$.
 
 \subsubsection{NeuralNet2 (Davies, Serjeant) }
+\label{sec:NeuralNet2}
 
 Our lens finder included wavelet prefiltering. The image was convolved with the Mallat wavelet with a kernel size of 4 in both the horizontal and vertical directions, then combined and compared to the original image to make the input image;  input image $= \sqrt[]{H^{2}+V^{2}}$. This prefiltering was performed to emphasise the edges in the images. It was found to improve the results compared to the CNN without this pre-filter. The CNN had 2 convolution layers each containing  $3\times3 - 32$ filters, incorporating dropout and max-pooling, and then 3 dense fully-connected layers to classify each image. The network was trained on 18000 of the 20000 training images; training took 15 epochs and was completed once the validation loss was minimised. The training was validated on the remaining 2000 images. Validation loss was calculated using binary cross entropy
 \begin{equation}
@@ -782,6 +792,7 @@ Our lens finder included wavelet prefiltering. The image was convolved with the 
 \end{equation} where $\mathcal{L}$ is the loss function, $n$ is the number of inputs, $y_{i}$ is the true value of the $i^{th}$ input , and $p_{i}$ is the predicted value for the $i^{th}$ input from the network. A perfect loss of $0$ was generated once every predicted value matched the true value for every input. The network was made and trained in Python 2.7 using the open-source libraries \textsc{theano} and \textsc{keras}\footnote{\href{https://github.com/keras-team/keras}{\tt https://github.com/keras-team/keras}}. A more developed version of our lens finder will appear in Davies, Bromley and Serjeant (in preparation).
 
 \subsubsection{CAS Swinburne (Jacobs)}
+\label{sec:CASSwinburne}
 
 Our model is a CNN-based classifier. The architecture of our network was simple, similar to that of AlexNet \citep{krizhevsky_imagenet_2012}, with three 2D convolutional layers (with kernel sizes 11, 5, and 3), and two fully-connected layers of 1024 neurons each. The activation function after each convolutional layer was a ReLU. After each convolution we employed a 3x3 max pooling layer. To avoid over-fitting, we included a dropout layer of 0.5 after each of the two fully-connected layers. We implemented our network using the Keras python framework \citep{Chollet_2015} and Theano \citep{Bastien_2012}.
 
@@ -829,22 +840,22 @@ want to include these "barely lensed" objects to test the limits of the classifi
   \hline
   Name & type & AUROC & TPR$_0$ & TPR$_{10}$ & short description \\ 
   \hline
- CMU-DeepLens-ResNet-ground3 & Ground-Based & 0.98 & 0.09 & 0.45 & CNN \\ 
+ CMU-DeepLens-Resnet-ground3 & Ground-Based & 0.98 & 0.09 & 0.45 & CNN \\ 
   CMU-DeepLens-Resnet-Voting & Ground-Based & 0.98 & 0.02 & 0.10 & CNN \\ 
   LASTRO EPFL & Ground-Based & 0.97 & 0.07 & 0.11 & CNN \\ 
   CAS Swinburne Melb & Ground-Based & 0.96 & 0.02 & 0.08 & CNN \\ 
   AstrOmatic & Ground-Based & 0.96 & 0.00 & 0.01 & CNN \\ 
   Manchester SVM & Ground-Based & 0.93 & 0.22 & 0.35 & SVM / Gabor \\ 
-  Manchester-NA2 & Ground-Based & 0.89 & 0.00 & 0.01 & Human Inspection \\ 
+  Manchester2 & Ground-Based & 0.89 & 0.00 & 0.01 & Human Inspection \\ 
    ALL-star & Ground-Based & 0.84 & 0.01 & 0.02 & edges/gradiants and Logistic Reg. \\ 
    CAST & Ground-Based & 0.83 & 0.00 & 0.00 & CNN / SVM \\ 
    YattaLensLite & Ground-Based & 0.82 & 0.00 & 0.00 & SExtractor \\ 
    LASTRO EPFL & Space-Based & 0.93 & 0.00 & 0.08 & CNN \\ 
-  CMU-DeepLens-ResNet & Space-Based & 0.92 & 0.22 & 0.29 & CNN \\ 
+  CMU-DeepLens-Resnet & Space-Based & 0.92 & 0.22 & 0.29 & CNN \\ 
    GAMOCLASS & Space-Based & 0.92 & 0.07 & 0.36 & CNN \\ 
   CMU-DeepLens-Resnet-Voting & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
   AstrOmatic & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
-   CMU-DeepLens-ResNet-aug & Space-Based & 0.91 & 0.00 & 0.00 & CNN \\ 
+   CMU-DeepLens-Resnet-aug & Space-Based & 0.91 & 0.00 & 0.00 & CNN \\ 
    Kapteyn Resnet & Space-Based & 0.82 & 0.00 & 0.00 & CNN \\ 
    CAST & Space-Based & 0.81 & 0.07 & 0.12 & CNN \\ 
   Manchester1 & Space-Based & 0.81 & 0.01 & 0.17 & Human Inspection \\ 
@@ -859,8 +870,8 @@ want to include these "barely lensed" objects to test the limits of the classifi
 \label{table:AUROC}
 \end{table*}
 
-Table~\ref{table:AUROC} shows the AUROC, TPR$_0$ and TPR$_{10}$ for the entries in order of AUROC and dataset type.  It can be seen that CMU-DeepLens-ResNet-ground3 had the best AUROC for the ground-based set and LASTRO EPFL the best for the space-based set.  The order is different if TPR$_0$ is used to rank the entries as seen in table~\ref{table:TPR0}.  Here Manchester SVM and 
-CMU-DeepLens-ResNet get the best scores.
+Table~\ref{table:AUROC} shows the AUROC, TPR$_0$ and TPR$_{10}$ for the entries in order of AUROC and dataset type.  It can be seen that CMU-DeepLens-Resnet-ground3 had the best AUROC for the ground-based set and LASTRO EPFL the best for the space-based set.  The order is different if TPR$_0$ is used to rank the entries as seen in table~\ref{table:TPR0}.  Here Manchester SVM and 
+CMU-DeepLens-Resnet get the best scores.
 
 \begin{table*}
 \centering
@@ -869,16 +880,16 @@ CMU-DeepLens-ResNet get the best scores.
   Name & type & AUROC & TPR$_0$ & TPR$_{10}$ & short description \\ 
   \hline
  Manchester SVM & Ground-Based & 0.93 & 0.22 & 0.35 & SVM / Gabor \\ 
-  CMU-DeepLens-ResNet-ground3 & Ground-Based & 0.98 & 0.09 & 0.45 & CNN \\ 
+  CMU-DeepLens-Resnet-ground3 & Ground-Based & 0.98 & 0.09 & 0.45 & CNN \\ 
   LASTRO EPFL & Ground-Based & 0.97 & 0.07 & 0.11 & CNN \\ 
    CMU-DeepLens-Resnet-Voting & Ground-Based & 0.98 & 0.02 & 0.10 & CNN \\ 
    CAS Swinburne Melb & Ground-Based & 0.96 & 0.02 & 0.08 & CNN \\ 
    ALL-star & Ground-Based & 0.84 & 0.01 & 0.02 & edges/gradiants and Logistic Reg. \\ 
-   Manchester-NA2 & Ground-Based & 0.89 & 0.00 & 0.01 & Human Inspection \\ 
+   Manchester2 & Ground-Based & 0.89 & 0.00 & 0.01 & Human Inspection \\ 
    YattaLensLite & Ground-Based & 0.82 & 0.00 & 0.00 & SExtractor \\ 
    CAST & Ground-Based & 0.83 & 0.00 & 0.00 & CNN / SVM \\ 
    AstrOmatic & Ground-Based & 0.96 & 0.00 & 0.01 & CNN \\ 
-   CMU-DeepLens-ResNet & Space-Based & 0.92 & 0.22 & 0.29 & CNN \\ 
+   CMU-DeepLens-Resnet & Space-Based & 0.92 & 0.22 & 0.29 & CNN \\ 
    GAMOCLASS & Space-Based & 0.92 & 0.07 & 0.36 & CNN \\ 
    CAST & Space-Based & 0.81 & 0.07 & 0.12 & CNN \\ 
    All-now & Space-Based & 0.73 & 0.05 & 0.07 & edges/gradiants and Logistic Reg. \\ 
@@ -888,7 +899,7 @@ CMU-DeepLens-ResNet get the best scores.
    GAHEC IRAP & Space-Based & 0.66 & 0.00 & 0.01 & arc finder \\ 
    AstrOmatic & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
    Kapteyn Resnet& Space-Based & 0.82 & 0.00 & 0.00 & CNN \\ 
-   CMU-DeepLens-ResNet-aug & Space-Based & 0.91 & 0.00 & 0.00 & CNN \\ 
+   CMU-DeepLens-Resnet-aug & Space-Based & 0.91 & 0.00 & 0.00 & CNN \\ 
    CMU-DeepLens-Resnet-Voting & Space-Based & 0.91 & 0.00 & 0.01 & CNN \\ 
    NeuralNet2 & Space-Based & 0.76 & 0.00 & 0.00 & CNN / wavelets \\ 
    YattaLensLite & Space-Based & 0.76 & 0.00 & 0.00 & Arcs / SExtractor \\ 
@@ -971,9 +982,9 @@ In addition, figure~\ref{fig:roc_kids} shows the ROC curves for only the ground-
 \end{figure*}
 
 Figures~\ref{fig:einstein_space} and \ref{fig:einstein_ground} show the AUROC, TPR$_0$, TPR$_{10}$ and fraction of lenses as a function of a lower cutoff on the Einstein radius (area).  There is also a vertical dotted line that indicates 
-where no more than 100 lenses in the test sample had larger Einstein radii.  Beyond this point one should be suspicious of small number statistics.  When deriving the distribution of Einstein radii from data these curves would need to be used to correct for detection bias.  It can be seen that CMU-DeepLens-ResNet, Manchester1, Manchester SVM and GAMOCLASS obtain significantly higher TPR$_0$ and  TPR$_{10}$ for larger Einstein radii.  Manchester1 is the human inspection method.  In some cases the TPR$_0$'s are above 50\% of the lenses that meet this criterion.  Remember that many of the so called lenses are very dim or there is no significant arc because the source position is well outside the caustic.  If an additional requirement was placed on the definition of a lens, such as the brightness of the arc being above a threshold, the TPRs would go up.
+where no more than 100 lenses in the test sample had larger Einstein radii.  Beyond this point one should be suspicious of small number statistics.  When deriving the distribution of Einstein radii from data these curves would need to be used to correct for detection bias.  It can be seen that CMU-DeepLens-Resnet, Manchester1, Manchester SVM and GAMOCLASS obtain significantly higher TPR$_0$ and  TPR$_{10}$ for larger Einstein radii.  Manchester1 is the human inspection method.  In some cases the TPR$_0$'s are above 50\% of the lenses that meet this criterion.  Remember that many of the so called lenses are very dim or there is no significant arc because the source position is well outside the caustic.  If an additional requirement was placed on the definition of a lens, such as the brightness of the arc being above a threshold, the TPRs would go up.
 
-Figures~\ref{fig:flux_space} and \ref{fig:flux_ground} are the same except that the flux in the lensed images is used as the threshold.  We count only the flux in pixels with flux over one $\sigma$ of the background.  In some cases one can see an abrupt rise in the TPRs at some flux threshold.  CMU-DeepLens-ResNet in particular reaches a TPR$_0$ above 75\% for the brightest $\sim$ 10\% of the lenses. %\red{(Find these numbers for the real KiDS sample)}
+Figures~\ref{fig:flux_space} and \ref{fig:flux_ground} are the same except that the flux in the lensed images is used as the threshold.  We count only the flux in pixels with flux over one $\sigma$ of the background.  In some cases one can see an abrupt rise in the TPRs at some flux threshold.  CMU-DeepLens-Resnet in particular reaches a TPR$_0$ above 75\% for the brightest $\sim$ 10\% of the lenses. %\red{(Find these numbers for the real KiDS sample)}
 
 A lensed image can be bright without being visibly distorted as in the case of unresolved images.  Figures~\ref{fig:npixel_space} and \ref{fig:npixel_ground} use the number of pixels in the lensed image(s) that are over  one $\sigma$ of the background.  In this case also some classifiers show an abrupt improvement when the image is required to be larger than some threshold.  Interestingly in some cases the TPRs go down with lensed image size after reaching a peak.  This could be because they are not differentiating the arcs from companion galaxies as well in this regime.  There were also cases where the arc intersects with the borders of the image that might cause them to be missed.
 

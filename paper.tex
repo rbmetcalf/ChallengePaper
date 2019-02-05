@@ -99,6 +99,8 @@ Marc Huertas-Company \inst{14}
 \and
 Neal Jackson \inst{13}
 \and
+Colin Jacobs\inst{23}
+\and
 Eric Jullo \inst{15}
 \and
 Jean-Paul Kneib \inst{12}
@@ -184,6 +186,8 @@ JPMorgan Chase, Chicago, IL 60603 U.S.A.
 Kavli IPMU (WPI), UTIAS, The University of Tokyo, Kashiwa, Chiba 277-8583, Japan
 \and
 School of Physical Sciences, The Open University, Walton Hall, Milton Keynes, MK7 6AA, UK
+\and
+Centre for Astrophysics and Supercomputing, Swinburne University of Technology, P.O. Box 218, Hawthorn, VIC 3122, Australia
 }
 
 \abstract{
@@ -776,6 +780,16 @@ Our lens finder included wavelet prefiltering. The image was convolved with the 
 \begin{equation}
 \mathcal{L} = \sum_{i=1}^{n} \big[ y_{i}$ $log(p_{i}) + (1 $ - $ y_{i})$ $log(1 $ - $ p_{i}) \big]
 \end{equation} where $\mathcal{L}$ is the loss function, $n$ is the number of inputs, $y_{i}$ is the true value of the $i^{th}$ input , and $p_{i}$ is the predicted value for the $i^{th}$ input from the network. A perfect loss of $0$ was generated once every predicted value matched the true value for every input. The network was made and trained in Python 2.7 using the open-source libraries \textsc{theano} and \textsc{keras}\footnote{\href{https://github.com/keras-team/keras}{\tt https://github.com/keras-team/keras}}. A more developed version of our lens finder will appear in Davies, Bromley and Serjeant (in preparation).
+
+\subsubsection{CAS Swinburne (Jacobs)}
+
+Our model is a CNN-based classifier. The architecture of our network was simple, similar to that of AlexNet \citep{krizhevsky_imagenet_2012}, with three 2D convolutional layers (with kernel sizes 11, 5, and 3), and two fully-connected layers of 1024 neurons each. The activation function after each convolutional layer was a ReLU. After each convolution we employed a 3x3 max pooling layer. To avoid over-fitting, we included a dropout layer of 0.5 after each of the two fully-connected layers. We implemented our network using the Keras python framework \citep{Chollet_2015} and Theano \citep{Bastien_2012}.
+
+The training set was augmented with three rotations, and 20\% of the images were reserved for validation. The training set consisted of 4-band FITS files of simulated lenses and non-lenses. We imported the training set into HDF5 database files. The data was normalised on import, such that the mean value of the data cube, across all bands, is zero and the standard deviation is one, i.e. \(X' = (X - \mu)/\sigma\); the dynamic range was not altered. We also include batch normalisation step after the first convolution, which normalises the outputs of this layer to the same range (\(\mu = 0\), \(\sigma = 1\)). This has been shown empirically to aid in more rapid convergence of the training process.
+
+The training process using a categorical cross-entropy loss function, and a stochastic gradient descent optimizer with an initial learning rate of 0.01, learning rate decay of \(10^{-6}\), and Nesterov momentum \citep{nesterov83method} of 0.9. Training converged (validation loss stopped decreasing) after approximately 30 epochs.
+
+We note that experiments indicated that training on 4-band FITS data, as opposed to RGB images produced from the fits files, resulted in improved validation accuracy, of order a few percent. 
 
 \section{Results}
 \label{sec:results}

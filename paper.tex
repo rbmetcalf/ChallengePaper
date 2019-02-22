@@ -252,7 +252,11 @@ With GLAMER we identify and map out all the caustics within the light-cone for 3
 
  In the light cone there are many thousands of caustics for the higher source redshifts.  These lenses could be used as is, but we wanted to produce a much larger number with more randomness.   For each caustic we identify the lens plane with the highest convergence and identify all the halos within a three dimensional distance of 0.5 Mpc from the center of the critical curve and on this and its neighboring lens planes.    This collection of halos is then used as the lens and rotated to produce more random lenses.    It  contains all the sub-halos and nearby companion halos, but not the large scale structure surrounding it.
 
-To model the background objects that are lensed we use sources from the Hubble Ultra Deep Field (UDF) that have been decomposed into shapelet functions to remove noise.  This is the same set of images as used in \citet{2008AandA...482..403M,2010AandA...514A..93M}.   There are 9,350 such sources with redshifts and separate shapelet coefficients in 4 bands.   
+To model the background objects that are lensed we use sources from
+the Hubble Ultra Deep Field (UDF) that have been decomposed into
+shapelet functions to remove noise.  This is the same set of images as
+used in \citet{2008AandA...482..403M,2010AandA...514A..93M} \citep[see
+also][]{2019MNRAS.482.2823P}.   There are 9,350 such sources with redshifts and separate shapelet coefficients in 4 bands.   
 
 To construct a mock lens, first a caustic on the highest redshift source plane is selected.  This is done in order of Einstein area, but all the critical curves are used more than once.  Since every lens with a caustic at a lower redshift will have a caustic at the highest redshift this is a selection from all of the caustics in the light-cone.   The lens is extracted as explained above and rotated randomly in three dimensions.  A source is selected at random from the shapelet catalog subject to a magnitude limit in a reference band.   The redshift of the UDF source is used as the source redshift.  If the source is at a lower redshift than the lens or within $\Delta z = 0.4$ another random source is selected.
 
@@ -477,7 +481,7 @@ each of the four bands and concatenate the vectors to create a final
 feature vector for each object that we use to train a model
 classifier.
 
-We use {\em Logistic Regression} (LR), a machine learning algorithm,
+We use {\em Logistic Regression} (LR) 
 to train a classifier model.  LR requires a parameter search over the
 regression coefficient, $C_{LogReg}$.  The parameters from both the
 feature extrator, HOG, and the linear classifier, LR, contain
@@ -551,7 +555,7 @@ The CNN weights are initialized to random values using a truncated Gaussian dist
 
 We used a CNN \citep{Fukushima1980,Lecun1998} with a simple architecture of 12 layers (inspired by \citep{symmetry}), see table \ref{tab:architecture}.
 To avoid the problem of the data flow distribution getting out of the comfort zone of the activation functions ("Internal Covariate Shift"), we used a mix of normalization propagation \citep{norm_prop} (without the constraint on the weights but a proper initialization) and batch normalization \citep{batch_norm} (slowly disabled over the iterations).
-As activation function, we used a scaled and shifted ReLU (Rectifier Linear Unit), 
+As activation function, we used a scaled and shifted ReLU, defined as
 \begin{equation} \label{eq:relu}
     \frac{1}{\sqrt{\pi-1}} (\sqrt{2 \pi} \max(0,x) - 1),
 \end{equation}
@@ -637,13 +641,14 @@ Our code is accessible on github\footnote{\url{https://github.com/antigol/lensfi
 GAMOCLASS is a CNN based classifier.
 We used the full training data set in the proportion of 4/5 for training and 1/5 for validation. The training images were labelled with 1 if showing strong lensing and 0 otherwise. Our CNN gives as output a probability [0,1] of the input image being a strongly lensed system.
 The final architecture of our model is illustrated in Fig. \ref{Fig1_gamoclass}. The input image (101x101 pixels) is first processed by a 2D convolution layer with a 3x3 filter size, then subsampled by a 3x3 max pooling layer.  Another two identical units follow, with a growing dimensionality of the output space %%(depth, i.e. output number of filters)
- in the convolution, for a total of 3 convolutional layers and 3 max pooling layers. Each of these convolutional layers is followed by a rectified linear unit (ReLU) step. The output of these units is then processed through a single fully-connected layer follower by a dropout layer, and, finally, by a one-neuron fully connected layer with sigmoid activation functions. For the classification problem we used the binary cross-entropy cost function and found the weights  using ADAM \citep{Kingma_2014}) optimization method. The use of the ADAM optimizer improved the learning rate compared to tests with stochastic gradient descent (SGD).
+ in the convolution, for a total of 3 convolutional layers and 3 max
+ pooling layers. Each of these convolutional layers is followed by a ReLU step. The output of these units is then processed through a single fully-connected layer follower by a dropout layer, and, finally, by a one-neuron fully connected layer with sigmoid activation functions. For the classification problem we used the binary cross-entropy cost function and found the weights  using ADAM \citep{Kingma_2014}) optimization method. The use of the ADAM optimizer improved the learning rate compared to tests with stochastic gradient descent (SGD).
 In order to increase the size of the training set and make the model invariant to specific transformations, we perform these data augmentation steps:
-1) Random rotation of the image in the range [0, 180$\degree$], using a reflection fill mode to keep constant the size of the images,
-2) The images were randomly shifted of 0.02 times the total width of the image,
-3) Random horizontal and vertical flips of the images.
+1) we introduce random rotations of the image in the range [0, 180$\degree$], using a reflection fill mode to keep constant the size of the images;
+2) the images are randomly shifted of 0.02 times the total width of the image;
+3) the images are randomly flipped horizontally and vertically.
 
-During the training we initialize the weights of our model with random normal values and we "warm up" the training of the CNN for 25 epochs, using an exponential decay rate ($10^{-6}$) \citep{Huang_2016}  and then a staring learning rate of  0.001. Then the network was trained using an early stopping method, and for a maximum number of 300 epochs. The early stopping method is an effective method of preventing overfitting and consists in stopping the training if a monitored quantity does not improve for a fixed number (called \textit{patience}) of training epochs. The quantity that we monitored was the \textit{accuracy} of the classification of the validation sample. The best architecture was trained over 220 epochs with a parameter of patience equal to 20.
+During the training we initialize the weights of our model with random normal values and we ``warm up" the training of the CNN for 25 epochs, using an exponential decay rate ($10^{-6}$) \citep{Huang_2016}  and then a staring learning rate of  0.001. Then the network was trained using an early stopping method, and for a maximum number of 300 epochs. The early stopping method is an effective method of preventing overfitting and consists in stopping the training if a monitored quantity does not improve for a fixed number (called \textit{patience}) of training epochs. The quantity that we monitored was the \textit{accuracy} of the classification of the validation sample. The best architecture was trained over 220 epochs with a parameter of patience equal to 20.
 We implemented our code in the Keras framework \citep{Chollet_2015} on top of Theano \citep{Bastien_2012}.
 Our architecture converges with a classification accuracy of 91\% on the validation sample. We further evaluated the performance of our classifier calculating the ROC (see section \ref{sec:figure_of_merit})  curve of the classifier, i.e. the True Positive Rate (TPR) against the False Positive Rate. As shown in Fig. \ref{Fig2_gamoclass}, we reached a TPR higher than the 90\% with a FPR < 8\%.
 
@@ -669,7 +674,7 @@ We employed different strategies for the two samples available for the challenge
 In each case we used the simulations made available for the challenge both to train and to validate the results and we used the area under the ROC (see section \ref{sec:figure_of_merit}) to determine which combination of methods gives the best result.    
 We selected 
 %We evaluate the ROC curves for all configurations tested, selecting 
-$90\%$ of the images, chosen randomly, for the training and $10\%$ to validate. We repeated the process $10$ times to avoid bias due to a specific choice of training/validation set and to define an uncertainty in our ROC (see section \ref{sec:figure_of_merit}) .
+$90\%$ of the images, chosen randomly, for the training and $10\%$ to validate. We repeated the process $10$ times to avoid bias due to a specific choice of training/validation set and to define an uncertainty in our ROC.
 
 For the space-based data set we tested only two configurations: i) using the CNN straightforwardly for classification and ii) 
 with the preprocessing described above. 
@@ -680,7 +685,7 @@ As mentioned above, the CNN we used can take 3 colour images as input.  To use t
 
 A more detailed description of each configuration tested is presented below:
 \begin{enumerate}[label=\Roman*.]
-\item Combination of bands r and i with the average between bands u and g. Use one CNN for classification.
+\item Combination of bands $r$ and $i$ with the average between bands $u$ and $g$. Use one CNN for classification.
 \item Creation of $1$ CNN for each band (total of $4$). The $4$ outputs are used as input to a SVM classifier which returns the final classification $p$. 
 \item Combination into 4 different combinations of bands:  RGB $\rightarrow$ (\textit{u,g,r}), (\textit{u,g,i}), (\textit{u,r,i}) and (\textit{g,r,i}). One CNN for each combination of bands and then use of the output score as input to an SVM classifier.
 %Mediatrix features used as input of an SVM classifier.
@@ -807,7 +812,7 @@ We note that experiments indicated that training on 4-band FITS data, as opposed
 
 In this section we summarize the analysis of the submissions.  In section~\ref{sec:figure_of_merit} we discuss how to judge a classifier in this particular case and define some metrics of success.  The results for all the submissions are given in section~\ref{sec:performance}.
 
-\subsection{figures of merit}
+\subsection{Figures of merit}
 \label{sec:figure_of_merit}
 
 In deriving a good figure of merit for evaluating lens finding algorithms one needs to take into account the particular nature of this problem.
@@ -829,7 +834,7 @@ Since only about one in a thousand objects will be a lens (perhaps somewhat more
 The {\bf TPR$_0$} will be defined as the highest TPR reached, as a function of $p$ threshold, before a single false positive occurs in the test set of 100,000 cases.  This is the point were the ROC meets the FPR = 0 axis.  This quantity highly penalizes classifiers with discrete ranking which often get TPR$_0$ = 0 because their highest classification level is not conservative enough to eliminate all false positives.  We also define {\bf TPR$_{10}$} which is the TPR at the point were less than ten false positives are made.  If the TP rate is boosted from the FPR by a factor of 1,000 in a realistic data set this would correspond to about a 10\% contamination.
 
 In addition to these considerations, the performance of a classifier is a function of many characteristics of the lens system.  It might be that one classifier is good at finding systems with large Einstein radii and incomplete arcs, but not as good at finding small complete Einstein rings that are blended with the light of the lens galaxy.  Also a lens may have a source that is too faint to be detected by any algorithm or is too far from the lens to be very distorted, but will be classified as a lens in the test dataset.    We do not impose a definitive arc/ring magnification, brightness or surface brightness limit for a system to be considered a lens because we 
-want to include these "barely lensed" objects to test the limits of the classifiers.  As we will see, if you restrict your objectives to detecting only lensed images with surface brightness above some threshold, for example, the "best" algorithm might change and the TPR will change.  For this reason we plot the AUROC, TPR$_0$ and TPR$_{10}$ as a function of several variables for all the entries.  This is done by removing all the lenses that do not exceed the threshold and then recalculating  these quantities, while the number of non-lenses remains the same.
+want to include these ``barely lensed" objects to test the limits of the classifiers.  As we will see, if one restricts the objectives to detecting only lensed images with surface brightness above some threshold, for example, the "best" algorithm might change and the TPR will change.  For this reason we plot the AUROC, TPR$_0$ and TPR$_{10}$ as a function of several variables for all the entries.  This is done by removing all the lenses that do not exceed the threshold and then recalculating  these quantities, while the number of non-lenses remains the same.
 
 \subsection{Performance of the methods}
 \label{sec:performance}

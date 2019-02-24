@@ -9,69 +9,99 @@
 \pard\pardeftab720\sl220\partightenfactor0
 
 \f0\fs36 \cf2 \cb3 \expnd0\expndtw0\kerning0
-Referee Report\
+We would like to thank the referee for his or her kind words and insightful comments.\
+We hope our edits will satisfy the these concerns.  We give the comments here with our \
+responses after each one.\
 \
-\
-The detail in responding by the authors to the first report\'92s concerns and questions is genuinely appreciated. The authors are commended on crafting a very interesting and clear manuscript on a challenging and forward-looking project. This re-draft was frankly a pleasure to read and study.\
-\
-There are several concerns that are given below that should be addressed, after which one last rapid iteration should complete the process. The comments below are largely concerned with clarity, as the presentation of the challenge and the core results is overall very well done.\
-\
-First, a remark. The Millennium-GLAMER-UDF-stellar mass simulation setup for these challenges, is truly impressive in how it leverages numerical, observational, and analytic techniques for a sophisticated output. It will be gratifying to see future projects make use of this framework.\
 \
 
-\b There are still a small number of typographic errors, which apart from the missing bracket in equation 2 seem innocuous.\
+\b >There are still a small number of typographic errors, which apart from the missing \
+>bracket in equation 2 seem innocuous.\
 
 \b0 \
 Equation 2 has been corrected.\
 \
 
-\b The structure of Section 4, Lens Finding Methods, is practical and clear. Having the subsections 4.1 through 4.4. for each relatively major type of method is useful for a reader to follow the differences in the general classes of methods, while appreciating that within each there are diverse implementations and assumption sets. It would be helpful to propagate the \'93major method type\'94 information throughout the tables and figures of the paper. For example, Table 1 would be much more useful to the reader if it can be cross-referenced to the 4.x subsections where each entry can be found, whether this is done by a numerical section cross-reference, or a brief but accurate descriptor of each.\
+\b >The structure of Section 4, Lens Finding Methods, is practical and clear. Having the \
+>subsections 4.1 through 4.4. for each relatively major type of method is useful for a \
+>reader to follow the differences in the general classes of methods, while appreciating \
+>that within each there are diverse implementations and assumption sets. It would be \
+>helpful to propagate the \'93major method type\'94 information throughout the tables and \
+>figures of the paper. For example, Table 1 would >be much more useful to the reader \
+>if it can be cross-referenced to the 4.x subsections where each entry can be found, \
+>whether this is done by a numerical section cross-reference, or a brief but accurate \
+>descriptor of each.\
 
 \b0 \
-We have added a reference to the section to table 1.  Tables 2 and 3 have \'93short description\'94 columns that identify the type of algorithm.  \
-Adding this information to the plots would be cumbersome.   We think the reader can now easily refer to table 1 to find the description easily. \
+We have added a reference to the section to table 1.  Tables 2 and 3 have \'93short description\'94 \
+columns that identify the type of algorithm.  Adding this information to the plots would be \
+cumbersome.   We think the reader can now easily refer to table 1 to find the description easily. \
 \
 
-\b For each entry there is a subsection 4.x.x which has a heading. Several of these headings are not identical to those used in the Tables and Figures. This is confusing. As a specific example, 4.3.1\'92s \'93Gabor-SVM (Hartley, Flamary)\'94 is found in Table 1 and elsewhere as \'93Manchester SVM\'94. This causes frustration and interrupts the flow of reading and attempting to follow all the many threads of this work. Please systematize and conform the section headings with the entries used in the Tables and everywhere in the Figures.\
+\b >For each entry there is a subsection 4.x.x which has a heading. Several of these headings \
+>are not identical to those used in the Tables and Figures. This is confusing. As a specific \
+>example, 4.3.1\'92s \'93Gabor-SVM (Hartley, Flamary)\'94 is found in Table 1 and elsewhere as \
+>\'93Manchester SVM\'94. This causes frustration and interrupts the flow of reading and attempting \
+>to follow all the many threads of this work. Please systematize and conform the section \
+>headings with the entries used in the Tables and everywhere in the Figures.\
 \
 
-\b0 This was a result of the entrants being asked for a team name and a name for each entry.  In this way a team could have multiple entries.  \
-Some of the teams had multiple versions of their algorithms (for example CMU-DeepLens-Resnet, CMU-DeepLens-Resnet-Voting and CMU-DeepLens-Resnet-aug). The point is well taken however.  We have tried to systematise the names of the entries so they are more easily associated with the sections and teams.\
-
+\b0 This was a result of the entrants being asked for a team name and a name for each entry.  In this \
+way a team could have multiple entries.  Some of the teams had multiple versions of their algorithms \
+(for example CMU-DeepLens-Resnet, CMU-DeepLens-Resnet-Voting and CMU-DeepLens-Resnet-aug). \
+The point is well taken however.  We have tried to systematise the names of the entries so they are \
+more easily associated with the sections and teams.
 \b \
 \
-The fact that the \'93CAS Swinburn Melb\'94 contribution has no material description is a serious lapse. Without a description of the method at least on par with the other entries, all results from this contribution do not belong in this analysis and should be removed entirely from the Tables and analysis Figures. If a reasonable description is added in the revised text, it would have context for remaining. If that is not available, the entry needs to be excised.\
+>The fact that the \'93CAS Swinburn Melb\'94 contribution has no material description is a serious \
+>lapse. Without a description of the method at least on par with the other entries, all results from \
+>this contribution do not belong in this analysis and should be removed entirely from the Tables \
+>and analysis Figures. If a reasonable description is added in the revised text, it would have \
+>context for remaining. If that is not available, the entry needs to be excised.\
 \
 
-\b0 Colin Jacobs has added a section (4.4.8) describing this method.  He has also been added to the list of authors.\
+\b0 Colin Jacobs has added a section (4.4.8) describing this method.  He has also been added to the list \
+of authors.\
 \
 
-\b In the Section 5.1 description of metrics, the ROC end-point behaviors in the following sentence seem to be flipped. \'93At p=1 all of the cases are classified as non-lenses and so TPR=FPR=1 and at p=0 all of the cases are classified as lenses to TPR=FPR=0.\'94 When p=1, TPR=FPR=0 since there are no lenses remaining with p>1, and when p=0, TPR=FPR=1, since all lenses are encompassed by that threshold.\
+\b >In the Section 5.1 description of metrics, the ROC end-point behaviors in the following sentence \
+>seem to be flipped. \'93At p=1 all of the cases are classified as non-lenses and so TPR=FPR=1 and \
+>at p=0 all of the cases are classified as lenses to TPR=FPR=0.\'94 When p=1, TPR=FPR=0 since there \
+>are no lenses remaining with p>1, and when p=0, TPR=FPR=1, since all lenses are encompassed \
+>by that threshold.\
 \
 
 \b0 Right!  This has been corrected.
 \b \
 \
-Please make the analysis figures\'92 font types and sizes, labeling style, and line thickness more uniform for clarity. It seems that this will not require many adjustments. The multi-line figures Figure 9ff) are especially challenging to see clearly.\
+>Please make the analysis figures\'92 font types and sizes, labeling style, and line thickness more \
+>uniform for clarity. It seems that this will not require many adjustments. The multi-line figures \
+>Figure 9ff) are especially challenging to see clearly.\
 \
 
 \b0 \cf0 We have made adjustments to the figures that we hope make them more readable and uniform.\
 
 \b \cf2 \
-In all analysis figures, a reader will be able to evaluate the relative performance of each technique for each analysis-metric being presented, if the \'934.x\'94 method type is included within each sub-panel. I encourage the authors to consider adding an insert indicating the method type. Particularly with the ground- versus space-sets, and the fact that some participants have multiple contributions, this will be invaluable to the attentive reader.\
+>In all analysis figures, a reader will be able to evaluate the relative performance of each technique \
+>for each analysis-metric being presented, if the \'934.x\'94 method type is included within each \
+>sub-panel. I encourage the authors to consider adding an insert indicating the method type. \
+>Particularly with the ground- versus space-sets, and the fact that some participants have multiple \
+>contributions, this will be invaluable to the attentive reader.\
 \
 
-\b0 We found this difficult to accomplish in practice, but the type of algorithm can be easily found by consulting tables 1, 2 or 3.\
+\b0 We found this difficult to accomplish in practice, but the type of algorithm can be easily found by consulting \
+tables 1, 2 or 3.\
 
 \b \
-In Figures 10, 12, 14, and 16, the captions are inaccurate.\
+>In Figures 10, 12, 14, and 16, the captions are inaccurate.\
 \
-At minimum in the caption of Figure 9, where the dotted-line mark on 100-lens sample sizes is introduced, the caption should fully explain what that is.\
+>At minimum in the caption of Figure 9, where the dotted-line mark on 100-lens sample sizes is \
+>introduced, the caption should fully explain what that is.\
 \
 
 \b0 \cf4 We have revised the captions to correct the inaccuracies and give more information.\
-
-\b \cf2 \
-The discussion and conclusions seem to capture the essence of the conclusions given the current state of the work, and have an optimistic note, which is appreciated. This is excellent work and the community will be well served by having it fully published soon.\
+\cf2 \
 \
-}
+In addition, we have removed what used to be figure 4 which showed the ROC for the GLAMOCLASS \
+algorithm on the training set.  We felt that it did not add any important information.  We also made some \
+cosmetic changes to make the descriptions of the methods more uniform in style.}

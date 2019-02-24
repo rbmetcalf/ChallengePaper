@@ -650,15 +650,7 @@ In order to increase the size of the training set and make the model invariant t
 
 During the training we initialize the weights of our model with random normal values and we ``warm up" the training of the CNN for 25 epochs, using an exponential decay rate ($10^{-6}$) \citep{Huang_2016}  and then a staring learning rate of  0.001. Then the network was trained using an early stopping method, and for a maximum number of 300 epochs. The early stopping method is an effective method of preventing overfitting and consists in stopping the training if a monitored quantity does not improve for a fixed number (called \textit{patience}) of training epochs. The quantity that we monitored was the \textit{accuracy} of the classification of the validation sample. The best architecture was trained over 220 epochs with a parameter of patience equal to 20.
 We implemented our code in the Keras framework \citep{Chollet_2015} on top of Theano \citep{Bastien_2012}.
-Our architecture converges with a classification accuracy of 91\% on the validation sample. We further evaluated the performance of our classifier calculating the ROC (see section \ref{sec:figure_of_merit})  curve of the classifier, i.e. the True Positive Rate (TPR) against the False Positive Rate. As shown in Fig. \ref{Fig2_gamoclass}, we reached a TPR higher than the 90\% with a FPR < 8\%.
-
-\begin{figure}
-  \centering
-      \includegraphics[width=1\columnwidth]{figures/Fig2_gamoclass.pdf} 
-  \caption{GAMOCLASS ROC (see section \ref{sec:figure_of_merit})  on training data.}
- \label{Fig2_gamoclass}
-\end{figure}
-
+Our architecture converges with a classification accuracy of 91\% on the validation sample. We further evaluated the performance of our classifier calculating the ROC (see section \ref{sec:figure_of_merit})  curve of the classifier, i.e. the True Positive Rate (TPR) against the False Positive Rate.  We reached a TPR higher than the 90\% with a FPR < 8\%.
 
 %-------------------------------------------------%
 \subsubsection{CAST (Bom, Valent\'in, Makler)}
@@ -757,26 +749,26 @@ We decide to treat the problem as a three-class classification problem where the
 
 %Given the rules of the challenge, we had to submit a prediction for each source in the test-set as a single number: a number in the interval [0,1] or either a 0 or a 1. For satisfying this requirement we had to 
 
-{\bf Implementation}:
+%{\bf Implementation}:
 The CNN is implemented in Python 2.7 using the open-source libraries \textsc{Lasagne}\footnote{\href{http://github.com/Lasagne/Lasagne/}{\tt http://github.com/Lasagne/Lasagne/}} 
 and \textsc{Theano}
 \footnote{\href{http://deeplearning.net/software/theano/}{\tt http://deeplearning.net/software/theano/}} \citep{theano}.  
 The training of the CNN is executed on a GeForce GTX 760 in parallel with the data augmentation performed on the CPU using the \textsc{scikit-image}\footnote{\href{http://scikit-image.org/}{\tt http://scikit-image.org/}} package \citep{van2014scikit}. 
 
-{\bf Architecture}:
+%{\bf Architecture}:
 We used the CNN architecture called Resnet described in \citep{he2015deep} with three stacks of residual blocks of 5 layers. 
 The output layer is composed by three units. Each unit gives as an output a number between 0 and 1 that represents, respectively, the probability of being a \textit{non-lens}, a \textit{dubious lens}, a \textit{certain lens}.  We then collapsed one of the classes into another to give a binary classification : 0 when a source is classified as a \textit{non-lens} and a 1 when is classified as a \textit{clear lens} or as a \textit{dubious lens}. This choice did not allow for building  a continuous ROC (see section \ref{sec:figure_of_merit})  curve but only a binary one.
 The final submission was produced by averaging the values of the predictions from three CNNs with the same architecture.
 
 
-{\bf Preprocessing}:
+%{\bf Preprocessing}:
 The training image files were preprocessed with the software \textsc{STIFF}\footnote{\href{http://www.astromatic.net/software/stiff}{\tt http://www.astromatic.net/software/stiff}} which automatically converts the fits files to gray-scale TIFF images operating a non-linear intensity transformations to enhance the low-brightness features of the image.   
 Due to memory limitations we down-sampled the images to 84 by 84 pixels. 
 %Most likely, this leads to a worse classification accuracy than using the original image resolution.
 We augmented the training images in the following way: i) random rotation of 90, 180 or 270 degrees; ii) random shift in both $x$ and $y$ direction between -2 and +2 pixels; iii) $50\%$ probability of horizontally flipping the image. 
 Finally, the image border is cropped in order to have 80 by 80 pixel input images.
 
-{\bf Training}:
+%{\bf Training}:
 The network is trained by minimizing the categorical cross-entropy loss function
 \begin{equation}
 L = -\sum_j t_{j}\log p_{j}

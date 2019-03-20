@@ -207,7 +207,7 @@ When the lens is an individual galaxy and the source a quasar, there are two, fo
 
 Strong lenses have to date provided very valuable scientific information.  They have been used to study how dark matter is distributed in galaxies and clusters \citep[e.g.][]{1991ApJ...373..354K,2001ApJ...554.1216C,2002ApJ...568L...5K,2003ApJ...587..143R,2003ApJ...583..606K,2005MNRAS.360.1333W,2005ApJ...623...31D,2009MNRAS.392..945V,2016MNRAS.463.3115T} and  to measure the Hubble constant and other cosmological parameters 
 \citep[e.g.][]{1964MNRAS.128..307R,1992ARAandA..30..311B,2000ApJ...544...98W,2013ApJ...766...70S,2016AandARv..24...11T}.  
-Their magnification has been used as a natural telescope to observe otherwise undetectable objects at high redshift \citep[e.g][]{2007ApJ...671.1196M,2017MNRAS.464.4823B,2016ApJ...833..264S}.   They have put limits on the self interaction of dark matter and on the theory of gravitation \citep{0004-637X-606-2-819}.  Through microlensing they have been used to study the structure of quasars \citep{2008ApJ...689..755M,2008ApJ...673...34P,2011ApJ...729...34B}.   To expand on this wealth of information we must study more lenses.  The first step in doing this is to find more of these rare objects.
+Their magnification has been used as a natural telescope to observe otherwise undetectable objects at high redshift \citep[e.g.][]{2007ApJ...671.1196M,2017MNRAS.464.4823B,2016ApJ...833..264S}.   They have put limits on the self interaction of dark matter and on the theory of gravitation \citep{0004-637X-606-2-819}.  Through microlensing they have been used to study the structure of quasars \citep{2008ApJ...689..755M,2008ApJ...673...34P,2011ApJ...729...34B}.   To expand on this wealth of information we must study more lenses.  The first step in doing this is to find more of these rare objects.
 
 So far, less than a thousand lenses have been found in total across many heterogeneous data sets.
 The Square Kilometer Array (SKA)\footnote{http://skatelescope.org/}, the Large Synoptic Survey Telescope (LSST)\footnote{https://www.lsst.org/} and the Euclid space telescope\footnote{https://www.euclid-ec.org/} are expected to increase the number of potential lenses by orders of magnitude \citep{2010MNRAS.405.2579O,collett_15,euclidSLWGwhitepaper,2015aska.confE..84M}.   For example it is estimated that there will be approximately 200,000 observable galaxy-galaxy lenses in the Euclid data set among tens of billions of potential objects.   These surveys will bring a new era for strong lensing where large relatively well defined samples of lenses will be possible.  It will also require handling much larger quantities of data than has been customary in this field.
@@ -229,7 +229,7 @@ More recently, machine learning techniques that have become widely used in the f
 
 Given the future of this field, with large amounts of data coming soon and many new ideas emerging, it is timely to stage a series of challenges to stimulate new work, determine what can realistically be done in lens finding and get a better idea of the strengths and weaknesses of different methods.  The long term goal is to get a set of algorithms that can handle Euclid, LSST or SKA data sets and produce high purity and high completeness lens samples with well defined efficiency or selection.  We anticipate further challenges in the future in which the realism of the data simulations will become progressively better.  Here we have chosen to concentrate on galaxy/small group scale lenses where the background source is a galaxy because we feel that this is where the most progress can be made and the scientific return is the highest, but QSO lens and cluster/group lens challenges may follow.
 
-The paper is organised as follows.  The form of the challenge and its rules are described in the next section.  The methods used to simulate mock images of galaxies and gravitational lenses are described in section~\ref{sec:simulation}.  In section~\ref{sec:entries}, each of the methods that were used to solve the challenge are briefly described.  We discuss the metrics used to evaluate entries in section~\ref{sec:figure_of_merit}.  The performance of each of the methods is presented in section~\ref{sec:performance}.  Finally,  in section~\ref{sec:conclusion}, we conclude with a discussion of what was learned and how methods can be improved in the future.
+The paper is organised as follows.  The form of the challenge and its rules are described in the next section.  The methods used to simulate mock images of galaxies and gravitational lenses are described in Section~\ref{sec:simulation}.  In Section~\ref{sec:entries}, each of the methods that were used to solve the challenge are briefly described.  We discuss the metrics used to evaluate entries in Section~\ref{sec:figure_of_merit}.  The performance of each of the methods is presented in Section~\ref{sec:performance}.  Finally,  in Section~\ref{sec:conclusion}, we conclude with a discussion of what was learned and how methods can be improved in the future.
 
 \section{The Challenge}
 \label{sec:challenge}
@@ -249,7 +249,7 @@ The halo catalogue was read into the GLAMER lensing code \citep{2014MNRAS.445.19
 
 With GLAMER we identify and map out all the caustics within the light-cone for 33 source planes -- z=1 to 3 in intervals of 0.1 and 3 to 6 in intervals of 0.25.  We take every caustic that corresponded to a critical curve with an Einstein radius larger than 1.5 times the resolution of the final images.  The Einstein radius is estimated here and in all that follows as $R_{\rm ein}=\sqrt{A_{\rm ein}/\pi}$ where $A_{\rm ein}$ is the angular area within the critical curve.
 
- In the light cone there are many thousands of caustics for the higher source redshifts.  These lenses could be used as is, but we wanted to produce a much larger number with more randomness.   For each caustic we identify the lens plane with the highest convergence and identify all the halos within a three dimensional distance of 0.5 Mpc from the center of the critical curve and on this and its neighboring lens planes.    This collection of halos is then used as the lens and rotated to produce more random lenses.    It  contains all the sub-halos and nearby companion halos, but not the large scale structure surrounding it.
+ In the light cone there are many thousands of caustics for the higher source redshifts.  These lenses could be used as is, but we wanted to produce a much larger number with more randomness.   For each caustic we identify the lens plane with the highest convergence and identify all the halos within a three dimensional distance of 0.5 Mpc from the centre of the critical curve and on this and its neighbouring lens planes.    This collection of halos is then used as the lens and rotated to produce more random lenses.    It  contains all the sub-halos and nearby companion halos, but not the large scale structure surrounding it.
 
 To model the background objects that are lensed we use sources from
 the Hubble Ultra Deep Field (UDF) that have been decomposed into
@@ -259,21 +259,21 @@ also][]{2019MNRAS.482.2823P}.   There are 9,350 such sources with redshifts and 
 
 To construct a mock lens, first a caustic on the highest redshift source plane is selected.  This is done in order of Einstein area, but all the critical curves are used more than once.  Since every lens with a caustic at a lower redshift will have a caustic at the highest redshift this is a selection from all of the caustics in the light-cone.   The lens is extracted as explained above and rotated randomly in three dimensions.  A source is selected at random from the shapelet catalogue subject to a magnitude limit in a reference band.   The redshift of the UDF source is used as the source redshift.  If the source is at a lower redshift than the lens or within $\Delta z = 0.4$ another random source is selected.
 
-The furthest point in the caustic is found from its own center and the source is placed randomly within 3 times this distance.  This is a somewhat arbitrary length designed to be a compromise between producing only very clear strong lenses, because all the sources are right in the center of the caustic, and making the process inefficient because most of the sources are too far away from the caustic to produce clear lenses.  If the source positions were taken completely at random the fraction of clear lenses would be very low.
+The furthest point in the caustic is found from its own centre and the source is placed randomly within 3 times this distance.  This is a somewhat arbitrary length designed to be a compromise between producing only very clear strong lenses, because all the sources are right in the centre of the caustic, and making the process inefficient because most of the sources are too far away from the caustic to produce clear lenses.  If the source positions were taken completely at random the fraction of clear lenses would be very low.
 
-The visible galaxies associated with the lens must also be simulated. There  are too few bright galaxies in the UDF catalogue  to make enough mock lens galaxies for this purpose.  Instead, for most of the lenses, we used an analytic model for the surface brightness of these galaxies.  The Millennium Observatory provides parameters for the galaxies that inhabit the dark matter halos using the semi-analytic galaxy formation models of \citet{2011MNRAS.413..101G}.  The parameters used here were the total magnitude, the bulge-to-disk ratio, the disk scale height and the bulge effective radius.  The magnitude and bulge-to-disk ratio are a function of the pass band.  Each galaxy is given a random orientation and inclination angle between 0 and $80\degree$.  The disk is exponential with no vertical height which is why the inclination is limited to $80\degree$.  The bulge is represented by an elliptical S\'{e}rsic profile with an axis ratio randomly sampled between 0.5 and 1.  The S\'{e}rsic index, $n_s$, is given by 
+The visible galaxies associated with the lens must also be simulated. There  are too few bright galaxies in the UDF catalogue  to make enough mock lens galaxies for this purpose.  Instead, for most of the lenses, we used an analytic model for the surface brightness of these galaxies.  The Millennium Observatory provides parameters for the galaxies that inhabit the dark matter halos using the semi-analytic galaxy formation models of \citet{2011MNRAS.413..101G}.  The parameters used here were the total magnitude, the bulge-to-disc ratio, the disc scale height and the bulge effective radius.  The magnitude and bulge-to-disc ratio are a function of the pass band.  Each galaxy is given a random orientation and inclination angle between 0 and $80\degree$.  The disc is exponential with no vertical height which is why the inclination is limited to $80\degree$.  The bulge is represented by an elliptical S\'{e}rsic profile with an axis ratio randomly sampled between 0.5 and 1.  The S\'{e}rsic index, $n_s$, is given by 
 \begin{align}
 \log( n_s )= 0.4 \log\left[ {\rm max}\left(\frac{B}{T},0.03\right)\right] + 0.1 x 
 \end{align}
 where $\frac{B}{T}$ is the bulge to total flux ratio and $x$ is a uniform random number between -1 and 1.  This very approximately reproduces the observed correlation between these quantities \citep{2001AJ...121..820G}. 
 
-In addition to the basic disk and bulge models we introduce some spiral arms.  The surface brightness of 
-the disks are given by
+In addition to the basic disc and bulge models we introduce some spiral arms.  The surface brightness of 
+the discs are given by
 \begin{align}
 S(\theta,r) &= e^{-r/R_h} \left[ 1 + A \cos(N_a\theta + \phi_r ) \right]~, \\
 \phi_r &= \alpha\log(2 r/ R_h) + \phi_d \nonumber
 \end{align}
-where $R_h$ is the scale height of the disk.  The phase angle of the arms, $\phi_d$, is chosen at random.  The parameters $A$, $\alpha$ and $N_a$ are chosen from distributions that are judged by eye to produce realistic 
+where $R_h$ is the scale height of the disc.  The phase angle of the arms, $\phi_d$, is chosen at random.  The parameters $A$, $\alpha$ and $N_a$ are chosen from distributions that are judged by eye to produce realistic 
 galaxies.
 The bulge is also perturbed from a perfect S\'{e}rsic profile by multiplying the surface brightness by
 \begin{align}
@@ -281,7 +281,7 @@ The bulge is also perturbed from a perfect S\'{e}rsic profile by multiplying the
 \end{align}
 where $\phi_n$ is a random phase.  The coefficients are picked randomly from between -0.002 and 0.002.   
 
-These foreground galaxies are rotated in three dimensions with the halos of the lens each time a random lens is produced so that they remain in the same positions relative to the mass.  All the random parameters are also reassigned with every realization of the lens.
+These foreground galaxies are rotated in three dimensions with the halos of the lens each time a random lens is produced so that they remain in the same positions relative to the mass.  All the random parameters are also reassigned with every realisation of the lens.
 
 These images of the foreground galaxies are not intended to reproduce the true population of galaxies, but only to be sufficiently irregular to make them difficult to fit to a simple analytic model that might make them unrealistically easy to distinguish from a foreground plus a lensed image.   As will be discussed later, more realistic models will be needed in the future and are a subject of current investigation.
 
@@ -295,7 +295,7 @@ For the test sets only the final images were provided to participants although a
 
 The space-based datasets were meant to roughly mimic the data quality which is expected from observations by the Euclid telescope in the visible channel. To this end, the pixel size was set to 0.1 arcsec and a Gaussian PSF was applied with a FWHM of 0.18 arcsec. The Gaussian PSF is clearly a simplified model, but a realistic treatment of the PSF is outside the scope of this paper. The reference band for background and foreground galaxies was SDSS $i$, which is overlapping with the broader Euclid VIS band. The realisation of the mock images followed the same procedure described in \citet{2004PASP..116..750G} and \citet{2008AandA...482..403M}. As a result, the noise follows a Gaussian distribution with a realistic width and is uncorrelated between pixels. Characteristics of the instrument, filter and exposure times were taken from the Euclid Red Book \citep{2011arXiv1110.3193L}.
  
- In the challenge set the limiting magnitude for background sources was 28 in $i$.   60\% of the cases had no background source and were thus labeled as non-lenses.
+ In the challenge set the limiting magnitude for background sources was 28 in $i$.   60\% of the cases had no background source and were thus labelled as non-lenses.
  
 \subsection{Ground-based}
 \label{sec:sim-ground-based}
@@ -349,10 +349,10 @@ By chance one of the original KiDS images appears to have been a lens.  When an 
 There were 24 valid entries into the challenge which are listed in Table~\ref{table:entries}.  There were a variety of different methods used and participants came from a variety of different backgrounds, most were professional astronomers, but there were also entries from researchers outside of the field.  
 
 The following sections contain short descriptions of the lens finding methods that were used in 
-the challenge.  Each subsection refers to a team which gave a separate entry.  We have grouped the 
-methods into four categories according to the type of method used.   The Receiver Operating Characteristic (ROC) curve and the area under this curve are referred to in these sections.  The ROC is defined in section~\ref{sec:figure_of_merit} where methods for evaluating the entries is discussed.  A reader unfamiliar with the ROC might want to refer to that section.
+the challenge.  Each sub-section refers to a team which gave a separate entry.  We have grouped the 
+methods into four categories according to the type of method used.   The Receiver Operating Characteristic (ROC) curve and the area under this curve are referred to in these sections.  The ROC is defined in Section~\ref{sec:figure_of_merit} where methods for evaluating the entries is discussed.  A reader unfamiliar with the ROC might want to refer to that section.
 
-\subsection{Visual Inspection}
+\subsection{Visual inspection}
 \subsubsection{Manchester1/Manchester2 (Jackson,Tagore)}
 \label{sec:manchester}
 
@@ -360,7 +360,7 @@ All images (a total of 100000) were examined for each of the space- and
 ground-based datasets. This was done by two observers; AT (Amit Tagore) examined 30000
 images in each case and NJ (Neal Jackson) examined 70000. Observation was carried out
 over a 48-hour period, at the rate of 5000/hr (NJ) and 2500/hr (AT). 
-The overall results, in terms of area under the ROC (see section \ref{sec:figure_of_merit}) curves, were very similar for 
+The overall results, in terms of area under the ROC (see Section \ref{sec:figure_of_merit}) curves, were very similar for 
 both observers. The space-based challenge produced areas of 0.800 and 
 0.812 for NJ and AT respectively, and the ground-based challenge yielded 
 0.891 and 0.884.
@@ -432,7 +432,7 @@ These are methods that classify the objects by making linear or nonlinear bounda
 \subsubsection{Manchester-SVM (Hartley, Flamary)}
 \label{sec:Gabor-SVM}
 
-A Support Vector Machine (SVM) is a supervised machine learning method which uses labeled training data to determine a classification model (see e.g., \citet{vapnik79estimation}, \citet{Cortes1995} and \citet{Burges1998}). A preprocessing stage first extracts a set of useful features from input samples, before projecting each sample as a vector into a high-, possibly infinite-dimensional space. The model then separates classes of data by maximising the margin between a defining hyperplane and a set of so-called support-vectors at the inner edge of each class. The process of classification is computationally inexpensive since the optimisation depends only on the dot products of the support vector subset. Feature extraction, however,  requires both an extensive exploration of the feature space during the development of a model, and potentially intensive computer resources in order to transform the original samples. Our full method is described in detail in \citet{hartley2017support} and was developed using the Python scikit-learn and scikit-image packages \citep{scikit-learn,scikit-image}.
+A Support Vector Machine (SVM) is a supervised machine learning method which uses labelled training data to determine a classification model (see e.g., \citet{vapnik79estimation}, \citet{Cortes1995} and \citet{Burges1998}). A preprocessing stage first extracts a set of useful features from input samples, before projecting each sample as a vector into a high-, possibly infinite-dimensional space. The model then separates classes of data by maximising the margin between a defining hyperplane and a set of so-called support-vectors at the inner edge of each class. The process of classification is computationally inexpensive since the optimisation depends only on the dot products of the support vector subset. Feature extraction, however,  requires both an extensive exploration of the feature space during the development of a model, and potentially intensive computer resources in order to transform the original samples. Our full method is described in detail in \citet{hartley2017support} and was developed using the Python scikit-learn and scikit-image packages \citep{scikit-learn,scikit-image}.
 
 During our development of an SVM classifier for lens finding, feature extraction initially involved the decomposition of each image into a set of objects, using SExtractor \citep{1996AandAS..117..393B} and GALFIT \citep{2002AJ....124..266P} to recover and subtract objects iteratively. This method had previously been used in a static algorithm approach which assigned points according to the morphological properties of each image \citep[see][]{2014AandA...566A..63J}. Lensed-like objects displaying, for example, greater ellipticity and tangential elongation were awarded more points. Since the SVM operates in a fixed dimensional space,  properties of individual objects were collapsed into a fixed set describing the mean and variance of morphological properties of all the objects within an image. After training an SVM using these features we recorded a modest separation of lens and non-lens classes.
 
@@ -649,7 +649,7 @@ In order to increase the size of the training set and make the model invariant t
 
 During the training we initialize the weights of our model with random normal values and we ``warm up" the training of the CNN for 25 epochs, using an exponential decay rate ($10^{-6}$) \citep{Huang_2016}  and then a staring learning rate of  0.001. Then the network was trained using an early stopping method, and for a maximum number of 300 epochs. The early stopping method is an effective method of preventing overfitting and consists in stopping the training if a monitored quantity does not improve for a fixed number (called \textit{patience}) of training epochs. The quantity that we monitored was the \textit{accuracy} of the classification of the validation sample. The best architecture was trained over 220 epochs with a parameter of patience equal to 20.
 We implemented our code in the Keras framework \citep{Chollet_2015} on top of Theano \citep{Bastien_2012}.
-Our architecture converges with a classification accuracy of 91\% on the validation sample. We further evaluated the performance of our classifier calculating the ROC (see section \ref{sec:figure_of_merit})  curve of the classifier, i.e. the True Positive Rate (TPR) against the False Positive Rate.  We reached a TPR higher than the 90\% with a FPR < 8\%.
+Our architecture converges with a classification accuracy of 91\% on the validation sample. We further evaluated the performance of our classifier calculating the ROC (see Section \ref{sec:figure_of_merit})  curve of the classifier, i.e. the True Positive Rate (TPR) against the False Positive Rate.  We reached a TPR higher than the 90\% with a FPR < 8\%.
 
 %-------------------------------------------------%
 \subsubsection{CAST (Bom, Valent\'in, Makler)}
@@ -662,7 +662,7 @@ see if this improved the automated arc detection with the CNN. We chose a contra
 
 We used a native CNN from Matlab\footnote{\texttt{https://www.mathworks.com/products/matlab.html}, \texttt{https://www.mathworks.com/help/nnet/convolutional-neural-networks.html}}, which has Convolutional 2D layers with 20 5x5 filters. This CNN can work either with one or three input images, representing greyscale and colour images.
 We employed different strategies for the two samples available for the challenge, which involve combinations of the available bands running in one or more CNN, using or not the preprocessing, and combining the output with the aid of other machine learning methods.
-In each case we used the simulations made available for the challenge both to train and to validate the results and we used the area under the ROC (see section \ref{sec:figure_of_merit}) to determine which combination of methods gives the best result.    
+In each case we used the simulations made available for the challenge both to train and to validate the results and we used the area under the ROC (see Section \ref{sec:figure_of_merit}) to determine which combination of methods gives the best result.    
 We selected 
 %We evaluate the ROC curves for all configurations tested, selecting 
 $90\%$ of the images, chosen randomly, for the training and $10\%$ to validate. We repeated the process $10$ times to avoid bias due to a specific choice of training/validation set and to define an uncertainty in our ROC.
@@ -672,7 +672,7 @@ with the preprocessing described above.
 We found that the results, accounting for the uncertainties,  
 were clearly superior in terms of the area under the ROC with the preprocessing. Therefore, this is the configuration we used for the challenge entry. 
 
-As mentioned above, the CNN we used can take 3 colour images as input.  To use the information on the $4$ available bands, we needed to either combine $2$ of the $4$ bands to end up with $3$ bands for a single RGB CNN (configuration I below) or we use multiple CNNs (configuration II to VI below). To combine the outputs of several CNNs we use a Support Vector Machine \citep[hereafter SVM; see e.g., ][]{rebentrost2014quantum} also implemented in Matlab. The SVM is used to combine the outputs $p_i$ of the several CNNs (configurations II, III, IV and VI). Instead of using only $p_i$ as inputs to the SVM we also tested providing the SVM with image features obtained by the CNN (feature maps, configuration V) as inputs. In all cases we tested with and without the preprocessing
+As mentioned above, the CNN we used can take 3 colour images as input.  To use the information on the $4$ available bands, we needed to either combine $2$ of the $4$ bands to end up with $3$ bands for a single RGB CNN (configuration I below) or we use multiple CNNs (configuration II to VI below). To combine the outputs of several CNNs we use a Support Vector Machine \citep[ SVM; see e.g. ][]{rebentrost2014quantum} also implemented in Matlab. The SVM is used to combine the outputs $p_i$ of the several CNNs (configurations II, III, IV and VI). Instead of using only $p_i$ as inputs to the SVM we also tested providing the SVM with image features obtained by the CNN (feature maps, configuration V) as inputs. In all cases we tested with and without the preprocessing
 
 A more detailed description of each configuration tested is presented below:
 \begin{enumerate}[label=\Roman*.]
@@ -756,12 +756,12 @@ The training of the CNN is executed on a GeForce GTX 760 in parallel with the da
 
 %{\bf Architecture}:
 We used the CNN architecture called Resnet described in \citep{he2015deep} with three stacks of residual blocks of 5 layers. 
-The output layer is composed by three units. Each unit gives as an output a number between 0 and 1 that represents, respectively, the probability of being a \textit{non-lens}, a \textit{dubious lens}, a \textit{certain lens}.  We then collapsed one of the classes into another to give a binary classification : 0 when a source is classified as a \textit{non-lens} and a 1 when is classified as a \textit{clear lens} or as a \textit{dubious lens}. This choice did not allow for building  a continuous ROC (see section \ref{sec:figure_of_merit})  curve but only a binary one.
+The output layer is composed by three units. Each unit gives as an output a number between 0 and 1 that represents, respectively, the probability of being a \textit{non-lens}, a \textit{dubious lens}, a \textit{certain lens}.  We then collapsed one of the classes into another to give a binary classification : 0 when a source is classified as a \textit{non-lens} and a 1 when is classified as a \textit{clear lens} or as a \textit{dubious lens}. This choice did not allow for building  a continuous ROC (see Section \ref{sec:figure_of_merit})  curve but only a binary one.
 The final submission was produced by averaging the values of the predictions from three CNNs with the same architecture.
 
 
 %{\bf Preprocessing}:
-The training image files were preprocessed with the software \textsc{STIFF}\footnote{\href{http://www.astromatic.net/software/stiff}{\tt http://www.astromatic.net/software/stiff}} which automatically converts the fits files to gray-scale TIFF images operating a non-linear intensity transformations to enhance the low-brightness features of the image.   
+The training image files were preprocessed with the software \textsc{STIFF}\footnote{\href{http://www.astromatic.net/software/stiff}{\tt http://www.astromatic.net/software/stiff}} which automatically converts the fits files to grey-scale TIFF images operating a non-linear intensity transformations to enhance the low-brightness features of the image.   
 Due to memory limitations we down-sampled the images to 84 by 84 pixels. 
 %Most likely, this leads to a worse classification accuracy than using the original image resolution.
 We augmented the training images in the following way: i) random rotation of 90, 180 or 270 degrees; ii) random shift in both $x$ and $y$ direction between -2 and +2 pixels; iii) $50\%$ probability of horizontally flipping the image. 
@@ -784,8 +784,9 @@ We use L2-norm regularization with $\lambda= 9 \times 10^{-3}$.
 
 Our lens finder included wavelet prefiltering. The image was convolved with the Mallat wavelet with a kernel size of 4 in both the horizontal and vertical directions, then combined and compared to the original image to make the input image;  input image $= \sqrt[]{H^{2}+V^{2}}$. This prefiltering was performed to emphasise the edges in the images. It was found to improve the results compared to the CNN without this pre-filter. The CNN had 2 convolution layers each containing  $3\times3 - 32$ filters, incorporating dropout and max-pooling, and then 3 dense fully-connected layers to classify each image. The network was trained on 18000 of the 20000 training images; training took 15 epochs and was completed once the validation loss was minimised. The training was validated on the remaining 2000 images. Validation loss was calculated using binary cross entropy
 \begin{equation}
-\mathcal{L} = \sum_{i=1}^{n} \big[ y_{i}$ $log(p_{i}) + (1 $ - $ y_{i})$ $log(1 $ - $ p_{i}) \big]
-\end{equation} where $\mathcal{L}$ is the loss function, $n$ is the number of inputs, $y_{i}$ is the true value of the $i^{th}$ input , and $p_{i}$ is the predicted value for the $i^{th}$ input from the network. A perfect loss of $0$ was generated once every predicted value matched the true value for every input. The network was made and trained in Python 2.7 using the open-source libraries \textsc{theano} and \textsc{keras}\footnote{\href{https://github.com/keras-team/keras}{\tt https://github.com/keras-team/keras}}. A more developed version of our lens finder will appear in Davies, Bromley and Serjeant (in preparation).
+\mathcal{L} = \sum_{i=1}^{n} \big[ y_{i} \log(p_{i}) + (1  -  y_{i}) \log(1  -  p_{i}) \big]
+\end{equation} 
+where $\mathcal{L}$ is the loss function, $n$ is the number of inputs, $y_{i}$ is the true value of the $i^{th}$ input , and $p_{i}$ is the predicted value for the $i^{th}$ input from the network. A perfect loss of $0$ was generated once every predicted value matched the true value for every input. The network was made and trained in Python 2.7 using the open-source libraries \textsc{theano} and \textsc{keras}\footnote{\href{https://github.com/keras-team/keras}{\tt https://github.com/keras-team/keras}}. A more developed version of our lens finder will appear in Davies, Bromley and Serjeant (in preparation).
 
 \subsubsection{CAS Swinburne (Jacobs)}
 \label{sec:CASSwinburne}
@@ -801,7 +802,7 @@ We note that experiments indicated that training on 4-band FITS data, as opposed
 \section{Results}
 \label{sec:results}
 
-In this section we summarize the analysis of the submissions.  In section~\ref{sec:figure_of_merit} we discuss how to judge a classifier in this particular case and define some metrics of success.  The results for all the submissions are given in section~\ref{sec:performance}.
+In this section we summarize the analysis of the submissions.  In Section~\ref{sec:figure_of_merit} we discuss how to judge a classifier in this particular case and define some metrics of success.  The results for all the submissions are given in Section~\ref{sec:performance}.
 
 \subsection{Figures of merit}
 \label{sec:figure_of_merit}
@@ -907,26 +908,26 @@ CMU-DeepLens-Resnet get the best scores.
 
 \begin{figure*}
  \includegraphics[width=2\columnwidth]{figures/roc_space.pdf}
- \caption{The ROC curves for the space-based entries.}
+ \caption{ROC curves for the space-based entries.}
  \label{fig:roc_space}
 \end{figure*}
 
 \begin{figure*}
  \includegraphics[width=2\columnwidth]{figures/roc_ground.pdf}
- \caption{The ROC curves for the ground-based entries.  Notice that these are generally better than in figure~\ref{fig:einstein_space} indicating that colour information is an important discriminant. }
+ \caption{ROC curves for the ground-based entries.  Notice that these are generally better than in figure~\ref{fig:einstein_space} indicating that colour information is an important discriminant. }
  \label{fig:roc_ground}
 \end{figure*}
 
 \begin{figure*}
  \includegraphics[width=2\columnwidth]{figures/roc_kids.pdf}
- \caption{The ROC curves for the ground-based entries including only the cases with authentic images taken from the KiDS survey.  It can be seen that in all cases these are lower than in figure~\ref{fig:roc_ground}.}
+ \caption{ROC curves for the ground-based entries including only the cases with authentic images taken from the KiDS survey.  It can be seen that in all cases these are lower than in figure~\ref{fig:roc_ground}.}
  \label{fig:roc_kids}
 \end{figure*}
 
 Figures~\ref{fig:roc_space} and \ref{fig:roc_ground} show the ROC curves for all the entries.  
-Note that ROC curves for the ground-based challenge (figure~\ref{fig:roc_ground}) are uniformly better than those for the space-based challenge (figure~\ref{fig:roc_space}).  This is because of the importance of colour information in discriminating lensed arcs from pieces of the foreground lens galaxy.
+We note that ROC curves for the ground-based challenge (figure~\ref{fig:roc_ground}) are uniformly better than those for the space-based challenge (figure~\ref{fig:roc_space}).  This is because of the importance of colour information in discriminating lensed arcs from pieces of the foreground lens galaxy.
 
-In addition, figure~\ref{fig:roc_kids} shows the ROC curves for only the ground-based images where an actual KiDS image was used (see section~\ref{sec:sim-ground-based}).  It can be seen that the classifiers do uniformly less well on this subset.  This indicates that the simulated galaxy images are different from the real ones and that the classifiers are able to distinguish fake foreground galaxies from lenses more easily than from real galaxies.  Some methods are more affected by this than others, but none seem to be immune, not even the human classification. This is perhaps not unexpected, but does show that the simulated lenses need to be improved before the raw numbers can be directly used to evaluate the performance of a classifier on real data.
+In addition, figure~\ref{fig:roc_kids} shows the ROC curves for only the ground-based images where an actual KiDS image was used (see Section~\ref{sec:sim-ground-based}).  It can be seen that the classifiers do uniformly less well on this subset.  This indicates that the simulated galaxy images are different from the real ones and that the classifiers are able to distinguish fake foreground galaxies from lenses more easily than from real galaxies.  Some methods are more affected by this than others, but none seem to be immune, not even the human classification. This is perhaps not unexpected, but does show that the simulated lenses need to be improved before the raw numbers can be directly used to evaluate the performance of a classifier on real data.
 
 
 \begin{figure*}
@@ -985,14 +986,14 @@ Figures~\ref{fig:flux_space} and \ref{fig:flux_ground} are the same except that 
 
 A lensed image can be bright without being visibly distorted as in the case of unresolved images.  Figures~\ref{fig:npixel_space} and \ref{fig:npixel_ground} use the number of pixels in the lensed image(s) that are over  one $\sigma$ of the background.  In this case also some classifiers show an abrupt improvement when the image is required to be larger than some threshold.  Interestingly in some cases the TPRs go down with lensed image size after reaching a peak.  This could be because they are not differentiating the arcs from companion galaxies as well in this regime.  There were also cases where the arc intersects with the borders of the image that might cause them to be missed.
 
-Figures~\ref{fig:flux_contrast_space} and \ref{fig:flux_contrast_ground} investigate how the flux contrast between the foreground objects and the lensed source affects the classifiers.  Interestingly some methods' TPRs go up with this quantity and some go down.  We have not yet found any clear explanation for this variety of behaviors.  
+Figures~\ref{fig:flux_contrast_space} and \ref{fig:flux_contrast_ground} investigate how the flux contrast between the foreground objects and the lensed source affects the classifiers.  Interestingly some methods' TPRs go up with this quantity and some go down.  We have not yet found any clear explanation for this variety of behaviours.  
 %\red{explanation?}
 
 The two human inspectors, NJ and AT, got significantly different scores on the ground based test set with individual AUROCs of 0.88 and 0.902 and TPR$_{10}$s of 0.01 and 0.06 respectively.  They did not inspect the same images however so differences cannot be considered conclusive, but it does suggest that different inspectors will have different detection efficiencies and biases.
 
 %\red{surface brightness contrast}
 
-\section{Conclusions \& discussion}
+\section{Conclusions and discussion}
 \label{sec:conclusion}
 
 A large variety of lens finding methods were tested on simulated images that were developed separately.    Based on figures~\ref{fig:einstein_space} and \ref{fig:einstein_ground}, we found that some methods could recover more than 50\% of the lenses above a lensed image brightness or size threshold without a single false positive out of 100,000 candidates.  If the data closely resembled the simulations we would already have reasonably good methods whose efficiency and biases can be quantitatively characterized.

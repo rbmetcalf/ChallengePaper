@@ -4,24 +4,23 @@
 \BOOKMARK [2][-]{subsection.3.1}{Space-based}{section.3}% 4
 \BOOKMARK [2][-]{subsection.3.2}{Ground-based}{section.3}% 5
 \BOOKMARK [1][-]{section.4}{Lens finding methods}{}% 6
-\BOOKMARK [2][-]{subsection.4.1}{Visual inspection}{section.4}% 7
-\BOOKMARK [3][-]{subsubsection.4.1.1}{Manchester1/Manchester2 \(Jackson,Tagore\)}{subsection.4.1}% 8
-\BOOKMARK [2][-]{subsection.4.2}{Arc-Finders}{section.4}% 9
-\BOOKMARK [3][-]{subsubsection.4.2.1}{ GAHEC IRAP \(Cabanac\)}{subsection.4.2}% 10
-\BOOKMARK [3][-]{subsubsection.4.2.2}{YattaLens Lite \(Sonnenfeld\)}{subsection.4.2}% 11
-\BOOKMARK [2][-]{subsection.4.3}{Machine Learning Methods that use pre-selected features}{section.4}% 12
-\BOOKMARK [3][-]{subsubsection.4.3.1}{Manchester-SVM \(Hartley, Flamary\)}{subsection.4.3}% 13
-\BOOKMARK [3][-]{subsubsection.4.3.2}{ALL \(Avestruz, Li, Lightman\)}{subsection.4.3}% 14
-\BOOKMARK [2][-]{subsection.4.4}{Convolutional Neural Networks}{section.4}% 15
-\BOOKMARK [3][-]{subsubsection.4.4.1}{AstrOmatic \(Bertin\)}{subsection.4.4}% 16
-\BOOKMARK [3][-]{subsubsection.4.4.2}{LASTRO EPFL \(Geiger, Sch\344fer\)}{subsection.4.4}% 17
-\BOOKMARK [3][-]{subsubsection.4.4.3}{GAMOCLASS \(Tuccillo, Huertas-Company, Velasco-Forero, Decenci\350re\)}{subsection.4.4}% 18
-\BOOKMARK [3][-]{subsubsection.4.4.4}{CAST \(Bom, Valent\355n, Makler\)}{subsection.4.4}% 19
-\BOOKMARK [3][-]{subsubsection.4.4.5}{CMU DeepLens \(Lanusse, Ma, Li, Ravanbakhsh\)}{subsection.4.4}% 20
-\BOOKMARK [3][-]{subsubsection.4.4.6}{Kapteyn Resnet \(Petrillo, Tortora, Vernardos, Kleijn, Koopmans\) }{subsection.4.4}% 21
-\BOOKMARK [3][-]{subsubsection.4.4.7}{NeuralNet2 \(Davies, Serjeant\) }{subsection.4.4}% 22
-\BOOKMARK [3][-]{subsubsection.4.4.8}{CAS Swinburne \(Jacobs\)}{subsection.4.4}% 23
-\BOOKMARK [1][-]{section.5}{Results}{}% 24
-\BOOKMARK [2][-]{subsection.5.1}{Figures of merit}{section.5}% 25
-\BOOKMARK [2][-]{subsection.5.2}{Performance of the methods}{section.5}% 26
-\BOOKMARK [1][-]{section.6}{Conclusions and discussion}{}% 27
+\BOOKMARK [2][-]{subsection.4.1}{Visual inspection : Manchester1/Manchester2 \(Jackson,Tagore\)}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Arc-Finders}{section.4}% 8
+\BOOKMARK [3][-]{subsubsection.4.2.1}{ GAHEC IRAP \(Cabanac\)}{subsection.4.2}% 9
+\BOOKMARK [3][-]{subsubsection.4.2.2}{YattaLens Lite \(Sonnenfeld\)}{subsection.4.2}% 10
+\BOOKMARK [2][-]{subsection.4.3}{Machine Learning Methods that use pre-selected features}{section.4}% 11
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Manchester-SVM \(Hartley, Flamary\)}{subsection.4.3}% 12
+\BOOKMARK [3][-]{subsubsection.4.3.2}{ALL \(Avestruz, Li, Lightman\)}{subsection.4.3}% 13
+\BOOKMARK [2][-]{subsection.4.4}{Convolutional Neural Networks}{section.4}% 14
+\BOOKMARK [3][-]{subsubsection.4.4.1}{AstrOmatic \(Bertin\)}{subsection.4.4}% 15
+\BOOKMARK [3][-]{subsubsection.4.4.2}{LASTRO EPFL \(Geiger, Sch\344fer\)}{subsection.4.4}% 16
+\BOOKMARK [3][-]{subsubsection.4.4.3}{GAMOCLASS \(Tuccillo, Huertas-Company, Velasco-Forero, Decenci\350re\)}{subsection.4.4}% 17
+\BOOKMARK [3][-]{subsubsection.4.4.4}{CAST \(Bom, Valent\355n, Makler\)}{subsection.4.4}% 18
+\BOOKMARK [3][-]{subsubsection.4.4.5}{CMU DeepLens \(Lanusse, Ma, Li, Ravanbakhsh\)}{subsection.4.4}% 19
+\BOOKMARK [3][-]{subsubsection.4.4.6}{Kapteyn Resnet \(Petrillo, Tortora, Vernardos, Kleijn, Koopmans\) }{subsection.4.4}% 20
+\BOOKMARK [3][-]{subsubsection.4.4.7}{NeuralNet2 \(Davies, Serjeant\) }{subsection.4.4}% 21
+\BOOKMARK [3][-]{subsubsection.4.4.8}{CAS Swinburne \(Jacobs\)}{subsection.4.4}% 22
+\BOOKMARK [1][-]{section.5}{Results}{}% 23
+\BOOKMARK [2][-]{subsection.5.1}{Figures of merit}{section.5}% 24
+\BOOKMARK [2][-]{subsection.5.2}{Performance of the methods}{section.5}% 25
+\BOOKMARK [1][-]{section.6}{Conclusions and discussion}{}% 26
